@@ -1,0 +1,82 @@
+/*****************
+   admin layout
+*******************/
+
+ body{background-color: black;}
+
+ .form-group {margin-bottom: 25px;}
+
+.admin-layout-row{position:relative;min-height:100vh; }
+
+/************
+   header
+*************/
+  .admin-header{position:relative;color:white; background: rgba(0, 0, 0, 0.24);box-shadow: 4px 4px 8px rgba(28, 34, 48, 0.24), inset -5px -5px 250px rgba(255, 255, 255, 0.02); backdrop-filter: blur(24px); z-index:10;}
+  .admin-header .navbar-brand .min{display:none;}
+  .admin-header .navbar-brand-wrap a{display:inline-flex;}
+  .admin-header .navbar-brand-wrap .navbar-brand{ width: 270px; height: 80px; }
+  .admin-header .navbar-brand-wrap .navbar-brand img {height: 100%; margin: auto;} 
+  .admin-header .admin-menutoggle{position:relative;/* top:6px; */font-size:35px;color: #FBFBFB;filter:drop-shadow(1px 1px 1px rgba(0,0,0,.5));}
+
+  body.close1 .admin-header .navbar-brand .min{display:block; min-width: 60px; height: auto;}
+  body.close1 .admin-header .navbar-brand .max{display:none;}
+  body.close1 .admin-header .navbar-brand-wrap{width:80px;}
+  body.close1 .admin-header .admin-menutoggle{ /* top:auto; bottom:7px; */ font-size:32px; }
+
+/*************
+    sidebar
+**************/
+.admin-sidebar{width:270px;background-color: #282828;box-shadow:0 0 10px rgba(0,0,0,0.3); padding: 0;}
+.admin-sidebar .navbar-nav .nav-item{position:relative; background-color: #191919;}
+.admin-sidebar .navbar-nav .nav-item .nav-link{position:relative;width:100%;padding:12px 12px 12px 20px;color:#FBFBFB;border-bottom:0.6px solid rgba(57, 61, 67, 0.4); font-size: 15px;}
+.admin-sidebar .navbar-nav .nav-item .nav-link > i{margin-right:10px;color:#B9B8B4; display: inline-block; width: 20px; font-size: 18px; text-align: center;}
+
+.admin-sidebar .navbar-nav .nav-item.dropdown .nav-link.dropdown-toggle::after{content:"\f105";position:absolute;right:10px;top:50%;transform:translateY(-50%);margin:0;padding:0;border:0;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;line-height:1;font-weight:400;font-family:"Font Awesome 5 Pro";-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;}
+.admin-sidebar .navbar-nav .nav-item.dropdown .nav-link.dropdown-toggle.show::after{ content: "\f107";}
+.admin-sidebar .navbar-nav .nav-item.dropdown .dropdown-menu{position:static;min-width:inherit;width:100%;margin:0;padding:0; border:none;background:transparent;}
+.admin-sidebar .navbar-nav .nav-item.dropdown .dropdown-menu .nav-item .nav-link{padding:6px 6px 6px 22px;font-size:14px;}
+
+.admin-sidebar .navbar-nav .nav-item > .nav-link:hover,
+.admin-sidebar .navbar-nav .nav-item.active > .nav-link{color:white;border-bottom-color:transparent;background-color: #22a612; box-shadow:0 3px 8px rgba(0,0,0,0.3);}
+.admin-sidebar .navbar-nav .nav-item > .nav-link:hover > i,
+.admin-sidebar .navbar-nav .nav-item.active > .nav-link > i{color:white;}
+
+body.close1 .admin-sidebar{width:80px;}
+body.close1 .admin-sidebar .navbar-nav > .nav-item > .nav-link{justify-content:center;text-align:center;}
+body.close1 .admin-sidebar .navbar-nav > .nav-item > .nav-link text{display:none;}
+body.close1 .admin-sidebar .navbar-nav .nav-item.dropdown .dropdown-menu{position:absolute;left:100%;top:0;min-width:215px;border-radius:0;background:white;box-shadow:7px 5px 12px rgba(0,0,0,0.2);}
+body.close1 .admin-sidebar .navbar-nav .nav-item.dropdown .dropdown-menu .nav-item .nav-link{padding:5px;font-size:14px;}
+
+
+/***************
+    footer
+***************/
+ .ste-footer{padding:12px 0;font-size:14px;color:white;background: #1a1a1a;}
+ .ste-footer .foot-copyright{text-align:center;}
+ 
+/************
+   pagis
+*************/
+ .admin-right-content .inner-content{padding:20px;}
+ .admin-right-content .ste-footer {position:absolute; right:0;bottom:0; z-index: -1; width: calc(100% - 270px);}
+
+ body.close1 .admin-right-content .ste-footer {width: calc(100% - 80px);}
+
+
+.reflow-table-mobile-mode tr td {text-align: left !important;}
+.reflow-table-mobile-mode tr td div {display: inline-block !important;}
+
+.form-control:disabled, .form-control[readonly] {
+   background-color: transparent;
+   opacity: 1;
+}
+
+@media screen and (max-width: 1024px){
+   .admin-header .navbar-brand-wrap .navbar-brand {width: 250px;}
+}
+
+@media screen and (max-width: 991px) {
+   .admin-layout-row {overflow: hidden}
+   .admin-right-content {margin-right: -200px; transition: 0.5s ease-in-out}
+   body.close1 .admin-right-content {margin-right: 0;}
+}

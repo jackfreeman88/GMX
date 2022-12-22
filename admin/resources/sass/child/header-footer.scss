@@ -1,0 +1,113 @@
+
+/*********
+ header 
+ **********/
+ .site-header{position:relative;left:0;top:0;right:0;background-color:#ffffff;box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:999;}
+ .site-header.sticky{position:sticky;top:0; } 
+
+ .navbar-brand {width: 260px;}
+ .navbar-brand img {width: 100%;}
+ @media screen and (min-width:1200px){
+  .site-header.sticky{animation:slide-down .6s ease-out;} 
+ }
+ @keyframes slide-down{0%{opacity:0;-moz-transform:translateY(-100%);}100%{opacity:1;-moz-transform:translateY(0);}}
+ 
+.site-header .container {perspective:inherit;}
+.site-header .navbar{padding:13px 1rem;}
+.site-header .navbar-toggler{position:absolute;right:0;top:15px;z-index:0;}
+.site-header .navbar-toggler span{display:block;width:32px;height:4px;margin:7px 0 0 auto;background-color:#1a60f6;box-shadow:2px 2px 1px;}
+.site-header .navbar-toggler span:nth-child(1){width:24px;}
+.site-header .navbar-toggler span:nth-child(3){width:15px;}
+.site-header .navbar-nav .nav-item{margin-right:10px;padding:0;}
+.site-header .navbar-nav .nav-item .nav-link {padding: 2px 8px; color:#333333;text-transform:uppercase; }
+.site-header .dropdown .dropdown-menu{margin-top:11px;min-width:260px;max-height:inherit;border-radius:9px;border-width:2px; border-color:#99b6e8;overflow:visible;}
+.site-header .dropdown .dropdown-menu::before{content:"";display:block;position:absolute;left:45%;top:-9px;width:15px;height:15px;border:thin solid #99b6e8;border-width:0 0 2px 2px;background:white;transform:rotate(134deg);pointer-events:none;}
+.site-header .dropdown .dropdown-menu.dropdown-menu-right::before{left:70%;}
+
+@media screen and (max-width:1199px)
+{
+  .site-header .navbar-expand-xl .navbar-collapse{position:fixed;left:0;top:0;bottom:0;width:300px;height: inherit !important; box-shadow:0 0 10px rgba(0,0,0,0.3);background-color:#ebeefe;overflow:hidden auto;animation:none !important;z-index: 99;}
+  .site-header .navbar-expand-xl .navbar-collapse .navbar-brand{min-width:inherit;width:212px;margin:0 auto 12px;padding:14px;}
+  .site-header .navbar-expand-xl .navbar-collapse .navbar-toggler{top: 10px;right:10px;order:3;padding:0;color: #131675;font-size:33px;}
+  .site-header .navbar-expand-xl .navbar-nav .nav-item:not(:last-child){margin:0;}
+  .site-header .navbar-expand-xl .navbar-nav .nav-item .nav-link{color:#333333;font-weight:400;padding:8px 15px;text-transform: capitalize;}
+  .site-header .navbar-expand-xl .navbar-nav .nav-item .btn {margin-left: 15px;}
+  .site-header .navbar-expand-xl .dropdown .dropdown-menu{position:relative;float:none;margin:0;padding:0;border:none;background:transparent;}
+  .site-header .navbar-expand-xl .dropdown .dropdown-menu::before{content:none;display:none;}
+  .site-header .navbar-expand-xl .dropdown .dropdown-menu .dropdown-item{padding:0 1.5rem;font-size:14px;}
+
+  .site-header .navbar-expand-xl .dropdown.hd-myaccount{margin:0 0 8px;padding:0 0 12px 15px;border-bottom:thin solid #124d8a;}
+  .site-header .navbar-expand-xl .dropdown.hd-myaccount figure{min-width:80px;width:80px;height:80px;}
+  .site-header .navbar-expand-xl .dropdown.dw-signinout{margin:0 0 15px 0;padding:0 0 10px 0;border-bottom:thin solid #335da5;}
+  .site-header .navbar-expand-xl .dropdown.dw-signinout .dropdown-toggle{display:none;}
+  .site-header .navbar-expand-xl .dropdown.dw-signinout .dropdown-menu{display:block;}
+
+  .site-header .navbar-expand-xl .navbar-collapse:not(.collapsing):not(.show) ~ .menusidebar-backdrop{display:none;}
+  .site-header .navbar-expand-xl .menusidebar-backdrop{position:fixed;left:250px;top:0;right:0;bottom:0;background-color:rgba(0,0,0,.8);z-index:1;}
+}
+@media screen and (max-width:575px)
+ {
+  .site-header .navbar{padding:13px 4rem 13px 1rem;}
+} 
+/*********
+ footer
+**********/
+.ste-footer{position:relative;padding:39px 0 0;color:#333;border-radius:50px;background-color:#ebeefe;}
+.ste-footer .foot-title{margin:0 0 23px;text-transform:uppercase;font-weight:600;}
+.ste-footer .ul-social{display:inline-flex;margin-top:18px;}
+.ste-footer .ul-social li:not(:last-child){margin-right:33px;}
+.ste-footer .ul-social li a{color: #063686;}
+.ste-footer .ul-social li a:hover{color: #f46d00;}
+.ste-footer .ul-left-angle > li{margin-bottom:6px;padding-left:18px;}
+.ste-footer .ul-left-angle > li::before{font-size:128%;}
+.ste-footer .ul-left-angle > li:hover::before{color:#db670a;}
+.ste-footer .navbar-nav-2col{flex-wrap:wrap; flex-direction: inherit;}
+.ste-footer .navbar-nav-2col li{width:49%;}
+.ste-footer .navbar-nav .nav-link{padding:0;}
+.ste-footer .navbar-nav .nav-link:hover{color:#db670a;}
+.ste-footer .foot-copyright{padding:10px 0;text-align:center;font-size:14px; color:#cdd7e7;background-color:#063686;}
+
+.ste-footer.index-foot{border-radius:0;}
+.ste-footer.index-foot::before{content:"";display:block;position:absolute;left:0;top:-148px;right:0;bottom:85px;border-radius:50px 50px 0 0;border:5px solid #063686;border-bottom:0;transform:skewY(-4deg);pointer-events:none;}
+.ste-footer.index-foot::after{content:"";display:block;position:absolute;left:0;top:100px;right:0;bottom:8px;border:5px solid #063686;border-width:0 5px;pointer-events:none;}
+
+@media screen and (min-width:1300px)
+{
+  .ste-footer .row .col-logo{flex:0 0 261px;max-width:261px;}
+  .ste-footer .row .col-quicklink{flex:0 0 18%;max-width:18%;}
+  .ste-footer .row .col-legal{flex:0 0 39%;max-width:39%;}
+  .ste-footer .row .col-contact{flex:0 0 253px;max-width:253px;}
+}
+@media screen and (max-width:1300px)
+{
+  .ste-footer .navbar-nav-2col li {width: 100%;}
+}
+@media screen and (max-width:1024px)
+{
+  .ste-footer .navbar-nav-2col li{width:100%;}
+}
+@media screen and (max-width:991px)
+{
+  .ste-footer.index-foot::before{content:none;display:none;}
+  .ste-footer.index-foot::after{content:none;display:none;}
+}
+@media screen and (max-width:767px)
+{
+  .ste-footer .foot-title{margin:18px 0;}
+  .ste-footer .col-quicklink .navbar-nav{flex-direction: inherit;flex-wrap:wrap;}
+  .ste-footer .col-quicklink .navbar-nav li{width:49%;}
+  .ste-footer .navbar-nav-2col li{width:50%;}
+}
+@media screen and (max-width:415px)
+{
+  .ste-footer .navbar-nav-2col li{width:100%;}
+
+  .navbar-brand {width: 200px;}
+
+}
+
+/*********
+ footer END
+ **********/
+
+

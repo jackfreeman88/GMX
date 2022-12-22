@@ -1,0 +1,65 @@
+div.zabuto_calendar{margin:0;padding:0;border:none;border-radius:10px;overflow:hidden}
+div.zabuto_calendar .table{width:100%;margin:0;padding:0;border:0;border-collapse:collapse;border-spacing:0;}
+div.zabuto_calendar .table td,div.zabuto_calendar .table th{padding:8px 2px}
+div.zabuto_calendar .table tr td,
+div.zabuto_calendar .table tr th{background-color:#fff;font-size:14px;color:#333;}
+div.zabuto_calendar .table tr td{padding:0;border:thin solid #dbdbdb;font-size:16px;overflow:hidden;text-align:center;}
+div.zabuto_calendar .table tr:last-child{border-bottom:1px solid #ddd;}
+div.zabuto_calendar .table tr.calendar-month-header td span{cursor:pointer;display:inline-block;padding-bottom:0;font-size:20px;color:white;}
+div.zabuto_calendar .table tr.calendar-month-header td{background-color:transparent;padding:15px;border:none;}
+div.zabuto_calendar .table-bordered tr.calendar-month-header td{border-left:0;border-right:0;border-top:0}
+div.zabuto_calendar div.calendar-month-navigation{cursor:pointer;margin:0;display:inline-block;font-size:14px;color:#333;font-weight:400;padding:1px;}
+.calendar-month-header{background-color: #0799c4;}
+.calendar-month-header .month_header strong,
+div.zabuto_calendar div.calendar-month-navigation strong{font-weight:400;}
+.calendar-month-header .nav_prev.calendar-month-navigation{float:left;width:18%;text-align:center}
+.calendar-month-header .month_header{width:64%;float:left;text-align:center}
+.calendar-month-header .nav_next.calendar-month-navigation{float:right;width:18%;text-align:center;}
+div.zabuto_calendar .table tr.calendar-month-header .month_header span{font-size:18px;color:white;font-weight:400;cursor:default}
+div.zabuto_calendar .table tr.calendar-month-header td:nth-of-type(2){text-align:center}
+.calendar-month-header td .fa-chevron-left::before{content:"\f104";margin-right:6px}
+.calendar-month-header td .fa-chevron-right::before{content:"\f105";margin-left:6px}
+.calendar-dow-header{background-color: #2c5ea9;}
+div.zabuto_calendar .table tr.calendar-dow-header th{background-color:transparent; color:white;font-size:14px;font-weight:400;text-align:center;font-size:14px;border:none;}
+div.zabuto_calendar .table tr.calendar-dow-header th:not(:last-child){border-right:none;}
+div.zabuto_calendar tr.calendar-dow td,
+div.zabuto_calendar tr.calendar-dow-header th{width:14%;border-right:0}
+/* div.zabuto_calendar tr.calendar-dow td.disable{background-color:#fbfbfb;color:#c8c8c8;padding:8px;} */
+div.zabuto_calendar tr.calendar-dow td.disable {
+    background-color: #e9ecef;
+    color: #4c535a;
+    padding: 8px;
+  }
+div.zabuto_calendar tr.calendar-dow td:nth-of-type(1){border-left:0}
+div.zabuto_calendar .table tr td div.day{margin:0;padding:8px;border:thin solid transparent;}
+div.zabuto_calendar .table tr td div.day.calendar-available{color:black; background: #dcf7fe; }
+/*div.zabuto_calendar .table tr td div.day.calendar-available:hover{border-color:#2d5eaa;}*/
+div.zabuto_calendar .table tr td.event div.day,
+div.zabuto_calendar ul.legend li.event{background-color:#fff0c3}
+div.zabuto_calendar .table tr td.dow-clickable,
+div.zabuto_calendar .table tr td.event-clickable{cursor:pointer}
+div.zabuto_calendar .badge-today,
+div.zabuto_calendar div.legend span.badge-today{background-color:#357ebd;color:#fff;text-shadow:none}
+div.zabuto_calendar .badge-event,
+div.zabuto_calendar div.legend span.badge-event{background-color:#ff9b08;color:#fff;text-shadow:none}
+div.zabuto_calendar .badge-event{font-size:.95em;padding-left:8px;padding-right:8px;padding-bottom:4px}
+div.zabuto_calendar div.legend{padding:19px 20px 12px;background-color:transparent;}
+div.zabuto_calendar div.legend:after{content:'';display:table;clear:both;}
+div.zabuto_calendar div.legend span{color:#777;font-size:14px;font-weight:400;display:inline-block;width:50%;float:left;}
+div.zabuto_calendar div.legend span.legend-block:after,div.zabuto_calendar div.legend span.legend-list:after,div.zabuto_calendar div.legend span.legend-spacer:after,div.zabuto_calendar div.legend span.legend-text:after{content:' '}
+div.zabuto_calendar div.legend span.legend-spacer{padding-left:25px}
+div.zabuto_calendar ul.legend>span{padding-left:2px}
+div.zabuto_calendar ul.legend{display:inline-block;list-style:none;margin:0;padding:0;width:auto;float:left}
+div.zabuto_calendar ul.legend li{display:inline-block;height:18px;width:18px;border:1px solid #ddd;margin-right:8px;margin-top:-2px;}
+div.zabuto_calendar ul.legend li.calendar-available{background: #dcf7fe !important;}
+div.zabuto_calendar div.legend span.legend-block span{position:relative;top:-3px;margin-right:16px}
+div.zabuto_calendar div.legend span.badge{font-size:.9em;border-radius:5px;padding:2px 5px 3px}
+@media (max-width:979px){div.zabuto_calendar .table td,div.zabuto_calendar .table th{padding:2px 1px}
+}
+@media screen and (max-width:480px){div.zabuto_calendar .table tr td div.day,div.zabuto_calendar tr.calendar-dow td.disable{padding:5px;}
+}
+@media (max-width:640px){div.zabuto_calendar .table tr.calendar-month-header td span.fa{font-size:24px}
+div.zabuto_calendar .table tr.calendar-month-header td .calendar-month-navigation,div.zabuto_calendar .table tr.calendar-month-header td span{font-size:0;width:20px;padding:2px 0 0;z-index:3;position:relative}
+.calendar-month-header .month_header{width:auto;position:absolute;left:0;right:0;z-index:1}
+div.zabuto_calendar .table tr.calendar-month-header .month_header>span{width:auto}
+}
