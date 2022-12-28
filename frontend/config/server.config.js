@@ -1,0 +1,6 @@
+export const REACT_APP_API_BASE_URL = 'https://api.greenmarketexchange.com/api/v1'
+export const APP_URL = 'https://www.greenmarketexchange.com/'
+export const ASSETS_URL = 'https://assets.greenmarketexchange.com'
+export const APP_NAME = 'GMX'
+export const SOCKET_URL = 'https://notify.greenmarketexchange.com/'
+export const RECAPTCHA_SITE_KEY = '6LfphBgjAAAAAFSzjfFDQ6LW_PCuo9Qo3m0x71-H'
