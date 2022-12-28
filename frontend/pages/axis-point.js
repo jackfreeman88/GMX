@@ -396,116 +396,134 @@ function AxisPoint({ isLoggedIn, userImage }) {
     useEffect(()=>{
         console.log("use Effect attachement has been changes", attachments)
     },[attachments]);
-    return (
-        <>
-            <Meta
-                title={
-                    `Axis Point | ${APP_NAME}`
-                }
-                keyword={''}
-                description={''}
-            />
-            <section className="bg-black p-27-0-55">
-                <Container>
-                    <Row>
-                        <Col lg>
-                            <Card className="card-dark card-post card-axis-point border-gray-1">
-                                <Card.Header>
-                                    <div className="d-flex align-items-center">
-                                        <h3 className="text-white fs-18 mb-0">Axis Point</h3>
-                                    </div>
-                                </Card.Header>
-                                <Card.Body>
+    return <>
+        <Meta
+            title={
+                `Axis Point | ${APP_NAME}`
+            }
+            keyword={''}
+            description={''}
+        />
+        <section className="bg-black p-27-0-55">
+            <Container>
+                <Row>
+                    <Col lg>
+                        <Card className="card-dark card-post card-axis-point border-gray-1">
+                            <Card.Header>
+                                <div className="d-flex align-items-center">
+                                    <h3 className="text-white fs-18 mb-0">Axis Point</h3>
+                                </div>
+                            </Card.Header>
+                            <Card.Body>
 
-                                    {isLoggedIn && <ActivityPost
-                                        activityComment={activityComment}
-                                        attachments={attachments}
-                                        attachmentsHandler={attachmentsHandler}
-                                        deleteHandler={deleteHandler}
-                                        postContentHandler={postContentHandler}
-                                        submitPost={submitPost}
-                                        userImage={userImage}
-                                        isEnable={isEnable}
-                                        isMediaEnable={isMediaEnable}
-                                        selectedMediaFile={selectedMediaFile}
-                                    />}
-                                    <ActivityList
-                                        activities={activities}
-                                        totalActivities={totalActivities}
-                                        fetchMoreActivity={fetchMoreActivity}
-                                        handleShow={handleShow}
-                                        handleShowCommentModal={handleShowCommentModal}
-                                        likesClickHandler={likesClickHandler}
-                                        repostsClickhandler={repostsClickhandler}
-                                    />
+                                {isLoggedIn && <ActivityPost
+                                    activityComment={activityComment}
+                                    attachments={attachments}
+                                    attachmentsHandler={attachmentsHandler}
+                                    deleteHandler={deleteHandler}
+                                    postContentHandler={postContentHandler}
+                                    submitPost={submitPost}
+                                    userImage={userImage}
+                                    isEnable={isEnable}
+                                    isMediaEnable={isMediaEnable}
+                                    selectedMediaFile={selectedMediaFile}
+                                />}
+                                <ActivityList
+                                    activities={activities}
+                                    totalActivities={totalActivities}
+                                    fetchMoreActivity={fetchMoreActivity}
+                                    handleShow={handleShow}
+                                    handleShowCommentModal={handleShowCommentModal}
+                                    likesClickHandler={likesClickHandler}
+                                    repostsClickhandler={repostsClickhandler}
+                                />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+
+                    {isLoggedIn ?
+                        <Col lg={3} className="mw-375">
+                            <Card className="card-dark card-post bs-none border-gray-1 mb-4">
+                                <Card.Body className="p-3">
+                                    <div className="text-center">
+                                        <Figure className="figure-circle figure-gray-4 figure-100 figure mb-2">
+                                            <img className="cover" src={ASSETS_URL + user?.profilePath ?? "/profile/no-profile-image.jpg"} alt="image" />
+                                        </Figure>
+                                        <h3 className="fs-20 fw-500 text-white">{user.businessName}</h3>
+                                    </div>
+                                    <hr></hr>
+                                    <div>
+                                        <ul className="listing-50p">
+                                            <li className="border-end">
+                                                {
+                                                    followersCount > 0 ?
+                                                        <Link href={'/followers/' + user.slug} legacyBehavior>
+
+                                                            <span className="color-777777 fs-16 fw-500 text-center d-block">Followers</span>
+                                                            <p className="fs-18 fw-600 color-white mb-0 text-center">{followersCount}</p>
+
+                                                        </Link> :
+                                                        <div>
+                                                            <span className="color-777777 fs-16 fw-500 text-center d-block">Followers</span>
+                                                            <p className="fs-18 fw-600 color-white mb-0 text-center">{followersCount}</p>
+                                                        </div>
+                                                }
+                                            </li>
+                                            <li>
+                                                {
+                                                    followingsCount > 0 ?
+                                                        <Link href={'/following/' + user.slug} legacyBehavior>
+
+                                                            <span className="color-777777 fs-16 fw-500 text-center d-block">Following</span>
+                                                            <p className="fs-18 fw-600 color-white mb-0 text-center">{followingsCount}</p>
+
+                                                        </Link> :
+                                                        <div>
+                                                            <span className="color-777777 fs-16 fw-500 text-center d-block">Following</span>
+                                                            <p className="fs-18 fw-600 color-white mb-0 text-center">{followingsCount}</p>
+                                                        </div>
+                                                }
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </Card.Body>
                             </Card>
-                        </Col>
+                            <Card className="card-dark card-post card-axis-point border-gray-1">
+                                <Card.Header className="px-4">
+                                    <h3 className="text-white fs-18 mb-0">Companies You May know</h3>
+                                </Card.Header>
+                                <Card.Body className="p-0">
+                                    <ListGroup variant="flush" className="list-gray">
+                                        {
+                                            <div id="myScrollable" className='scroll-component' style={{ maxHeight: '450px', minHeight: '100px', overflow: "auto" }}>
+                                            <InfiniteScroll
+                                                dataLength={companies.length}
+                                                next={fetchMoreCompanies}
+                                                hasMore={totalCompanies > companies.length ? true : false}
+                                                    scrollableTarget="myScrollable"
+                                                    loader={
+                                                        [...Array(8)].map((arrayData, aIndex) => {
+                                                            return (
+                                                                <div key={aIndex + "skeleton"} className="d-flex justify-content-between align-items-center px-5 list-group-item">
+                                                                    <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
+                                                                        <div className="d-flex align-items-center">
+                                                                            <Skeleton circle={true} height={40} width={40} className="mb-0 me-3" />
+                                                                            <Skeleton width={200} height={20} />
+                                                                        </div>
+                                                                        <Skeleton width={100} height={30} className="me-2" />
+                                                                    </SkeletonTheme>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                            >
 
-                        {isLoggedIn ?
-                            <Col lg={3} className="mw-375">
-                                <Card className="card-dark card-post bs-none border-gray-1 mb-4">
-                                    <Card.Body className="p-3">
-                                        <div className="text-center">
-                                            <Figure className="figure-circle figure-gray-4 figure-100 figure mb-2">
-                                                <img className="cover" src={ASSETS_URL + user?.profilePath ?? "/profile/no-profile-image.jpg"} alt="image" />
-                                            </Figure>
-                                            <h3 className="fs-20 fw-500 text-white">{user.businessName}</h3>
-                                        </div>
-                                        <hr></hr>
-                                        <div>
-                                            <ul className="listing-50p">
-                                                <li className="border-end">
-                                                    {
-                                                        followersCount > 0 ?
-                                                            <Link href={'/followers/' + user.slug}>
-                                                                <a>
-                                                                    <span className="color-777777 fs-16 fw-500 text-center d-block">Followers</span>
-                                                                    <p className="fs-18 fw-600 color-white mb-0 text-center">{followersCount}</p>
-                                                                </a>
-                                                            </Link> :
-                                                            <div>
-                                                                <span className="color-777777 fs-16 fw-500 text-center d-block">Followers</span>
-                                                                <p className="fs-18 fw-600 color-white mb-0 text-center">{followersCount}</p>
-                                                            </div>
-                                                    }
-                                                </li>
-                                                <li>
-                                                    {
-                                                        followingsCount > 0 ?
-                                                            <Link href={'/following/' + user.slug}>
-                                                                <a>
-                                                                    <span className="color-777777 fs-16 fw-500 text-center d-block">Following</span>
-                                                                    <p className="fs-18 fw-600 color-white mb-0 text-center">{followingsCount}</p>
-                                                                </a>
-                                                            </Link> :
-                                                            <div>
-                                                                <span className="color-777777 fs-16 fw-500 text-center d-block">Following</span>
-                                                                <p className="fs-18 fw-600 color-white mb-0 text-center">{followingsCount}</p>
-                                                            </div>
-                                                    }
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                                <Card className="card-dark card-post card-axis-point border-gray-1">
-                                    <Card.Header className="px-4">
-                                        <h3 className="text-white fs-18 mb-0">Companies You May know</h3>
-                                    </Card.Header>
-                                    <Card.Body className="p-0">
-                                        <ListGroup variant="flush" className="list-gray">
-                                            {
-                                                <div id="myScrollable" className='scroll-component' style={{ maxHeight: '450px', minHeight: '100px', overflow: "auto" }}>
-                                                <InfiniteScroll
-                                                    dataLength={companies.length}
-                                                    next={fetchMoreCompanies}
-                                                    hasMore={totalCompanies > companies.length ? true : false}
-                                                        scrollableTarget="myScrollable"
-                                                        loader={
-                                                            [...Array(8)].map((arrayData, aIndex) => {
+                                                {
+
+                                                        isLoading ?
+                                                            [...Array(10)].map((arrayData, index) => {
                                                                 return (
-                                                                    <div key={aIndex + "skeleton"} className="d-flex justify-content-between align-items-center px-5 list-group-item">
+                                                                    <div key={index + "skeleton-company"} className="d-flex justify-content-between align-items-center px-5 list-group-item">
                                                                         <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
                                                                             <div className="d-flex align-items-center">
                                                                                 <Skeleton circle={true} height={40} width={40} className="mb-0 me-3" />
@@ -515,75 +533,55 @@ function AxisPoint({ isLoggedIn, userImage }) {
                                                                         </SkeletonTheme>
                                                                     </div>
                                                                 )
-                                                            })
-                                                        }
-                                                >
+                                                            }) :
+                                                            companies.length > 0 ?
+                                                                companies.map((company, cIndex) => (
+                                                                    <ListGroup.Item key={cIndex}>
+                                                                        <CompanyList key={cIndex} company={company} />
+                                                            </ListGroup.Item>
+                                                        )) :
+                                                        <ListGroup.Item className='text-center'>No records found!</ListGroup.Item>
+                                                }
+                                            </InfiniteScroll>
+                                            </div>
+                                        }
+                                    </ListGroup>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        : null
+                    }
+                </Row>
+            </Container>
+        </section>
 
-                                                    {
-
-                                                            isLoading ?
-                                                                [...Array(10)].map((arrayData, index) => {
-                                                                    return (
-                                                                        <div key={index + "skeleton-company"} className="d-flex justify-content-between align-items-center px-5 list-group-item">
-                                                                            <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-                                                                                <div className="d-flex align-items-center">
-                                                                                    <Skeleton circle={true} height={40} width={40} className="mb-0 me-3" />
-                                                                                    <Skeleton width={200} height={20} />
-                                                                                </div>
-                                                                                <Skeleton width={100} height={30} className="me-2" />
-                                                                            </SkeletonTheme>
-                                                                        </div>
-                                                                    )
-                                                                }) :
-                                                                companies.length > 0 ?
-                                                                    companies.map((company, cIndex) => (
-                                                                        <ListGroup.Item key={cIndex}>
-                                                                            <CompanyList key={cIndex} company={company} />
-                                                                </ListGroup.Item>
-                                                            )) :
-                                                            <ListGroup.Item className='text-center'>No records found!</ListGroup.Item>
-                                                    }
-                                                </InfiniteScroll>
-                                                </div>
-                                            }
-                                        </ListGroup>
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                            : null
-                        }
-                    </Row>
-                </Container>
-            </section>
-
-            <LightboxModal
-                sliderIndex={activeIndex}
-                images={individualPostAttachments}
-                show={show}
-                handleClose={handleClose}
-            />
-            <CommentModal
-                showCommentModal={isCommentModal}
-                handleCloseCommentModal={handleCloseCommentModal}
-                postId={selectedPostId}
-                userImage={userImage}
-            />
-            <RepostModal
-                show={showRepostModal}
-                hide={repostsModalClose}
-                reposts={reposts}
-                repostsCount={repostsCount}
-                fetchMoreReposts={fetchMoreReposts}
-            />
-            <LikeModal
-                show={showLikeModal}
-                hide={likesModalClose}
-                likes={likes}
-                likesCount={likesCount}
-                fetchMoreLikes={fetchMoreLikes}
-            /> 
-        </>
-    )
+        <LightboxModal
+            sliderIndex={activeIndex}
+            images={individualPostAttachments}
+            show={show}
+            handleClose={handleClose}
+        />
+        <CommentModal
+            showCommentModal={isCommentModal}
+            handleCloseCommentModal={handleCloseCommentModal}
+            postId={selectedPostId}
+            userImage={userImage}
+        />
+        <RepostModal
+            show={showRepostModal}
+            hide={repostsModalClose}
+            reposts={reposts}
+            repostsCount={repostsCount}
+            fetchMoreReposts={fetchMoreReposts}
+        />
+        <LikeModal
+            show={showLikeModal}
+            hide={likesModalClose}
+            likes={likes}
+            likesCount={likesCount}
+            fetchMoreLikes={fetchMoreLikes}
+        /> 
+    </>;
 }
 export default AxisPoint
 

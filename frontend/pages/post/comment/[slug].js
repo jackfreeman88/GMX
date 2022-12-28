@@ -305,13 +305,17 @@ export default function CommentDetails({ slug, userImage }) {
                     <Col lg={11} className="mx-auto">
                         <Card className="card-dark card-post">
                             <Card.Header>
-                                <Link href='#'>
-                                    <a className="d-flex align-items-center" onClick={() => router.back()}>
-                                        <span className="text-white fs-20 me-3" >
-                                            <FontAwesomeIcon icon={faArrowLeft} />
-                                        </span>
-                                        <h3 className="text-white fs-18 mb-0">Comment</h3>
-                                    </a>
+                                <Link
+                                    href='#'
+                                    className="d-flex align-items-center"
+                                    onClick={() => router.back()}
+                                    legacyBehavior>
+
+                                    <span className="text-white fs-20 me-3" >
+                                        <FontAwesomeIcon icon={faArrowLeft} />
+                                    </span>
+                                    <h3 className="text-white fs-18 mb-0">Comment</h3>
+
                                 </Link>
                             </Card.Header>
                             <Card.Body>
@@ -327,10 +331,12 @@ export default function CommentDetails({ slug, userImage }) {
                                         </Col>
                                         <Col>
                                             <div>
-                                                <Link href={commentData.user?.role == roles.brand ? `/brand/${commentData.user.slug}` : `/customer/${commentData.user.slug}`}>
-                                                    <a>
-                                                        <h3 className="text-white fs-18">{commentData.user?.fullName}<span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(commentData.createdAt, 'DD MMM YYYY')}</span></h3>
-                                                    </a>
+                                                <Link
+                                                    href={commentData.user?.role == roles.brand ? `/brand/${commentData.user.slug}` : `/customer/${commentData.user.slug}`}
+                                                    legacyBehavior>
+
+                                                    <h3 className="text-white fs-18">{commentData.user?.fullName}<span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(commentData.createdAt, 'DD MMM YYYY')}</span></h3>
+
                                                 </Link>
                                                 <p className="color-bfbfbf">{commentData.comment}</p>
                                             </div>
@@ -491,10 +497,12 @@ export default function CommentDetails({ slug, userImage }) {
                                                                 </Col>
                                                                 <Col>
                                                                     <div>
-                                                                        <Link href={replyData.user?.role == roles.brand ? `/brand/${replyData.user.slug}` : `/customer/${replyData.user.slug}`}>
-                                                                            <a>
-                                                                                <h3 className="text-white fs-18">{replyData.user?.fullName}<span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(replyData.createdAt, 'DD MMM YYYY')}</span></h3>
-                                                                            </a>
+                                                                        <Link
+                                                                            href={replyData.user?.role == roles.brand ? `/brand/${replyData.user.slug}` : `/customer/${replyData.user.slug}`}
+                                                                            legacyBehavior>
+
+                                                                            <h3 className="text-white fs-18">{replyData.user?.fullName}<span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(replyData.createdAt, 'DD MMM YYYY')}</span></h3>
+
                                                                         </Link>
                                                                         <p className="color-bfbfbf">{replyData.reply}</p>
                                                                     </div>
@@ -557,7 +565,7 @@ export default function CommentDetails({ slug, userImage }) {
                 />
             </Container>
         </section>
-    )
+    );
 }
 
 export async function getServerSideProps(context) {

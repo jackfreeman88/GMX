@@ -325,489 +325,490 @@ function AddProduct() {
     };
 
     let checkValidation = submitted ? validator.validate(productData) : validation
-    return (
-        <>
-            <Meta title={`Add Product | ${APP_NAME}`} keywords={''} description={''} />
-            <section className="bg-black p-30-0-60">
-                <Container>
-                    <Row>
-                        <Col lg={12} className="mx-auto">
-                            <Card className="card-dark border-gray p-15-20-30 br-10">
-                                <Card.Header className="border-btm-gray mb-20 p-l-0 p-r-0 p-t-0 p-b-13">
-                                    <Card.Title className="fs-18 fw-600 color-white mb-0">
-                                        {showSkeleton ?
-                                            <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                <Skeleton width={150} />
-                                            </SkeletonTheme>
-                                            :
-                                            'Add Product'
-                                        }
-                                    </Card.Title>
-                                </Card.Header>
+    return <>
+        <Meta title={`Add Product | ${APP_NAME}`} keywords={''} description={''} />
+        <section className="bg-black p-30-0-60">
+            <Container>
+                <Row>
+                    <Col lg={12} className="mx-auto">
+                        <Card className="card-dark border-gray p-15-20-30 br-10">
+                            <Card.Header className="border-btm-gray mb-20 p-l-0 p-r-0 p-t-0 p-b-13">
+                                <Card.Title className="fs-18 fw-600 color-white mb-0">
+                                    {showSkeleton ?
+                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                            <Skeleton width={150} />
+                                        </SkeletonTheme>
+                                        :
+                                        'Add Product'
+                                    }
+                                </Card.Title>
+                            </Card.Header>
 
-                                <Card.Body className="p-0">
-                                    <Form>
-                                        <Row>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Product Name</Form.Label>
-                                                            <Form.Control type="text" placeholder="Enter Product Name" value={productData.title} name="title" onChange={handleChange} />
-                                                            <div className={checkValidation.title.isInvalid ? 'animated fadeIn' : ''} >
-                                                                <div className="error">
-                                                                    {checkValidation.title.message}
-                                                                </div>
+                            <Card.Body className="p-0">
+                                <Form>
+                                    <Row>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Product Name</Form.Label>
+                                                        <Form.Control type="text" placeholder="Enter Product Name" value={productData.title} name="title" onChange={handleChange} />
+                                                        <div className={checkValidation.title.isInvalid ? 'animated fadeIn' : ''} >
+                                                            <div className="error">
+                                                                {checkValidation.title.message}
                                                             </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Category</Form.Label>
-                                                            <Select
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_lg_Styles}
-                                                                value={categories.filter((item) => item.id == productData.categoryId)}
-                                                                options={categories.map(({ id, name }) => ({
-                                                                    value: id,
-                                                                    label: name,
-                                                                }))}
-                                                                onChange={(val, e) => handleSelectChange(val, e)}
-                                                                placeholder="Category"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="categoryId"
-                                                                isClearable={true}
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Category</Form.Label>
+                                                        <Select
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_lg_Styles}
+                                                            value={categories.filter((item) => item.id == productData.categoryId)}
+                                                            options={categories.map(({ id, name }) => ({
+                                                                value: id,
+                                                                label: name,
+                                                            }))}
+                                                            onChange={(val, e) => handleSelectChange(val, e)}
+                                                            placeholder="Category"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="categoryId"
+                                                            isClearable={true}
+                                                        />
+                                                        <div
+                                                            className={
+                                                                checkValidation.categoryId.isInvalid
+                                                                    ? 'animated fadeIn'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div className="error">
+                                                                {checkValidation.categoryId.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Med/Rec</Form.Label>
+                                                        <Select
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_lg_Styles}
+                                                            value={medrec.filter((item) => item.id == productData.medRecId)}
+                                                            options={medrec.map(({ id, name }) => ({
+                                                                value: id,
+                                                                label: name,
+                                                            }))}
+                                                            onChange={(val, e) => handleSelectChange(val, e)}
+                                                            placeholder="Med/Rec"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="medRecId"
+                                                            isClearable={true}
+                                                        />
+                                                        <div
+                                                            className={
+                                                                checkValidation.medRecId.isInvalid
+                                                                    ? 'animated fadeIn'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div className="error">
+                                                                {checkValidation.medRecId.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        {/* <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Price Per lb</Form.Label>
+                                                        <Form.Control type="number" placeholder="Enter Price Per lb" value={productData.price} name="price" onChange={handleChange} />
+                                                        <div className={checkValidation.price.isInvalid ? 'animated fadeIn' : ''} >
+                                                            <div className="error">
+                                                                {checkValidation.price.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col> */}
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Strain</Form.Label>
+                                                        <Select
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_lg_Styles}
+                                                            value={strains.filter((item) => item.id == productData.strainId)}
+                                                            options={strains.map(({ id, name }) => ({
+                                                                value: id,
+                                                                label: name,
+                                                            }))}
+                                                            onChange={(val, e) => handleSelectChange(val, e)}
+                                                            placeholder="Strain"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="strainId"
+                                                            isClearable={true}
+                                                        />
+                                                        <div
+                                                            className={
+                                                                checkValidation.strainId.isInvalid
+                                                                    ? 'animated fadeIn'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div className="error">
+                                                                {checkValidation.strainId.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Dominant Terpene</Form.Label>
+                                                        <Form.Control type="text" placeholder="Enter Dominant Terpene" value={productData.dominant} name="dominant" onChange={handleChange} />
+                                                        <div className={checkValidation.dominant.isInvalid ? 'animated fadeIn' : ''} >
+                                                            <div className="error">
+                                                                {checkValidation.dominant.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>l/o</Form.Label>
+                                                        <Select
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_lg_Styles}
+                                                            value={ioro.filter((item) => item.id == productData.iOId)}
+                                                            options={ioro.map(({ id, name }) => ({
+                                                                value: id,
+                                                                label: name,
+                                                            }))}
+                                                            onChange={(val, e) => handleSelectChange(val, e)}
+                                                            placeholder="l/o"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="iOId"
+                                                            isClearable={true}
+                                                        />
+                                                        <div
+                                                            className={
+                                                                checkValidation.iOId.isInvalid
+                                                                    ? 'animated fadeIn'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div className="error">
+                                                                {checkValidation.iOId.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Harvested</Form.Label>
+                                                        {/* <Datetime
+                                                            dateFormat="DD MMM, YYYY"
+                                                            timeFormat={false}
+                                                            closeOnSelect={true}
+                                                            inputProps={inputProps}
+                                                            isValidDate={(currentDate) => currentDate.isBefore(moment())}
+                                                            value={productData.harvested ? moment(productData.harvested).format("DD MMM, YYYY") : ''}
+                                                            onChange={(date) => handleChangeDate(date)}
+                                                            closeOnTab={true}
+                                                            utc={true}
+                                                        /> */}
+                                                        <CustomDatePicker
+                                                            responsive={true}
+                                                            selectedDate={productData.harvested ? moment(productData.harvested).format("DD MMM, YYYY") : ''}
+                                                            handleOnChange={(date) => handleChangeDate(date)}
+                                                            disableFutureDates={true}
+                                                            disablePastDates={false}
+                                                        />
+                                                        <div
+                                                            className={
+                                                                checkValidation.harvested.isInvalid
+                                                                    ? 'animated fadeIn'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div className="error">
+                                                                {checkValidation.harvested.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>THC%</Form.Label>
+                                                        <Form.Control type="number" placeholder="Enter THC%" value={productData.thc} name="thc" onChange={handleChange} />
+                                                        <div className={checkValidation.thc.isInvalid ? 'animated fadeIn' : ''} >
+                                                            <div className="error">
+                                                                {checkValidation.thc.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Flavor</Form.Label>
+                                                        <Form.Control type="text" placeholder="Enter Flavor" value={productData.flavor} name="flavor" onChange={handleChange} />
+                                                        <div className={checkValidation.flavor.isInvalid ? 'animated fadeIn' : ''} >
+                                                            <div className="error">
+                                                                {checkValidation.flavor.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Lab Results</Form.Label>
+                                                        <div className="form-control upload_file" placeholder="Choose File">
+                                                            <Form.Label htmlFor="labResults" className="btn btn-primary bs-none">
+                                                                Choose File
+                                                            </Form.Label>
+                                                            <Form.Control
+                                                                type="file"
+                                                                accept="application/pdf"
+                                                                name="labResults"
+                                                                className="uploadImg"
+                                                                id="labResults"
+                                                                onChange={(e) => documentHandler(e)}
                                                             />
-                                                            <div
-                                                                className={
-                                                                    checkValidation.categoryId.isInvalid
-                                                                        ? 'animated fadeIn'
-                                                                        : ''
-                                                                }
-                                                            >
-                                                                <div className="error">
-                                                                    {checkValidation.categoryId.message}
-                                                                </div>
+                                                            <div className='my-3'>{productData.labResults.name}</div>
+                                                        </div>
+                                                        <div
+                                                            className={
+                                                                checkValidation.labResults.isInvalid
+                                                                    ? 'animated fadeIn'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div className="error">
+                                                                {checkValidation.labResults.message}
                                                             </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Med/Rec</Form.Label>
-                                                            <Select
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_lg_Styles}
-                                                                value={medrec.filter((item) => item.id == productData.medRecId)}
-                                                                options={medrec.map(({ id, name }) => ({
-                                                                    value: id,
-                                                                    label: name,
-                                                                }))}
-                                                                onChange={(val, e) => handleSelectChange(val, e)}
-                                                                placeholder="Med/Rec"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="medRecId"
-                                                                isClearable={true}
-                                                            />
-                                                            <div
-                                                                className={
-                                                                    checkValidation.medRecId.isInvalid
-                                                                        ? 'animated fadeIn'
-                                                                        : ''
-                                                                }
-                                                            >
-                                                                <div className="error">
-                                                                    {checkValidation.medRecId.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            {/* <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Price Per lb</Form.Label>
-                                                            <Form.Control type="number" placeholder="Enter Price Per lb" value={productData.price} name="price" onChange={handleChange} />
-                                                            <div className={checkValidation.price.isInvalid ? 'animated fadeIn' : ''} >
-                                                                <div className="error">
-                                                                    {checkValidation.price.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col> */}
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Strain</Form.Label>
-                                                            <Select
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_lg_Styles}
-                                                                value={strains.filter((item) => item.id == productData.strainId)}
-                                                                options={strains.map(({ id, name }) => ({
-                                                                    value: id,
-                                                                    label: name,
-                                                                }))}
-                                                                onChange={(val, e) => handleSelectChange(val, e)}
-                                                                placeholder="Strain"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="strainId"
-                                                                isClearable={true}
-                                                            />
-                                                            <div
-                                                                className={
-                                                                    checkValidation.strainId.isInvalid
-                                                                        ? 'animated fadeIn'
-                                                                        : ''
-                                                                }
-                                                            >
-                                                                <div className="error">
-                                                                    {checkValidation.strainId.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Dominant Terpene</Form.Label>
-                                                            <Form.Control type="text" placeholder="Enter Dominant Terpene" value={productData.dominant} name="dominant" onChange={handleChange} />
-                                                            <div className={checkValidation.dominant.isInvalid ? 'animated fadeIn' : ''} >
-                                                                <div className="error">
-                                                                    {checkValidation.dominant.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>l/o</Form.Label>
-                                                            <Select
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_lg_Styles}
-                                                                value={ioro.filter((item) => item.id == productData.iOId)}
-                                                                options={ioro.map(({ id, name }) => ({
-                                                                    value: id,
-                                                                    label: name,
-                                                                }))}
-                                                                onChange={(val, e) => handleSelectChange(val, e)}
-                                                                placeholder="l/o"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="iOId"
-                                                                isClearable={true}
-                                                            />
-                                                            <div
-                                                                className={
-                                                                    checkValidation.iOId.isInvalid
-                                                                        ? 'animated fadeIn'
-                                                                        : ''
-                                                                }
-                                                            >
-                                                                <div className="error">
-                                                                    {checkValidation.iOId.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Harvested</Form.Label>
-                                                            {/* <Datetime
-                                                                dateFormat="DD MMM, YYYY"
-                                                                timeFormat={false}
-                                                                closeOnSelect={true}
-                                                                inputProps={inputProps}
-                                                                isValidDate={(currentDate) => currentDate.isBefore(moment())}
-                                                                value={productData.harvested ? moment(productData.harvested).format("DD MMM, YYYY") : ''}
-                                                                onChange={(date) => handleChangeDate(date)}
-                                                                closeOnTab={true}
-                                                                utc={true}
-                                                            /> */}
-                                                            <CustomDatePicker
-                                                                responsive={true}
-                                                                selectedDate={productData.harvested ? moment(productData.harvested).format("DD MMM, YYYY") : ''}
-                                                                handleOnChange={(date) => handleChangeDate(date)}
-                                                                disableFutureDates={true}
-                                                                disablePastDates={false}
-                                                            />
-                                                            <div
-                                                                className={
-                                                                    checkValidation.harvested.isInvalid
-                                                                        ? 'animated fadeIn'
-                                                                        : ''
-                                                                }
-                                                            >
-                                                                <div className="error">
-                                                                    {checkValidation.harvested.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>THC%</Form.Label>
-                                                            <Form.Control type="number" placeholder="Enter THC%" value={productData.thc} name="thc" onChange={handleChange} />
-                                                            <div className={checkValidation.thc.isInvalid ? 'animated fadeIn' : ''} >
-                                                                <div className="error">
-                                                                    {checkValidation.thc.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Flavor</Form.Label>
-                                                            <Form.Control type="text" placeholder="Enter Flavor" value={productData.flavor} name="flavor" onChange={handleChange} />
-                                                            <div className={checkValidation.flavor.isInvalid ? 'animated fadeIn' : ''} >
-                                                                <div className="error">
-                                                                    {checkValidation.flavor.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Lab Results</Form.Label>
-                                                            <div className="form-control upload_file" placeholder="Choose File">
-                                                                <Form.Label htmlFor="labResults" className="btn btn-primary bs-none">
-                                                                    Choose File
-                                                                </Form.Label>
-                                                                <Form.Control
-                                                                    type="file"
-                                                                    accept="application/pdf"
-                                                                    name="labResults"
-                                                                    className="uploadImg"
-                                                                    id="labResults"
-                                                                    onChange={(e) => documentHandler(e)}
-                                                                />
-                                                                <div className='my-3'>{productData.labResults.name}</div>
-                                                            </div>
-                                                            <div
-                                                                className={
-                                                                    checkValidation.labResults.isInvalid
-                                                                        ? 'animated fadeIn'
-                                                                        : ''
-                                                                }
-                                                            >
-                                                                <div className="error">
-                                                                    {checkValidation.labResults.message}
-                                                                </div>
-                                                            </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={6}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={50} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Unit</Form.Label>
-                                                            <Form.Control type="text" placeholder="Enter Unit" value={productData.unit} name="unit" onChange={handleChange} />
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={12}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={200} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Upload Images</Form.Label>
-                                                            <div className="d-flex justify-content-start align-items-center flex-wrap mt-10">
-                                                                {/* <div className="upload_file upload_file_btn mr-10">
-                                                                    <Form.Label for="document_upload" className="btn btn-outline-gray bs-none"><i className="icon-file-upload"></i>Upload Image</Form.Label>
-                                                                    <Form.Control type="file" id="document_upload" />
-                                                                </div> */}
-                                                                <p className="fs-14 color-dcdcdc fw-400 mb-2">Max 5 Images That Might be Helpful in Describing About Product</p>
-                                                            </div>
-                                                            {(productData.imagesExistArr) && (
-                                                                <div className='dzu-previewMain'>
-                                                                    {productData.imagesExistArr.map((row, i) => (
-                                                                        <div className="dzu-previewContainer mb-3" key={i} id={"removeImg-" + row.id}>
-                                                                            <img className="dzu-previewImage" src={ASSETS_URL + row.image} alt={row.image} title={row.Image} />
-                                                                            <div className="dzu-previewStatusContainer">
-                                                                                <span className="dzu-previewButton" onClick={() => removeComponent(row.image)}>
-                                                                                    {/* <img className="dzu-previewImage" src={require('../../assets/images/fas-fa-times.svg').default} alt="img"/> */}
-                                                                                </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    ))}
-                                                                </div>
-                                                            )}
-                                                            <Dropzone
-                                                                getUploadParams={getUploadParams}
-                                                                onChangeStatus={handleChangeStatus}
-                                                                inputContent="Drag files to upload"
-                                                                inputWithFilesContent="Upload Image"
-                                                                accept="image/*"
-                                                                maxFiles={5}
-                                                                validate={({ meta }) => maxFiles > 0 ? false : 'You can not upload more than 5 images'}
-                                                            // styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
-                                                            />
-                                                            {/* <div
-                                                                className={
-                                                                    checkValidation.productImages.isInvalid
-                                                                        ? 'animated fadeIn'
-                                                                        : ''
-                                                                }
-                                                            >
-                                                                <div className="error">
-                                                                    {checkValidation.productImages.message}
-                                                                </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={6}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={50} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Unit</Form.Label>
+                                                        <Form.Control type="text" placeholder="Enter Unit" value={productData.unit} name="unit" onChange={handleChange} />
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={12}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={200} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Upload Images</Form.Label>
+                                                        <div className="d-flex justify-content-start align-items-center flex-wrap mt-10">
+                                                            {/* <div className="upload_file upload_file_btn mr-10">
+                                                                <Form.Label for="document_upload" className="btn btn-outline-gray bs-none"><i className="icon-file-upload"></i>Upload Image</Form.Label>
+                                                                <Form.Control type="file" id="document_upload" />
                                                             </div> */}
-                                                            <div className='animated fadeIn d-none' id="max-files-err">
-                                                                <div className="error">
-                                                                    You can not upload more than 5 images
-                                                                </div>
+                                                            <p className="fs-14 color-dcdcdc fw-400 mb-2">Max 5 Images That Might be Helpful in Describing About Product</p>
+                                                        </div>
+                                                        {(productData.imagesExistArr) && (
+                                                            <div className='dzu-previewMain'>
+                                                                {productData.imagesExistArr.map((row, i) => (
+                                                                    <div className="dzu-previewContainer mb-3" key={i} id={"removeImg-" + row.id}>
+                                                                        <img className="dzu-previewImage" src={ASSETS_URL + row.image} alt={row.image} title={row.Image} />
+                                                                        <div className="dzu-previewStatusContainer">
+                                                                            <span className="dzu-previewButton" onClick={() => removeComponent(row.image)}>
+                                                                                {/* <img className="dzu-previewImage" src={require('../../assets/images/fas-fa-times.svg').default} alt="img"/> */}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
                                                             </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={12}>
-                                                <Form.Group className="form-dark mb-4">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton height={100} />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Form.Label>Description</Form.Label>
-                                                            <Form.Control as="textarea" placeholder="Enter Description" style={{ height: '107px' }} value={productData.description} name="description" onChange={handleChange} />
-                                                            <div className={checkValidation.description.isInvalid ? 'animated fadeIn' : ''} >
-                                                                <div className="error">
-                                                                    {checkValidation.description.message}
-                                                                </div>
+                                                        )}
+                                                        <Dropzone
+                                                            getUploadParams={getUploadParams}
+                                                            onChangeStatus={handleChangeStatus}
+                                                            inputContent="Drag files to upload"
+                                                            inputWithFilesContent="Upload Image"
+                                                            accept="image/*"
+                                                            maxFiles={5}
+                                                            validate={({ meta }) => maxFiles > 0 ? false : 'You can not upload more than 5 images'}
+                                                        // styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
+                                                        />
+                                                        {/* <div
+                                                            className={
+                                                                checkValidation.productImages.isInvalid
+                                                                    ? 'animated fadeIn'
+                                                                    : ''
+                                                            }
+                                                        >
+                                                            <div className="error">
+                                                                {checkValidation.productImages.message}
                                                             </div>
-                                                        </>
-                                                    }
-                                                </Form.Group>
-                                            </Col>
-                                            <Col md={12}>
-                                                <div className="d-flex justify-content-center align-items-center mt-6 mbottom-5 flex-wrap">
-                                                    {showSkeleton ?
-                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                            <Skeleton width={300} height={50} inline={true} count={2} className="m-10" />
-                                                        </SkeletonTheme>
-                                                        :
-                                                        <>
-                                                            <Link href='/product/list'><a className="btn btn-wh-160-54 btn-rounded btn-outline-secondary-transparent btn-right-icons m-10 ">Cancel<span><FontAwesomeIcon icon={faAngleRight} /></span></a></Link>
-                                                            <Button variant="primary" type="submit" className="btn-wh-150-54 btn-rounded btn-right-icons m-10" onClick={!showLoading ? addProduct : null} disabled={showLoading}>{showLoading ? <Spinner animation="border" /> : "Save"}<span className="color-22a612"><FontAwesomeIcon icon={faAngleRight} /></span></Button>
-                                                        </>
-                                                    }
-                                                </div>
-                                            </Col>
-                                        </Row>
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
-        </>
-    )
+                                                        </div> */}
+                                                        <div className='animated fadeIn d-none' id="max-files-err">
+                                                            <div className="error">
+                                                                You can not upload more than 5 images
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={12}>
+                                            <Form.Group className="form-dark mb-4">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton height={100} />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Form.Label>Description</Form.Label>
+                                                        <Form.Control as="textarea" placeholder="Enter Description" style={{ height: '107px' }} value={productData.description} name="description" onChange={handleChange} />
+                                                        <div className={checkValidation.description.isInvalid ? 'animated fadeIn' : ''} >
+                                                            <div className="error">
+                                                                {checkValidation.description.message}
+                                                            </div>
+                                                        </div>
+                                                    </>
+                                                }
+                                            </Form.Group>
+                                        </Col>
+                                        <Col md={12}>
+                                            <div className="d-flex justify-content-center align-items-center mt-6 mbottom-5 flex-wrap">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                        <Skeleton width={300} height={50} inline={true} count={2} className="m-10" />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <Link
+                                                            href='/product/list'
+                                                            className="btn btn-wh-160-54 btn-rounded btn-outline-secondary-transparent btn-right-icons m-10 "
+                                                            legacyBehavior>Cancel<span><FontAwesomeIcon icon={faAngleRight} /></span></Link>
+                                                        <Button variant="primary" type="submit" className="btn-wh-150-54 btn-rounded btn-right-icons m-10" onClick={!showLoading ? addProduct : null} disabled={showLoading}>{showLoading ? <Spinner animation="border" /> : "Save"}<span className="color-22a612"><FontAwesomeIcon icon={faAngleRight} /></span></Button>
+                                                    </>
+                                                }
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    </>;
 }
 
 export default AddProduct

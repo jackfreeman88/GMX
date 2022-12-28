@@ -27,13 +27,15 @@ export default function SingleReply({ replyData, handleShowReplies, reply, rInde
                     </Figure>
                 </Col>
                 <Col>
-                <Link href={replyData.user?.role == roles.brand ? `/brand/${replyData.user.slug}` : `/customer/${replyData.user.slug}`}>
-                    <a>
-                        <div>
-                            <h3 className="text-white fs-18">{replyData.user?.fullName}<span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(replyData.createdAt, 'DD MMM YYYY')}</span></h3>
-                            <p className="color-bfbfbf">{replyData.reply}</p>
-                        </div>
-                    </a>
+                <Link
+                    href={replyData.user?.role == roles.brand ? `/brand/${replyData.user.slug}` : `/customer/${replyData.user.slug}`}
+                    legacyBehavior>
+
+                    <div>
+                        <h3 className="text-white fs-18">{replyData.user?.fullName}<span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(replyData.createdAt, 'DD MMM YYYY')}</span></h3>
+                        <p className="color-bfbfbf">{replyData.reply}</p>
+                    </div>
+
                 </Link>
                     <Row className="gallery-view">
                         {replyData.attachments?.length > 0 &&
@@ -82,5 +84,5 @@ export default function SingleReply({ replyData, handleShowReplies, reply, rInde
                 handleClose={handleClose}
             />
         </Row>
-    )
+    );
 }

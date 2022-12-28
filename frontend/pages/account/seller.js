@@ -396,444 +396,442 @@ function MyAccountSeller() {
 
 	let checkValidation = submitted ? validator.validate(profileData) : validation
 	let checkChangePasswordValidation = changePasswordsubmitted ? changePasswordValidator.validate(changePasswordState) : changePasswordValidation
-	return (
-		<>
-			<Meta title={`My Account | ${APP_NAME}`} keywords={''} description={''} />
-			<section className="bg-black p-30-0-60">
-				<Container>
-					<Row>
-						<Col lg={12} className="mx-auto">
-							<Card className="card-dark border-gray p-15-20-20 br-10">
-								<Card.Header className="border-btm-gray mb-20 d-flex align-items-center">
-									<Card.Title className="fs-18 fw-600 color-dcdcdc mb-0">My Account</Card.Title>
-									<div className="ms-auto">
-										<Link href="/account/delete">
-											<a className="btn btn-primary br-6">Delete Account</a>
-										</Link>
-									</div>
-								</Card.Header>
+	return <>
+        <Meta title={`My Account | ${APP_NAME}`} keywords={''} description={''} />
+        <section className="bg-black p-30-0-60">
+            <Container>
+                <Row>
+                    <Col lg={12} className="mx-auto">
+                        <Card className="card-dark border-gray p-15-20-20 br-10">
+                            <Card.Header className="border-btm-gray mb-20 d-flex align-items-center">
+                                <Card.Title className="fs-18 fw-600 color-dcdcdc mb-0">My Account</Card.Title>
+                                <div className="ms-auto">
+                                    <Link href="/account/delete" className="btn btn-primary br-6">
+                                        Delete Account
+                                    </Link>
+                                </div>
+                            </Card.Header>
 
-								<Card.Body className="p-0">
-									<Row>
-										<Col lg={3}>
-											<Form.Group className="mb-4 profile-box br-10 bg-color-333 border-gray">
-												<Form.Label>Logo</Form.Label>
-												<div className="userimg-wrap">
-													{showSkeleton ?
-														<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-															<Skeleton height={96} circle={true} className='cover circle d-inline-block' />
-														</SkeletonTheme>
-														:
-														<>
-															<img src={ASSETS_URL + profileData.profilePath} id="preview_image" className='cover circle' />
-															<div className="form-control upload_file br-50p w-28 h-28 bg-color-22a612" placeholder="">
-																<Form.Label htmlFor="logo" className=" profile-edit-btn"><span><FontAwesomeIcon icon={faEdit} /></span></Form.Label>
-																<Form.Control type="file" id="logo" name="profileDocument" onChange={(e) => documentHandler(e)} accept="image/*" />
-															</div>
-														</>
-													}
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={9}>
-											<Row>
-												<Col lg={12}>
-													<Form.Group className="mb-4 form-dark">
-														{showSkeleton ?
-															<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
-															:
-															<>
-																<Form.Label>Name</Form.Label>
-																<Form.Control type="text" name="businessName" placeholder="Enter First Name" value={profileData.businessName} onChange={onChangeHandler} />
-																<div className={checkValidation.businessName.isInvalid ? 'animated fadeIn' : ''} >
-																	<div className="error">
-																		{checkValidation.businessName.message}
-																	</div>
-																</div>
-															</>
-														}
-													</Form.Group>
-												</Col>
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														{showSkeleton ?
-															<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
-															:
-															<><Form.Label>Email</Form.Label>
-																<Form.Control type="email" name="email" placeholder="Enter Email" value={profileData.email} disabled /></>
-														}
-													</Form.Group>
-												</Col>
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														{showSkeleton ?
-															<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
-															:
-															<>
-																<Form.Label>Phone Number</Form.Label>
-																<Form.Control type="number" name="phoneNumber" placeholder="Enter Phone Number" value={profileData.phoneNumber} onChange={onChangeHandler} min="0" />
-																<div
-																	className={
-																		checkValidation.phoneNumber.isInvalid
-																			? 'animated fadeIn'
-																			: ''
-																	}
-																>
-																	<div className="error">
-																		{checkValidation.phoneNumber.message}
-																	</div>
-																</div>
-															</>
-														}
-													</Form.Group>
-												</Col>
-											</Row>
-										</Col>
-										<Col lg={12}>
-											<h4 className="fs-16 fw-600 color-dcdcdc mb-20 p-b-10 border-btm-gray">Brand Details</h4>
-										</Col>
+                            <Card.Body className="p-0">
+                                <Row>
+                                    <Col lg={3}>
+                                        <Form.Group className="mb-4 profile-box br-10 bg-color-333 border-gray">
+                                            <Form.Label>Logo</Form.Label>
+                                            <div className="userimg-wrap">
+                                                {showSkeleton ?
+                                                    <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
+                                                        <Skeleton height={96} circle={true} className='cover circle d-inline-block' />
+                                                    </SkeletonTheme>
+                                                    :
+                                                    <>
+                                                        <img src={ASSETS_URL + profileData.profilePath} id="preview_image" className='cover circle' />
+                                                        <div className="form-control upload_file br-50p w-28 h-28 bg-color-22a612" placeholder="">
+                                                            <Form.Label htmlFor="logo" className=" profile-edit-btn"><span><FontAwesomeIcon icon={faEdit} /></span></Form.Label>
+                                                            <Form.Control type="file" id="logo" name="profileDocument" onChange={(e) => documentHandler(e)} accept="image/*" />
+                                                        </div>
+                                                    </>
+                                                }
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={9}>
+                                        <Row>
+                                            <Col lg={12}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    {showSkeleton ?
+                                                        <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
+                                                        :
+                                                        <>
+                                                            <Form.Label>Name</Form.Label>
+                                                            <Form.Control type="text" name="businessName" placeholder="Enter First Name" value={profileData.businessName} onChange={onChangeHandler} />
+                                                            <div className={checkValidation.businessName.isInvalid ? 'animated fadeIn' : ''} >
+                                                                <div className="error">
+                                                                    {checkValidation.businessName.message}
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    }
+                                                </Form.Group>
+                                            </Col>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    {showSkeleton ?
+                                                        <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
+                                                        :
+                                                        <><Form.Label>Email</Form.Label>
+                                                            <Form.Control type="email" name="email" placeholder="Enter Email" value={profileData.email} disabled /></>
+                                                    }
+                                                </Form.Group>
+                                            </Col>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    {showSkeleton ?
+                                                        <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
+                                                        :
+                                                        <>
+                                                            <Form.Label>Phone Number</Form.Label>
+                                                            <Form.Control type="number" name="phoneNumber" placeholder="Enter Phone Number" value={profileData.phoneNumber} onChange={onChangeHandler} min="0" />
+                                                            <div
+                                                                className={
+                                                                    checkValidation.phoneNumber.isInvalid
+                                                                        ? 'animated fadeIn'
+                                                                        : ''
+                                                                }
+                                                            >
+                                                                <div className="error">
+                                                                    {checkValidation.phoneNumber.message}
+                                                                </div>
+                                                            </div>
+                                                        </>
+                                                    }
+                                                </Form.Group>
+                                            </Col>
+                                        </Row>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <h4 className="fs-16 fw-600 color-dcdcdc mb-20 p-b-10 border-btm-gray">Brand Details</h4>
+                                    </Col>
 
-										<Col lg={12}>
-											<Form.Group className="mb-4 form-dark">
-												{showSkeleton ?
-													<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
-													:
-													<>
-														<Form.Label>Brand Name</Form.Label>
-														<Form.Control type="text" name="brandName" placeholder="Enter Brand Name" value={profileData.brandName} onChange={onChangeHandler} />
-														<div
-															className={
-																checkValidation.brandName.isInvalid
-																	? 'animated fadeIn'
-																	: ''
-															}
-														>
-															<div className="error">
-																{checkValidation.brandName.message}
-															</div>
-														</div>
-													</>
-												}
-											</Form.Group>
-										</Col>
-										{showSkeleton ?
-											<Col lg={12}>
-												<Form.Group className="mb-4 form-dark">
-													<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
-												</Form.Group>
-											</Col>
-											:
-											<>
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														<Form.Label>Website<span>(optional)</span></Form.Label>
-														<Form.Control type="text" name="website" placeholder="Enter Website" value={profileData.website} onChange={onChangeHandler} />
-														{/*<div
-															className={
-																checkValidation.website.isInvalid
-																	? 'animated fadeIn'
-																	: ''
-															}
-														>
-															<div className="error">
-																{checkValidation.website.message}
-															</div>
-														</div>*/}
-													</Form.Group>
-												</Col>
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														<Form.Label>Business Establishment Year</Form.Label>
-														<Form.Control type="number" name="year" placeholder="Enter Business Establishment Year" value={profileData.year} onChange={onChangeHandler} />
-														<div
-															className={
-																checkValidation.year.isInvalid
-																	? 'animated fadeIn'
-																	: ''
-															}
-														>
-															<div className="error">
-																{checkValidation.year.message}
-															</div>
-														</div>
-													</Form.Group>
-												</Col>
-											</>
-										}
-										{showSkeleton ?
-											<Col lg={12}>
-												<Form.Group className="mb-4 form-dark">
-													<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
-												</Form.Group>
-											</Col>
-											:
-											<>
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														<Form.Label>Average Order Per Month<span>(optional)</span></Form.Label>
-														<Form.Control type="number" name="avgOrder" placeholder="Enter Average Order Per Month" value={profileData.avgOrder} onChange={onChangeHandler} />
-													</Form.Group>
-												</Col>
+                                    <Col lg={12}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            {showSkeleton ?
+                                                <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
+                                                :
+                                                <>
+                                                    <Form.Label>Brand Name</Form.Label>
+                                                    <Form.Control type="text" name="brandName" placeholder="Enter Brand Name" value={profileData.brandName} onChange={onChangeHandler} />
+                                                    <div
+                                                        className={
+                                                            checkValidation.brandName.isInvalid
+                                                                ? 'animated fadeIn'
+                                                                : ''
+                                                        }
+                                                    >
+                                                        <div className="error">
+                                                            {checkValidation.brandName.message}
+                                                        </div>
+                                                    </div>
+                                                </>
+                                            }
+                                        </Form.Group>
+                                    </Col>
+                                    {showSkeleton ?
+                                        <Col lg={12}>
+                                            <Form.Group className="mb-4 form-dark">
+                                                <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
+                                            </Form.Group>
+                                        </Col>
+                                        :
+                                        <>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    <Form.Label>Website<span>(optional)</span></Form.Label>
+                                                    <Form.Control type="text" name="website" placeholder="Enter Website" value={profileData.website} onChange={onChangeHandler} />
+                                                    {/*<div
+                                                        className={
+                                                            checkValidation.website.isInvalid
+                                                                ? 'animated fadeIn'
+                                                                : ''
+                                                        }
+                                                    >
+                                                        <div className="error">
+                                                            {checkValidation.website.message}
+                                                        </div>
+                                                    </div>*/}
+                                                </Form.Group>
+                                            </Col>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    <Form.Label>Business Establishment Year</Form.Label>
+                                                    <Form.Control type="number" name="year" placeholder="Enter Business Establishment Year" value={profileData.year} onChange={onChangeHandler} />
+                                                    <div
+                                                        className={
+                                                            checkValidation.year.isInvalid
+                                                                ? 'animated fadeIn'
+                                                                : ''
+                                                        }
+                                                    >
+                                                        <div className="error">
+                                                            {checkValidation.year.message}
+                                                        </div>
+                                                    </div>
+                                                </Form.Group>
+                                            </Col>
+                                        </>
+                                    }
+                                    {showSkeleton ?
+                                        <Col lg={12}>
+                                            <Form.Group className="mb-4 form-dark">
+                                                <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
+                                            </Form.Group>
+                                        </Col>
+                                        :
+                                        <>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    <Form.Label>Average Order Per Month<span>(optional)</span></Form.Label>
+                                                    <Form.Control type="number" name="avgOrder" placeholder="Enter Average Order Per Month" value={profileData.avgOrder} onChange={onChangeHandler} />
+                                                </Form.Group>
+                                            </Col>
 
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														<Form.Label>License Number</Form.Label>
-														<Form.Control type="text" name="licenseNumber" placeholder="Enter License Number" value={profileData.licenseNumber} onChange={onChangeHandler} />
-														<div
-															className={
-																checkValidation.licenseNumber.isInvalid
-																	? 'animated fadeIn'
-																	: ''
-															}
-														>
-															<div className="error">
-																{checkValidation.licenseNumber.message}
-															</div>
-														</div>
-													</Form.Group>
-												</Col>
-											</>
-										}
-										{showSkeleton ?
-											<Col lg={12}>
-												<Form.Group className="mb-4 form-dark">
-													<SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
-												</Form.Group>
-											</Col>
-											:
-											<>
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														<Form.Label>License Type</Form.Label>
-														<Select
-															classNamePrefix="react-select"
-															className="react-select-lg"
-															styles={react_select_lg_Styles}
-															value={medRecs.filter((item) => item.id == profileData.medRecId)}
-															options={medRecs.map(({ id, name }) => ({
-																value: id,
-																label: name,
-															}))}
-															onChange={(val) => handleChangeSelectLicenseType(val)}
-															placeholder="Select License Type"
-															components={{
-																DropdownIndicator,
-																IndicatorSeparator: () => null,
-															}}
-															name="medRecId"
-															isClearable={true}
-														/>
-														<div
-															className={
-																checkValidation.medRecId.isInvalid
-																	? 'animated fadeIn'
-																	: ''
-															}
-														>
-															<div className="error">
-																{checkValidation.medRecId.message}
-															</div>
-														</div>
-													</Form.Group>
-												</Col>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    <Form.Label>License Number</Form.Label>
+                                                    <Form.Control type="text" name="licenseNumber" placeholder="Enter License Number" value={profileData.licenseNumber} onChange={onChangeHandler} />
+                                                    <div
+                                                        className={
+                                                            checkValidation.licenseNumber.isInvalid
+                                                                ? 'animated fadeIn'
+                                                                : ''
+                                                        }
+                                                    >
+                                                        <div className="error">
+                                                            {checkValidation.licenseNumber.message}
+                                                        </div>
+                                                    </div>
+                                                </Form.Group>
+                                            </Col>
+                                        </>
+                                    }
+                                    {showSkeleton ?
+                                        <Col lg={12}>
+                                            <Form.Group className="mb-4 form-dark">
+                                                <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}><Skeleton height={50} /></SkeletonTheme>
+                                            </Form.Group>
+                                        </Col>
+                                        :
+                                        <>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    <Form.Label>License Type</Form.Label>
+                                                    <Select
+                                                        classNamePrefix="react-select"
+                                                        className="react-select-lg"
+                                                        styles={react_select_lg_Styles}
+                                                        value={medRecs.filter((item) => item.id == profileData.medRecId)}
+                                                        options={medRecs.map(({ id, name }) => ({
+                                                            value: id,
+                                                            label: name,
+                                                        }))}
+                                                        onChange={(val) => handleChangeSelectLicenseType(val)}
+                                                        placeholder="Select License Type"
+                                                        components={{
+                                                            DropdownIndicator,
+                                                            IndicatorSeparator: () => null,
+                                                        }}
+                                                        name="medRecId"
+                                                        isClearable={true}
+                                                    />
+                                                    <div
+                                                        className={
+                                                            checkValidation.medRecId.isInvalid
+                                                                ? 'animated fadeIn'
+                                                                : ''
+                                                        }
+                                                    >
+                                                        <div className="error">
+                                                            {checkValidation.medRecId.message}
+                                                        </div>
+                                                    </div>
+                                                </Form.Group>
+                                            </Col>
 
-												<Col lg={6}>
-													<Form.Group className="mb-4 form-dark">
-														<Form.Label>License Expire Date</Form.Label>
-														{/* <Datetime
-															dateFormat="DD MMM, YYYY"
-															timeFormat={false}
-															closeOnSelect={true}
-															inputProps={inputProps}
-															isValidDate={Helper.valid}
-															value={profileData.expirationDate ? moment(profileData.expirationDate).format(
-																"DD MMM, YYYY"
-															) : ''}
-															onChange={(date) => handleChangeDate(date)}
-															closeOnTab={true}
-															utc={true}
-															className="date_picker"
-														/> */}
-														<CustomDatePicker
-															responsive={true}
-															selectedDate={profileData.expirationDate ? moment(profileData.expirationDate).format(
-																"DD MMM, YYYY"
-															) : ''}
-															handleOnChange={(date) => handleChangeDate(date)}
-															disableFutureDates={false}
-															disablePastDates={true}
-														/>
-														<div
-															className={
-																checkValidation.expirationDate.isInvalid
-																	? 'animated fadeIn'
-																	: ''
-															}
-														>
-															<div className="error">
-																{checkValidation.expirationDate.message}
-															</div>
-														</div>
-													</Form.Group>
-												</Col>
-											</>
-										}
-										<Col lg={12}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>License Document </Form.Label>
-												{profileData.licensePath ? <a className="color-f3772c curser-pointer ms-2" onClick={() => downloadFile(profileData.licensePath)}>(Download File)</a> : ''}
-												<div className="form-control upload_file" placeholder="Choose File">
-													<Form.Label htmlFor="document_upload" className="btn btn-primary bs-none">Choose File</Form.Label>
-													<Form.Control type="file" accept='image/*,application/pdf' id="document_upload" name="licenseDocument" onChange={(e) => documentHandler(e)} />
-													<div className='my-3'>{profileData.licenseDocument ? profileData.licenseDocument.name : null}</div>
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={6}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>State</Form.Label>
-												<Select
-													classNamePrefix="react-select"
-													className="react-select-lg"
-													styles={react_select_lg_Styles}
-													value={states.filter((item) => item.id == profileData.stateId)}
-													options={states.map(({ id, name }) => ({
-														value: id,
-														label: name,
-													}))}
-													onChange={(val) => handleChangeSelectState(val)}
-													placeholder="Select State"
-													components={{
-														DropdownIndicator,
-														IndicatorSeparator: () => null,
-													}}
-													name="state_id"
-													isClearable={true}
-												/>
-												<div
-													className={
-														checkValidation.stateId.isInvalid
-															? 'animated fadeIn'
-															: ''
-													}
-												>
-													<div className="error">
-														{checkValidation.stateId.message}
-													</div>
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={6}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>Zip Code</Form.Label>
-												<Form.Control type="number" name="zipCode" placeholder="Enter Zip Code" value={profileData.zipCode} onChange={onChangeHandler} min="1" />
-												<div
-													className={
-														checkValidation.zipCode.isInvalid
-															? 'animated fadeIn'
-															: ''
-													}
-												>
-													<div className="error">
-														{checkValidation.zipCode.message}
-													</div>
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={12}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>Address</Form.Label>
-												<div className="form-icon form-icon-right">
-													<Form.Control type="text" name="address" placeholder="Enter Address" ref={locationRef} onChange={handleAddressKeyUp} id='address' />
-													<span className="icon"><FontAwesomeIcon icon={faLocation} /></span>
-												</div>
-												<div
-													className={
-														checkValidation.address.isInvalid
-															? 'animated fadeIn'
-															: ''
-													}
-												>
-													<div className="error">
-														{checkValidation.address.message}
-													</div>
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={12}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>Description</Form.Label>
-												<Form.Control as="textarea" name="description" placeholder="Enter Description" onChange={onChangeHandler} style={{ height: '100px' }} value={profileData.description} />
-												<div
-													className={
-														checkValidation.description.isInvalid
-															? 'animated fadeIn'
-															: ''
-													}
-												>
-													<div className="error">
-														{checkValidation.description.message}
-													</div>
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={12}>
-											<div className="text-center m-0-0-45">
-												<Button variant="primary" type="submit" className="btn-wh-184-51 btn-rounded" onClick={!showLoading ? updateProfileDetails : null} disabled={showLoading}>{showLoading ? <Spinner animation="border" /> : "Update"}</Button>
-											</div>
-										</Col>
-										<Col lg={12}>
-											<h4 className="fs-16 fw-600 color-dcdcdc mb-45 p-b-10 border-btm-gray">Change Password</h4>
-										</Col>
-										<Col lg={4}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>Current Password</Form.Label>
-												<Form.Control type="password" name="currentPassword" placeholder="Enter Current Password" value={changePasswordState.currentPassword} onChange={changePassOnChangeHandler} />
-												<div className={checkChangePasswordValidation.currentPassword.isInvalid ? 'animated fadeIn' : ''} >
-													<div className="error">
-														{checkChangePasswordValidation.currentPassword.message}
-													</div>
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={4}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>New Password</Form.Label>
-												<Form.Control type="password" name="newPassword" placeholder="Enter New Password" value={changePasswordState.newPassword} onChange={changePassOnChangeHandler} />
-												<div className={checkChangePasswordValidation.newPassword.isInvalid ? 'animated fadeIn' : ''} >
-													<div className="error">
-														{checkChangePasswordValidation.newPassword.message}
-													</div>
-												</div>
-											</Form.Group>
-										</Col>
-										<Col lg={4}>
-											<Form.Group className="mb-4 form-dark">
-												<Form.Label>Confirm New Password</Form.Label>
-												<Form.Control type="password" name="confirmNewPassword" placeholder="Enter New Password" value={changePasswordState.confirmNewPassword} onChange={changePassOnChangeHandler} />
-												<div className={checkChangePasswordValidation.confirmNewPassword.isInvalid ? 'animated fadeIn' : ''} >
-													<div className="error">
-														{checkChangePasswordValidation.confirmNewPassword.message}
-													</div>
-												</div>
-											</Form.Group>
-										</Col>
+                                            <Col lg={6}>
+                                                <Form.Group className="mb-4 form-dark">
+                                                    <Form.Label>License Expire Date</Form.Label>
+                                                    {/* <Datetime
+                                                        dateFormat="DD MMM, YYYY"
+                                                        timeFormat={false}
+                                                        closeOnSelect={true}
+                                                        inputProps={inputProps}
+                                                        isValidDate={Helper.valid}
+                                                        value={profileData.expirationDate ? moment(profileData.expirationDate).format(
+                                                            "DD MMM, YYYY"
+                                                        ) : ''}
+                                                        onChange={(date) => handleChangeDate(date)}
+                                                        closeOnTab={true}
+                                                        utc={true}
+                                                        className="date_picker"
+                                                    /> */}
+                                                    <CustomDatePicker
+                                                        responsive={true}
+                                                        selectedDate={profileData.expirationDate ? moment(profileData.expirationDate).format(
+                                                            "DD MMM, YYYY"
+                                                        ) : ''}
+                                                        handleOnChange={(date) => handleChangeDate(date)}
+                                                        disableFutureDates={false}
+                                                        disablePastDates={true}
+                                                    />
+                                                    <div
+                                                        className={
+                                                            checkValidation.expirationDate.isInvalid
+                                                                ? 'animated fadeIn'
+                                                                : ''
+                                                        }
+                                                    >
+                                                        <div className="error">
+                                                            {checkValidation.expirationDate.message}
+                                                        </div>
+                                                    </div>
+                                                </Form.Group>
+                                            </Col>
+                                        </>
+                                    }
+                                    <Col lg={12}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>License Document </Form.Label>
+                                            {profileData.licensePath ? <a className="color-f3772c curser-pointer ms-2" onClick={() => downloadFile(profileData.licensePath)}>(Download File)</a> : ''}
+                                            <div className="form-control upload_file" placeholder="Choose File">
+                                                <Form.Label htmlFor="document_upload" className="btn btn-primary bs-none">Choose File</Form.Label>
+                                                <Form.Control type="file" accept='image/*,application/pdf' id="document_upload" name="licenseDocument" onChange={(e) => documentHandler(e)} />
+                                                <div className='my-3'>{profileData.licenseDocument ? profileData.licenseDocument.name : null}</div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={6}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>State</Form.Label>
+                                            <Select
+                                                classNamePrefix="react-select"
+                                                className="react-select-lg"
+                                                styles={react_select_lg_Styles}
+                                                value={states.filter((item) => item.id == profileData.stateId)}
+                                                options={states.map(({ id, name }) => ({
+                                                    value: id,
+                                                    label: name,
+                                                }))}
+                                                onChange={(val) => handleChangeSelectState(val)}
+                                                placeholder="Select State"
+                                                components={{
+                                                    DropdownIndicator,
+                                                    IndicatorSeparator: () => null,
+                                                }}
+                                                name="state_id"
+                                                isClearable={true}
+                                            />
+                                            <div
+                                                className={
+                                                    checkValidation.stateId.isInvalid
+                                                        ? 'animated fadeIn'
+                                                        : ''
+                                                }
+                                            >
+                                                <div className="error">
+                                                    {checkValidation.stateId.message}
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={6}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>Zip Code</Form.Label>
+                                            <Form.Control type="number" name="zipCode" placeholder="Enter Zip Code" value={profileData.zipCode} onChange={onChangeHandler} min="1" />
+                                            <div
+                                                className={
+                                                    checkValidation.zipCode.isInvalid
+                                                        ? 'animated fadeIn'
+                                                        : ''
+                                                }
+                                            >
+                                                <div className="error">
+                                                    {checkValidation.zipCode.message}
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>Address</Form.Label>
+                                            <div className="form-icon form-icon-right">
+                                                <Form.Control type="text" name="address" placeholder="Enter Address" ref={locationRef} onChange={handleAddressKeyUp} id='address' />
+                                                <span className="icon"><FontAwesomeIcon icon={faLocation} /></span>
+                                            </div>
+                                            <div
+                                                className={
+                                                    checkValidation.address.isInvalid
+                                                        ? 'animated fadeIn'
+                                                        : ''
+                                                }
+                                            >
+                                                <div className="error">
+                                                    {checkValidation.address.message}
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>Description</Form.Label>
+                                            <Form.Control as="textarea" name="description" placeholder="Enter Description" onChange={onChangeHandler} style={{ height: '100px' }} value={profileData.description} />
+                                            <div
+                                                className={
+                                                    checkValidation.description.isInvalid
+                                                        ? 'animated fadeIn'
+                                                        : ''
+                                                }
+                                            >
+                                                <div className="error">
+                                                    {checkValidation.description.message}
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <div className="text-center m-0-0-45">
+                                            <Button variant="primary" type="submit" className="btn-wh-184-51 btn-rounded" onClick={!showLoading ? updateProfileDetails : null} disabled={showLoading}>{showLoading ? <Spinner animation="border" /> : "Update"}</Button>
+                                        </div>
+                                    </Col>
+                                    <Col lg={12}>
+                                        <h4 className="fs-16 fw-600 color-dcdcdc mb-45 p-b-10 border-btm-gray">Change Password</h4>
+                                    </Col>
+                                    <Col lg={4}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>Current Password</Form.Label>
+                                            <Form.Control type="password" name="currentPassword" placeholder="Enter Current Password" value={changePasswordState.currentPassword} onChange={changePassOnChangeHandler} />
+                                            <div className={checkChangePasswordValidation.currentPassword.isInvalid ? 'animated fadeIn' : ''} >
+                                                <div className="error">
+                                                    {checkChangePasswordValidation.currentPassword.message}
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={4}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>New Password</Form.Label>
+                                            <Form.Control type="password" name="newPassword" placeholder="Enter New Password" value={changePasswordState.newPassword} onChange={changePassOnChangeHandler} />
+                                            <div className={checkChangePasswordValidation.newPassword.isInvalid ? 'animated fadeIn' : ''} >
+                                                <div className="error">
+                                                    {checkChangePasswordValidation.newPassword.message}
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
+                                    <Col lg={4}>
+                                        <Form.Group className="mb-4 form-dark">
+                                            <Form.Label>Confirm New Password</Form.Label>
+                                            <Form.Control type="password" name="confirmNewPassword" placeholder="Enter New Password" value={changePasswordState.confirmNewPassword} onChange={changePassOnChangeHandler} />
+                                            <div className={checkChangePasswordValidation.confirmNewPassword.isInvalid ? 'animated fadeIn' : ''} >
+                                                <div className="error">
+                                                    {checkChangePasswordValidation.confirmNewPassword.message}
+                                                </div>
+                                            </div>
+                                        </Form.Group>
+                                    </Col>
 
-										<Col lg={12}>
-											<div className="text-center m-4-0-25">
-												<Button variant="primary" type="submit" className="btn-wh-184-51 btn-rounded" onClick={!showChangePassLoading ? handleChangePasswordSubmit : null} disabled={showChangePassLoading}>{showChangePassLoading ? <Spinner animation="border" /> : "Change"}</Button>
-											</div>
-										</Col>
-									</Row>
-								</Card.Body>
+                                    <Col lg={12}>
+                                        <div className="text-center m-4-0-25">
+                                            <Button variant="primary" type="submit" className="btn-wh-184-51 btn-rounded" onClick={!showChangePassLoading ? handleChangePasswordSubmit : null} disabled={showChangePassLoading}>{showChangePassLoading ? <Spinner animation="border" /> : "Change"}</Button>
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Card.Body>
 
-							</Card>
-						</Col>
-					</Row>
-				</Container>
-			</section>
-		</>
-	)
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    </>;
 }
 
 export default MyAccountSeller

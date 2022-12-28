@@ -454,260 +454,260 @@ export default function PostDetails({ slug, userImage }) {
                                         singlePost.map((activity, index) => {
                                         let mainPost = activity.type == '2' ? activity.parentPost : activity;
                                         console.log(mainPost);
-                                        return (
-                                            <>
-                                                <Row key={index}>
-                                                    {activity.type == '2' &&
-                                                        <div>
-                                                            <h3 className="text-white fs-18"> <i className="icon icon-reposts"></i> {(getSingle('userId') == activity.user.id) ? 'You' : activity.user.role == '2' ? activity.user.brandName : activity.user.businessName} Reposted</h3>
-                                                        </div>
-                                                    }
-                                                    <Col sm="auto" >
-                                                        <Figure className="figure figure-circle figure-gray-2 figure-62">
-                                                            <img className="cover" src={ASSETS_URL + mainPost.user?.profilePath ?? "/profile/no-profile-image.jpg"} alt="profile" />
-                                                        </Figure>
-                                                    </Col>
-                                                    <Col>
-                                                        <div>
-                                                            <Link href={mainPost.user?.role == roles.brand ? `/brand/${mainPost.user.slug}` : `/customer/${mainPost.user.slug}`}>
-                                                                <a>
-                                                                    <h3 className="text-white fs-18">{mainPost.user?.role == '2' ? mainPost.user?.brandName : mainPost.user?.businessName} <span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(mainPost.createdAt, 'DD MMM YYYY')}</span></h3>
-                                                                </a>
-                                                            </Link>
-                                                            <p className="color-bfbfbf">{mainPost.post}</p>
-                                                        </div>
-                                                        <Row>
-                                                            {mainPost.attachments?.length > 0 &&
-                                                                mainPost.attachments.map((attachmentFile, aIndex) => (
-                                                                    <Col lg={3} md={4} sm={6} key={'attachment' + aIndex}>
-                                                                        {
-                                                                            aIndex <= 3 ?
-                                                                                attachmentFile.attachmentType == 2 ?
-                                                                                    <div className="gallery-image cursor-pointer" onClick={() => handleShow(true, aIndex, activity.id, 'post')}>
-                                                                                        < ReactPlayer
-                                                                                            className='react-player'
-                                                                                            width='100%'
-                                                                                            height='100%'
-                                                                                            url={ASSETS_URL + attachmentFile.attachment}
-                                                                                            playing={false}
-                                                                                            controls={true}
-                                                                                            //volume={5}
-                                                                                            muted={true}
-                                                                                        />
-                                                                                        {aIndex == 3 ? <span className="more-images">{mainPost.attachments.length - 4 == 0 ? null : `+${mainPost.attachments.length - 4}`}</span> : null}
-                                                                                    </div>
-                                                                                    :
-                                                                                    <div className="gallery-image cursor-pointer" onClick={() => handleShow(true, aIndex, activity.id, 'post')}>
-                                                                                        <img className="cover" src={ASSETS_URL + attachmentFile.attachment} alt="postedImage" />
-                                                                                        {aIndex == 3 ? <span className="more-images">{mainPost.attachments.length - 4 == 0 ? null : `+${mainPost.attachments.length - 4}`}</span> : null}
-                                                                                    </div>
-                                                                                : null
-                                                                        }
-                                                                    </Col>
-                                                                ))
-                                                            }
-                                                        </Row>
-                                                        <div className="d-sm-flex justify-content-between align-items-center">
-                                                            <ul className="comment-icons nav mb-3">
-                                                                <li>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip> {!isLiked ? "Like" : "UnLike"}</Tooltip>}>
-                                                                        {isLoggedIn() ?
-                                                                            <a onClick={e => handleLikeClick(mainPost.id)}>
-                                                                                {!isLiked ? <span><i className="far fa-triangle"></i></span> : <span className="color-22a612"><i className="fas fa-triangle"></i></span>}
-                                                                            </a>
-                                                                            :
-                                                                            <Link href={`/sign-in`}>
-                                                                                <a><span><i className="far fa-triangle"></i></span></a>
-                                                                            </Link>}
-                                                                    </OverlayTrigger>
-                                                                </li>
-                                                                <li>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Comment</Tooltip>}>
-                                                                        {isLoggedIn() ?
-                                                                            <a onClick={
-                                                                                () => handleShowCommentModal(mainPost.id, 'comment')}
-                                                                            >
-                                                                                <i className="icon icon-chat-bubble"></i>
-                                                                            </a>
-                                                                            : <Link href={`/sign-in`}><a><i className="icon icon-chat-bubble"></i></a></Link>}
-                                                                    </OverlayTrigger>
-                                                                </li>
-                                                                <li>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>{!isReposted ? 'Repost' : 'Undo Repost'}</Tooltip>}>
-                                                                        {isLoggedIn() ?
-                                                                            <a onClick={() => handleRepostClick({ postId: mainPost.id, post: mainPost.post })}>
-                                                                                {!isReposted ? <span><i className="icon icon-reposts"></i></span> : <span className="color-22a612"><i className="icon icon-reposts"></i></span>}
-                                                                            </a>
-                                                                            :
-                                                                            <Link href={`/sign-in`}>
-                                                                                <a>
-                                                                                    <span><i className="icon icon-reposts"></i></span>
-                                                                                </a>
-                                                                            </Link>
-                                                                        }
-                                                                    </OverlayTrigger>
-                                                                </li>
-                                                                <li>
-                                                                    <OverlayTrigger placement="top" overlay={<Tooltip>Share</Tooltip>}>
-                                                                        <OverlayTrigger trigger="click" placement="top" overlay={
-                                                                            <Popover id="popover-basic">
-                                                                                <Popover.Body>
-                                                                                    <ul className="comment-icons nav">
-                                                                                        <li><a><FacebookShareButton url={APP_URL + "post/" + mainPost.postUniqueId}><i className="fab fa-facebook-f"></i></FacebookShareButton></a></li>
-                                                                                        <li><a><TwitterShareButton url={APP_URL + "post/" + mainPost.postUniqueId}><i className="fab fa-twitter"></i></TwitterShareButton></a></li>
-                                                                                        <li><a><LinkedinShareButton url={APP_URL + "post/" + mainPost.postUniqueId}><i className="fab fa-linkedin-in"></i></LinkedinShareButton></a></li>
-                                                                                    </ul>
-                                                                                </Popover.Body>
-                                                                            </Popover>
-                                                                        }>
-                                                                            <span>
-                                                                                <i className="icon icon-share-file"></i>
-                                                                            </span>
-                                                                        </OverlayTrigger>
-                                                                    </OverlayTrigger>
-                                                                </li>
-                                                            </ul>
-                                                            <ul className="likes-comments nav">
-                                                                <li><span className="text-white">{likeCount}</span>
-                                                                    {' '}{likeCount > 0 ?
-                                                                        isLoggedIn() ?
-                                                                            <a className="color-a5a5a5" onClick={(e) => { likesClickHandler(e, mainPost.postUniqueId) }}>Likes</a>
-                                                                            : <Link href={`/sign-in`}><a className="color-a5a5a5">Likes</a></Link>
-                                                                        : 'Likes'
-                                                                    }
-                                                                </li>
-                                                                <li><span className="text-white">{mainPost.commentCount}</span> Comments</li>
-                                                                <li><span className="text-white">{repostCount}</span>
-                                                                    {' '}{repostCount > 0 ?
-                                                                        isLoggedIn() ?
-                                                                            <a className="color-a5a5a5" onClick={(e) => { repostsClickhandler(e, mainPost.postUniqueId) }}>Reposts</a>
-                                                                            : <Link href={`/sign-in`}><a className="color-a5a5a5">Reposts</a></Link>
-                                                                        : 'Reposts'
-                                                                    }</li>
-                                                            </ul>
-                                                        </div>
-                                                        <hr></hr>
-                                                        <Row>
-                                                            <Col sm="auto">
-                                                                <Figure className="figure figure-circle figure-gray-2 figure-62">
-                                                                    <img className="cover" src={ASSETS_URL + userImage} alt="profile" />
-                                                                </Figure>
-                                                            </Col>
-                                                            <Col>
-                                                                <Form.Group className="form-dark">
-                                                                    <Form.Control as="textarea"
-                                                                        name='replyText'
-                                                                        value={replyText}
-                                                                        onChange={replyTextChangeHandler}
-                                                                        placeholder="Enter Your Reply" />
-                                                                </Form.Group>
-                                                                <Form.Group className="form-dark">
-                                                                    <div className="d-flex align-items-start flex-wrap">
-                                                                        <div className="multimediaFiles">
-                                                                            <label htmlFor="multimediaFilesPost" className={`btn btn-outline-gray btn-rounded btn-h-30 me-3 mt-3${(isLoading || isMediaEnable) ? ' disabled' : ''}`}>
-                                                                                <span className="color-20da97 me-2"><i className="icon icon-image v-align-middle"></i></span>
-                                                                                Media
-                                                                            </label>
-                                                                            <input type="file"
-                                                                                multiple
-                                                                                accept="audio/*,video/*,image/*"
-                                                                                onChange={attachmentsHandler}
-                                                                                id="multimediaFilesPost"
-                                                                                className="mediaFiles"
-                                                                            />
-                                                                            {/* <a href="#" className="btn btn-outline-gray btn-rounded btn-h-30 mt-3">
-                                                                                <span className="color-f8bf52 me-2"><i className="icon icon-video v-align-middle"></i></span>
-                                                                                Videos
-                                                                            </a> */}
-                                                                        </div>
-                                                                    </div>
-                                                                </Form.Group>
-                                                            </Col>
-                                                            <Col sm="auto">
-                                                                <button type="submit"
-                                                                    onClick={
-                                                                        !isLoading ?
-                                                                            () => handleSubmit()
+                                        return <>
+                                            <Row key={index}>
+                                                {activity.type == '2' &&
+                                                    <div>
+                                                        <h3 className="text-white fs-18"> <i className="icon icon-reposts"></i> {(getSingle('userId') == activity.user.id) ? 'You' : activity.user.role == '2' ? activity.user.brandName : activity.user.businessName} Reposted</h3>
+                                                    </div>
+                                                }
+                                                <Col sm="auto" >
+                                                    <Figure className="figure figure-circle figure-gray-2 figure-62">
+                                                        <img className="cover" src={ASSETS_URL + mainPost.user?.profilePath ?? "/profile/no-profile-image.jpg"} alt="profile" />
+                                                    </Figure>
+                                                </Col>
+                                                <Col>
+                                                    <div>
+                                                        <Link
+                                                            href={mainPost.user?.role == roles.brand ? `/brand/${mainPost.user.slug}` : `/customer/${mainPost.user.slug}`}
+                                                            legacyBehavior>
+
+                                                            <h3 className="text-white fs-18">{mainPost.user?.role == '2' ? mainPost.user?.brandName : mainPost.user?.businessName} <span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(mainPost.createdAt, 'DD MMM YYYY')}</span></h3>
+
+                                                        </Link>
+                                                        <p className="color-bfbfbf">{mainPost.post}</p>
+                                                    </div>
+                                                    <Row>
+                                                        {mainPost.attachments?.length > 0 &&
+                                                            mainPost.attachments.map((attachmentFile, aIndex) => (
+                                                                <Col lg={3} md={4} sm={6} key={'attachment' + aIndex}>
+                                                                    {
+                                                                        aIndex <= 3 ?
+                                                                            attachmentFile.attachmentType == 2 ?
+                                                                                <div className="gallery-image cursor-pointer" onClick={() => handleShow(true, aIndex, activity.id, 'post')}>
+                                                                                    < ReactPlayer
+                                                                                        className='react-player'
+                                                                                        width='100%'
+                                                                                        height='100%'
+                                                                                        url={ASSETS_URL + attachmentFile.attachment}
+                                                                                        playing={false}
+                                                                                        controls={true}
+                                                                                        //volume={5}
+                                                                                        muted={true}
+                                                                                    />
+                                                                                    {aIndex == 3 ? <span className="more-images">{mainPost.attachments.length - 4 == 0 ? null : `+${mainPost.attachments.length - 4}`}</span> : null}
+                                                                                </div>
+                                                                                :
+                                                                                <div className="gallery-image cursor-pointer" onClick={() => handleShow(true, aIndex, activity.id, 'post')}>
+                                                                                    <img className="cover" src={ASSETS_URL + attachmentFile.attachment} alt="postedImage" />
+                                                                                    {aIndex == 3 ? <span className="more-images">{mainPost.attachments.length - 4 == 0 ? null : `+${mainPost.attachments.length - 4}`}</span> : null}
+                                                                                </div>
                                                                             : null
                                                                     }
-                                                                    disabled={isLoading || isEnable}
-                                                                    className="btn btn-outline-gray btn-wh-150-48 btn-rounded mt-3">
-                                                                    {isLoading ?
-                                                                        <Spinner animation="border" /> :
-                                                                        "Reply"
-                                                                    }
-                                                                </button>
-                                                            </Col>
-                                                            <Row>
-                                                                <Col sm="auto">
-                                                                    <div style={{ width: "58px" }}></div>
                                                                 </Col>
-                                                                <Col className=" mt-3">
-                                                                    <div className={selectedMediaFile.length > 0 ? `grid-wrapper` : ``}>
-                                                                        {selectedMediaFile &&
-                                                                            selectedMediaFile.map((selectedFile, index) => {
-                                                                                return (
-                                                                                    
-                                                                                        <div key={selectedFile + index} className={`gallery-image position-relative` + (selectedFile.type === 'video' ? ` gallery-video` : ``)}>
-                                                                                            <Button variant="" className="btn-remove" onClick={() => deleteHandler(index, selectedFile.previewFile, selectedFile.id)}>
-                                                                                                <i className="fal fa-times"></i>
-                                                                                            </Button>
-                                                                                            {
-                                                                                                selectedFile.type === 'video' ?
-                                                                                                    <video controls>
-                                                                                                        <source src={selectedFile.previewFile} type="video/mp4" />
-                                                                                                        Sorry, your browser doesn't support embedded videos.
-                                                                                                    </video>
-                                                                                                    :
-                                                                                                    <img className="cover" src={selectedFile.previewFile} alt="upload" />
-                                                                                            }
-                                                                                        </div>                                    
-                                                                                );
-                                                                            })}
-                                                                    </div>
-                                                                </Col>
-                                                            </Row >
-                                                            {/* <Row className="images">
-                                                                {selectedMediaFile &&
-                                                                    selectedMediaFile.map((selectedFile, index) => {
-                                                                        return (
-                                                                            <Col key={selectedFile + index} className="image">
-                                                                                <div className="gallery-image position-relative">
-                                                                                    <Button variant="" className="btn-remove" onClick={() => deleteHandler(index, selectedFile.previewFile, selectedFile.id)}>
-                                                                                        <i className="fal fa-times"></i>
-                                                                                    </Button>
-                                                                                    {
-                                                                                        selectedFile.type === 'video' ?
-                                                                                            <video className="gallery-image" controls>
-                                                                                                <source src={selectedFile.previewFile} type="video/mp4" />
-                                                                                                Sorry, your browser doesn't support embedded videos.
-                                                                                            </video>
-                                                                                            :
-                                                                                            <img className="gallery-image" src={selectedFile.previewFile} alt="upload" />
-                                                                                    }
-                                                                                </div>
-                                                                            </Col>
-                                                                        );
-                                                                    })}
-                                                            </Row> */}
-                                                        </Row>
-                                                        {
-                                                            comments?.length > 0 &&
-                                                            comments.map((commentData, cIndex) => (
-                                                                (activity.id === commentData.postId || mainPost.id === commentData.postId) ?
-                                                                    <CommentList key={cIndex}
-                                                                        commentData={commentData}
-                                                                        activity={activity}
-                                                                        handleShow={handleShow}
-                                                                        handleShowCommentModal={handleShowCommentModal}
-                                                                    />
-                                                                    : null
                                                             ))
                                                         }
-                                                    </Col>
-                                                </Row>
-                                            </>
-                                        )
+                                                    </Row>
+                                                    <div className="d-sm-flex justify-content-between align-items-center">
+                                                        <ul className="comment-icons nav mb-3">
+                                                            <li>
+                                                                <OverlayTrigger placement="top" overlay={<Tooltip> {!isLiked ? "Like" : "UnLike"}</Tooltip>}>
+                                                                    {isLoggedIn() ?
+                                                                        <a onClick={e => handleLikeClick(mainPost.id)}>
+                                                                            {!isLiked ? <span><i className="far fa-triangle"></i></span> : <span className="color-22a612"><i className="fas fa-triangle"></i></span>}
+                                                                        </a>
+                                                                        :
+                                                                        <Link href={`/sign-in`} legacyBehavior>
+                                                                            <span><i className="far fa-triangle"></i></span>
+                                                                        </Link>}
+                                                                </OverlayTrigger>
+                                                            </li>
+                                                            <li>
+                                                                <OverlayTrigger placement="top" overlay={<Tooltip>Comment</Tooltip>}>
+                                                                    {isLoggedIn() ?
+                                                                        <a onClick={
+                                                                            () => handleShowCommentModal(mainPost.id, 'comment')}
+                                                                        >
+                                                                            <i className="icon icon-chat-bubble"></i>
+                                                                        </a>
+                                                                        : <Link href={`/sign-in`} legacyBehavior><i className="icon icon-chat-bubble"></i></Link>}
+                                                                </OverlayTrigger>
+                                                            </li>
+                                                            <li>
+                                                                <OverlayTrigger placement="top" overlay={<Tooltip>{!isReposted ? 'Repost' : 'Undo Repost'}</Tooltip>}>
+                                                                    {isLoggedIn() ?
+                                                                        <a onClick={() => handleRepostClick({ postId: mainPost.id, post: mainPost.post })}>
+                                                                            {!isReposted ? <span><i className="icon icon-reposts"></i></span> : <span className="color-22a612"><i className="icon icon-reposts"></i></span>}
+                                                                        </a>
+                                                                        :
+                                                                        <Link href={`/sign-in`} legacyBehavior>
+
+                                                                            <span><i className="icon icon-reposts"></i></span>
+
+                                                                        </Link>
+                                                                    }
+                                                                </OverlayTrigger>
+                                                            </li>
+                                                            <li>
+                                                                <OverlayTrigger placement="top" overlay={<Tooltip>Share</Tooltip>}>
+                                                                    <OverlayTrigger trigger="click" placement="top" overlay={
+                                                                        <Popover id="popover-basic">
+                                                                            <Popover.Body>
+                                                                                <ul className="comment-icons nav">
+                                                                                    <li><a><FacebookShareButton url={APP_URL + "post/" + mainPost.postUniqueId}><i className="fab fa-facebook-f"></i></FacebookShareButton></a></li>
+                                                                                    <li><a><TwitterShareButton url={APP_URL + "post/" + mainPost.postUniqueId}><i className="fab fa-twitter"></i></TwitterShareButton></a></li>
+                                                                                    <li><a><LinkedinShareButton url={APP_URL + "post/" + mainPost.postUniqueId}><i className="fab fa-linkedin-in"></i></LinkedinShareButton></a></li>
+                                                                                </ul>
+                                                                            </Popover.Body>
+                                                                        </Popover>
+                                                                    }>
+                                                                        <span>
+                                                                            <i className="icon icon-share-file"></i>
+                                                                        </span>
+                                                                    </OverlayTrigger>
+                                                                </OverlayTrigger>
+                                                            </li>
+                                                        </ul>
+                                                        <ul className="likes-comments nav">
+                                                            <li><span className="text-white">{likeCount}</span>
+                                                                {' '}{likeCount > 0 ?
+                                                                    isLoggedIn() ?
+                                                                        <a className="color-a5a5a5" onClick={(e) => { likesClickHandler(e, mainPost.postUniqueId) }}>Likes</a>
+                                                                        : <Link href={`/sign-in`} className="color-a5a5a5">Likes</Link>
+                                                                    : 'Likes'
+                                                                }
+                                                            </li>
+                                                            <li><span className="text-white">{mainPost.commentCount}</span> Comments</li>
+                                                            <li><span className="text-white">{repostCount}</span>
+                                                                {' '}{repostCount > 0 ?
+                                                                    isLoggedIn() ?
+                                                                        <a className="color-a5a5a5" onClick={(e) => { repostsClickhandler(e, mainPost.postUniqueId) }}>Reposts</a>
+                                                                        : <Link href={`/sign-in`} className="color-a5a5a5">Reposts</Link>
+                                                                    : 'Reposts'
+                                                                }</li>
+                                                        </ul>
+                                                    </div>
+                                                    <hr></hr>
+                                                    <Row>
+                                                        <Col sm="auto">
+                                                            <Figure className="figure figure-circle figure-gray-2 figure-62">
+                                                                <img className="cover" src={ASSETS_URL + userImage} alt="profile" />
+                                                            </Figure>
+                                                        </Col>
+                                                        <Col>
+                                                            <Form.Group className="form-dark">
+                                                                <Form.Control as="textarea"
+                                                                    name='replyText'
+                                                                    value={replyText}
+                                                                    onChange={replyTextChangeHandler}
+                                                                    placeholder="Enter Your Reply" />
+                                                            </Form.Group>
+                                                            <Form.Group className="form-dark">
+                                                                <div className="d-flex align-items-start flex-wrap">
+                                                                    <div className="multimediaFiles">
+                                                                        <label htmlFor="multimediaFilesPost" className={`btn btn-outline-gray btn-rounded btn-h-30 me-3 mt-3${(isLoading || isMediaEnable) ? ' disabled' : ''}`}>
+                                                                            <span className="color-20da97 me-2"><i className="icon icon-image v-align-middle"></i></span>
+                                                                            Media
+                                                                        </label>
+                                                                        <input type="file"
+                                                                            multiple
+                                                                            accept="audio/*,video/*,image/*"
+                                                                            onChange={attachmentsHandler}
+                                                                            id="multimediaFilesPost"
+                                                                            className="mediaFiles"
+                                                                        />
+                                                                        {/* <a href="#" className="btn btn-outline-gray btn-rounded btn-h-30 mt-3">
+                                                                            <span className="color-f8bf52 me-2"><i className="icon icon-video v-align-middle"></i></span>
+                                                                            Videos
+                                                                        </a> */}
+                                                                    </div>
+                                                                </div>
+                                                            </Form.Group>
+                                                        </Col>
+                                                        <Col sm="auto">
+                                                            <button type="submit"
+                                                                onClick={
+                                                                    !isLoading ?
+                                                                        () => handleSubmit()
+                                                                        : null
+                                                                }
+                                                                disabled={isLoading || isEnable}
+                                                                className="btn btn-outline-gray btn-wh-150-48 btn-rounded mt-3">
+                                                                {isLoading ?
+                                                                    <Spinner animation="border" /> :
+                                                                    "Reply"
+                                                                }
+                                                            </button>
+                                                        </Col>
+                                                        <Row>
+                                                            <Col sm="auto">
+                                                                <div style={{ width: "58px" }}></div>
+                                                            </Col>
+                                                            <Col className=" mt-3">
+                                                                <div className={selectedMediaFile.length > 0 ? `grid-wrapper` : ``}>
+                                                                    {selectedMediaFile &&
+                                                                        selectedMediaFile.map((selectedFile, index) => {
+                                                                            return (
+                                                                                
+                                                                                    <div key={selectedFile + index} className={`gallery-image position-relative` + (selectedFile.type === 'video' ? ` gallery-video` : ``)}>
+                                                                                        <Button variant="" className="btn-remove" onClick={() => deleteHandler(index, selectedFile.previewFile, selectedFile.id)}>
+                                                                                            <i className="fal fa-times"></i>
+                                                                                        </Button>
+                                                                                        {
+                                                                                            selectedFile.type === 'video' ?
+                                                                                                <video controls>
+                                                                                                    <source src={selectedFile.previewFile} type="video/mp4" />
+                                                                                                    Sorry, your browser doesn't support embedded videos.
+                                                                                                </video>
+                                                                                                :
+                                                                                                <img className="cover" src={selectedFile.previewFile} alt="upload" />
+                                                                                        }
+                                                                                    </div>                                    
+                                                                            );
+                                                                        })}
+                                                                </div>
+                                                            </Col>
+                                                        </Row >
+                                                        {/* <Row className="images">
+                                                            {selectedMediaFile &&
+                                                                selectedMediaFile.map((selectedFile, index) => {
+                                                                    return (
+                                                                        <Col key={selectedFile + index} className="image">
+                                                                            <div className="gallery-image position-relative">
+                                                                                <Button variant="" className="btn-remove" onClick={() => deleteHandler(index, selectedFile.previewFile, selectedFile.id)}>
+                                                                                    <i className="fal fa-times"></i>
+                                                                                </Button>
+                                                                                {
+                                                                                    selectedFile.type === 'video' ?
+                                                                                        <video className="gallery-image" controls>
+                                                                                            <source src={selectedFile.previewFile} type="video/mp4" />
+                                                                                            Sorry, your browser doesn't support embedded videos.
+                                                                                        </video>
+                                                                                        :
+                                                                                        <img className="gallery-image" src={selectedFile.previewFile} alt="upload" />
+                                                                                }
+                                                                            </div>
+                                                                        </Col>
+                                                                    );
+                                                                })}
+                                                        </Row> */}
+                                                    </Row>
+                                                    {
+                                                        comments?.length > 0 &&
+                                                        comments.map((commentData, cIndex) => (
+                                                            (activity.id === commentData.postId || mainPost.id === commentData.postId) ?
+                                                                <CommentList key={cIndex}
+                                                                    commentData={commentData}
+                                                                    activity={activity}
+                                                                    handleShow={handleShow}
+                                                                    handleShowCommentModal={handleShowCommentModal}
+                                                                />
+                                                                : null
+                                                        ))
+                                                    }
+                                                </Col>
+                                            </Row>
+                                        </>;
                                     })
                                 }
                             </Card.Body>
@@ -742,7 +742,7 @@ export default function PostDetails({ slug, userImage }) {
                 />
             </Container>
         </section>
-    )
+    );
 }
 
 export async function getServerSideProps(context) {

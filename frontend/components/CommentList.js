@@ -18,18 +18,20 @@ export default function CommentList({ commentData, handleShow, handleShowComment
                     </Figure>
                 </Col>
                 <Col>
-                    <Link href={commentData.user?.role == roles.brand ? `/brand/${commentData.user.slug}` : `/customer/${commentData.user.slug}`}>
-                        <a>
-                            <h3 className="text-white fs-18">
-                                {commentData.user?.fullName}
-                                <span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(commentData.createdAt, "DD MMM YYYY")}</span>
-                            </h3>
-                        </a>
+                    <Link
+                        href={commentData.user?.role == roles.brand ? `/brand/${commentData.user.slug}` : `/customer/${commentData.user.slug}`}
+                        legacyBehavior>
+
+                        <h3 className="text-white fs-18">
+                            {commentData.user?.fullName}
+                            <span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(commentData.createdAt, "DD MMM YYYY")}</span>
+                        </h3>
+
                     </Link>
-                    <Link href={"/post/comment/" + commentData.commentUniqueId}>
-                        <a>
-                            <p className="color-bfbfbf">{commentData.comment}</p>
-                        </a>
+                    <Link href={"/post/comment/" + commentData.commentUniqueId} legacyBehavior>
+
+                        <p className="color-bfbfbf">{commentData.comment}</p>
+
                     </Link>
                     <Row>
                         {commentData.attachments?.length > 0 &&
@@ -78,15 +80,18 @@ export default function CommentList({ commentData, handleShow, handleShowComment
                             </li>
                         </ul>
                         {commentData.replyCount > 0 ? (
-                            <Link href={"/post/comment/" + commentData.commentUniqueId}>
-                                <a className="color-a5a5a5">
-                                    <ul className="likes-comments nav">
-                                        <li>
-                                            <span className="text-white">{commentData.replyCount}</span> Comments
-                                        </li>
-                                    </ul>
-                                </a>
-                            </Link>
+                            (<Link
+                            href={"/post/comment/" + commentData.commentUniqueId}
+                            className="color-a5a5a5"
+                            legacyBehavior>
+
+                                <ul className="likes-comments nav">
+                                    <li>
+                                        <span className="text-white">{commentData.replyCount}</span> Comments
+                                    </li>
+                                </ul>
+
+                            </Link>)
                         ) : (
                             <ul className="likes-comments nav">
                                 <li>

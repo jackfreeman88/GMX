@@ -52,15 +52,17 @@ const Activity = props => {
                     </div>
                 }
                 <div>
-                    <Link href={mainPost.user?.role == roles.brand ? `/brand/${mainPost.user.slug}` : `/customer/${mainPost.user.slug}`}>
-                        <a>
-                            <h3 className="text-white fs-18">{mainPost.user?.role == '2' ? mainPost.user?.brandName : mainPost.user?.businessName} <span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(mainPost.createdAt, 'DD MMM YYYY')}</span></h3>
-                        </a>
+                    <Link
+                        href={mainPost.user?.role == roles.brand ? `/brand/${mainPost.user.slug}` : `/customer/${mainPost.user.slug}`}
+                        legacyBehavior>
+
+                        <h3 className="text-white fs-18">{mainPost.user?.role == '2' ? mainPost.user?.brandName : mainPost.user?.businessName} <span className="color-a5a5a5 fs-14 fw-normal ms-2">{dateTimeFormat(mainPost.createdAt, 'DD MMM YYYY')}</span></h3>
+
                     </Link>
-                    <Link href={"/post/" + activity.postUniqueId}>
-                        <a>
-                            <p className="color-bfbfbf">{mainPost.post}</p>
-                        </a>
+                    <Link href={"/post/" + activity.postUniqueId} legacyBehavior>
+
+                        <p className="color-bfbfbf">{mainPost.post}</p>
+
                     </Link>
                 </div>
                 <Row>
@@ -103,8 +105,8 @@ const Activity = props => {
                                         {!isLiked ? <span><i className="far fa-triangle"></i></span> : <span className="color-22a612"><i className="fas fa-triangle"></i></span>}
                                     </a>
                                     :
-                                    <Link href={`/sign-in`}>
-                                        <a><span><i className="far fa-triangle"></i></span></a>
+                                    <Link href={`/sign-in`} legacyBehavior>
+                                        <span><i className="far fa-triangle"></i></span>
                                     </Link>
                                 }
                             </OverlayTrigger>
@@ -117,7 +119,7 @@ const Activity = props => {
                                     >
                                         <i className="icon icon-chat-bubble"></i>
                                     </a>
-                                    : <Link href={`/sign-in`}><a><i className="icon icon-chat-bubble"></i></a></Link>
+                                    : <Link href={`/sign-in`} legacyBehavior><i className="icon icon-chat-bubble"></i></Link>
                                 }
                             </OverlayTrigger>
                         </li>
@@ -128,10 +130,10 @@ const Activity = props => {
                                         {!isReposted ? <span><i className="icon icon-reposts"></i></span> : <span className="color-22a612"><i className="icon icon-reposts"></i></span>}
                                     </a>
                                     :
-                                    <Link href={`/sign-in`}>
-                                        <a>
-                                            <span><i className="icon icon-reposts"></i></span>
-                                        </a>
+                                    <Link href={`/sign-in`} legacyBehavior>
+
+                                        <span><i className="icon icon-reposts"></i></span>
+
                                     </Link>
                                 }
                             </OverlayTrigger>
@@ -181,14 +183,14 @@ const Activity = props => {
                                 isLoggedIn() ?
                                     < a className="color-a5a5a5" onClick={(e) => { likesClickHandler(e, mainPost.postUniqueId) }}>Likes</a>
                                     :
-                                    <Link href={`/sign-in`}><a className="color-a5a5a5">Likes</a></Link>
+                                    <Link href={`/sign-in`} className="color-a5a5a5">Likes</Link>
                                 : 'Likes'}
                         </li>
                         <li>
                             {mainPost.commentCount > 0 ?
                                 <div><span className="text-white">{mainPost.commentCount}</span>
-                                    <Link href={`/post/${activity.postUniqueId}`}>
-                                        <a className="color-a5a5a5"> Comments</a>
+                                    <Link href={`/post/${activity.postUniqueId}`} className="color-a5a5a5">
+                                         Comments
                                     </Link>
                                 </div>
                                 : <div><span className="color-a5a5a5">{mainPost.commentCount}</span> Comments</div>}
@@ -199,14 +201,14 @@ const Activity = props => {
                                 isLoggedIn() ?
                                     <a className="color-a5a5a5" onClick={(e) => { repostsClickhandler(e, mainPost.postUniqueId) }}>Reposts</a>
                                     :
-                                    <Link href={`/sign-in`}><a className="color-a5a5a5">Reposts</a></Link>
+                                    <Link href={`/sign-in`} className="color-a5a5a5">Reposts</Link>
                                 : 'Reposts'}
                         </li>
                     </ul>
                 </div>
             </Col>
         </Row >
-    )
+    );
 }
 
 export default Activity

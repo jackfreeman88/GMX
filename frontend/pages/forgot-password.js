@@ -70,41 +70,39 @@ function ForgotPassword() {
 
     let checkValidation = submitted ? validator.validate(email) : validation
 
-    return (
-        <>
-            <Meta title={`Forgot Password | ${APP_NAME}`} keywords={''} description={''} />
-            <section className="bg-black">
-                <Container>
-                    <Row>
-                        <Col lg={5} md={8} className="mx-auto">
-                            <Card className="card-post border-gray bs-none">
-                                <Card.Body className="p-md-5 py-md-4 p-3">
-                                    <Card.Title className='text-center fs-26 fw-700 color-dcdcdc mt-3 mb-4'>Forgot Password</Card.Title>
-                                    <Form className="form-dark">
-                                        <Form.Group className="mb-4">
-                                            <Form.Label>Email</Form.Label>
-                                            <Form.Control type="email" name="email" placeholder="Enter Email" value={email.email} onChange={onChangeHandler} />
-                                            <div className={checkValidation.email.isInvalid ? 'animated fadeIn' : ''} >
-                                                <div className="error">
-                                                    {checkValidation.email.message}
-                                                </div>
+    return <>
+        <Meta title={`Forgot Password | ${APP_NAME}`} keywords={''} description={''} />
+        <section className="bg-black">
+            <Container>
+                <Row>
+                    <Col lg={5} md={8} className="mx-auto">
+                        <Card className="card-post border-gray bs-none">
+                            <Card.Body className="p-md-5 py-md-4 p-3">
+                                <Card.Title className='text-center fs-26 fw-700 color-dcdcdc mt-3 mb-4'>Forgot Password</Card.Title>
+                                <Form className="form-dark">
+                                    <Form.Group className="mb-4">
+                                        <Form.Label>Email</Form.Label>
+                                        <Form.Control type="email" name="email" placeholder="Enter Email" value={email.email} onChange={onChangeHandler} />
+                                        <div className={checkValidation.email.isInvalid ? 'animated fadeIn' : ''} >
+                                            <div className="error">
+                                                {checkValidation.email.message}
                                             </div>
-                                        </Form.Group>
-                                        <Form.Group className="mb-4 text-center">
-                                            <Button variant="primary" type="submit" className="btn-wh-180-56 btn-rounded btn-right-icons" onClick={!showLoading ? handleOnSubmit : null} disabled={showLoading}>{showLoading ? <Spinner animation="border" /> : <>Send Link<span className="color-22a612"><FontAwesomeIcon icon={faAngleRight} /></span></>}</Button>
-                                        </Form.Group>
-                                        <Form.Group className="mb-3 text-center">
-                                            <p className="color-dcdcdc">I remembered my password back to <Link href="/sign-in"><a className="color-22a612 fw-500">Login</a></Link></p>
-                                        </Form.Group>
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
-        </>
-    )
+                                        </div>
+                                    </Form.Group>
+                                    <Form.Group className="mb-4 text-center">
+                                        <Button variant="primary" type="submit" className="btn-wh-180-56 btn-rounded btn-right-icons" onClick={!showLoading ? handleOnSubmit : null} disabled={showLoading}>{showLoading ? <Spinner animation="border" /> : <>Send Link<span className="color-22a612"><FontAwesomeIcon icon={faAngleRight} /></span></>}</Button>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3 text-center">
+                                        <p className="color-dcdcdc">I remembered my password back to <Link href="/sign-in" className="color-22a612 fw-500">Login</Link></p>
+                                    </Form.Group>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    </>;
 }
 
 export default ForgotPassword

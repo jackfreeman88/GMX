@@ -184,10 +184,14 @@ export default function ChatSection(props) {
                     <>
                         <Card.Header className='px-3'>
                             <div className='d-flex align-items-center'>
-                                <Link href="">
-                                    <a className='d-lg-none d-block fs-20 color-white me-3' onClick={props.toggleChat}>
-                                        <FontAwesomeIcon icon={faArrowLeft} />
-                                    </a>
+                                <Link
+                                    href=""
+                                    className='d-lg-none d-block fs-20 color-white me-3'
+                                    onClick={props.toggleChat}
+                                    legacyBehavior>
+
+                                    <FontAwesomeIcon icon={faArrowLeft} />
+
                                 </Link>
                                 <Figure className='user_profile me-3 mb-0'>
                                     <Image src={ASSETS_URL + selectedUser.profilePath} className="cover" />
@@ -195,16 +199,16 @@ export default function ChatSection(props) {
                                 <div>
                                     {
                                         getSingle('role') === '2' ?
-                                            <Link href={`/customer/${selectedUser.slug}`}>
-                                                <a>
-                                                    <h3 className='fs-16 my-2 color-f3772c'>{selectedUser.fullName}</h3>
-                                                </a>
+                                            <Link href={`/customer/${selectedUser.slug}`} legacyBehavior>
+
+                                                <h3 className='fs-16 my-2 color-f3772c'>{selectedUser.fullName}</h3>
+
                                             </Link>
                                             :
-                                            <Link href={`/brand/${selectedUser.slug}`}>
-                                                <a>
-                                                    <h3 className='fs-16 my-2 color-f3772c'>{selectedUser.brandName}</h3>
-                                                </a>
+                                            <Link href={`/brand/${selectedUser.slug}`} legacyBehavior>
+
+                                                <h3 className='fs-16 my-2 color-f3772c'>{selectedUser.brandName}</h3>
+
                                             </Link>
                                     }
                                 </div>
@@ -288,5 +292,5 @@ export default function ChatSection(props) {
                     : null}
             </Card>
         </Col>
-    )
+    );
 }
