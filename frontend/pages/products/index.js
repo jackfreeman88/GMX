@@ -205,520 +205,528 @@ function ProductList(props) {
         setParams((prevState) => ({ ...prevState, keyword: '' }))
         setFilters((prevState) => ({ ...prevState, filterKeyword: '' }))
     }
-    return (
-        <>
-            <Meta title={`Products | ${APP_NAME}`} keywords={''} description={''} />
-            <section className="bg-black p-20-0-50">
-                <Container>
-                    <Row>
-                        <Col lg={12} className="mx-auto">
-                            <div className="tabel-with-filetr">
-                                <div className="d-flex justify-content-between flex-wrap bg-color-282828 p-10-20-10-20 table-top-filter">
-                                    <Form className="d-flex justify-content-flex-start align-items-center filter-form mb-0">
-                                        <Form.Group className="form-inline form-dark form-group-h-33 mr-10">
-                                            <Form.Label>Sort By:</Form.Label>
-                                            <Select
-                                                classNamePrefix="react-select"
-                                                className="react-select-lg maxw-150"
-                                                styles={react_select_xs_Styles}
-                                                options={sortBy.map(({ value, name }) => ({
-                                                    value: value,
-                                                    label: name,
-                                                }))}
-                                                value={sortBy.filter((item) => item.value == params.sortBy)}
-                                                onChange={(val, e) => handleChangeSort(val, e)}
-                                                placeholder="Sort By"
-                                                components={{
-                                                    DropdownIndicator,
-                                                    IndicatorSeparator: () => null,
-                                                }}
-                                                name="sortBy"
-                                                isClearable={true}
-                                            />
-                                        </Form.Group>
-                                    </Form>
-                                    <Button varient="primary" onClick={handleShow} className="btn btn-wh-110-28 br-6 "><span className='fs-14 me-2'><FontAwesomeIcon icon={faFilter} /></span> Filter</Button>
+    return <>
+        <Meta title={`Products | ${APP_NAME}`} keywords={''} description={''} />
+        <section className="bg-black p-20-0-50">
+            <Container>
+                <Row>
+                    <Col lg={12} className="mx-auto">
+                        <div className="tabel-with-filetr">
+                            <div className="d-flex justify-content-between flex-wrap bg-color-282828 p-10-20-10-20 table-top-filter">
+                                <Form className="d-flex justify-content-flex-start align-items-center filter-form mb-0">
+                                    <Form.Group className="form-inline form-dark form-group-h-33 mr-10">
+                                        <Form.Label>Sort By:</Form.Label>
+                                        <Select
+                                            classNamePrefix="react-select"
+                                            className="react-select-lg maxw-150"
+                                            styles={react_select_xs_Styles}
+                                            options={sortBy.map(({ value, name }) => ({
+                                                value: value,
+                                                label: name,
+                                            }))}
+                                            value={sortBy.filter((item) => item.value == params.sortBy)}
+                                            onChange={(val, e) => handleChangeSort(val, e)}
+                                            placeholder="Sort By"
+                                            components={{
+                                                DropdownIndicator,
+                                                IndicatorSeparator: () => null,
+                                            }}
+                                            name="sortBy"
+                                            isClearable={true}
+                                        />
+                                    </Form.Group>
+                                </Form>
+                                <Button varient="primary" onClick={handleShow} className="btn btn-wh-110-28 br-6 "><span className='fs-14 me-2'><FontAwesomeIcon icon={faFilter} /></span> Filter</Button>
 
-                                    <Offcanvas show={show} onHide={handleClose} placement={'end'} className="dark-canvas">
-                                        <Offcanvas.Header closeButton>
-                                            <Offcanvas.Title>Filter</Offcanvas.Title>
-                                        </Offcanvas.Header>
-                                        <Offcanvas.Body>
-                                            <Row>
-                                                <Col md={12}>
-                                                    <div className='d-flex align-items-start'>
-                                                        <Form.Group className="search-form form-dark">
-                                                            <Form.Control onChange={onChangeSearch} type="text" value={filters.filterKeyword} placeholder="Search by Keywords" />
-                                                            <Button varient="primary" onClick={onHandleSearch} className="btn-wh-35 br-8 bg-f3772c"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                                                        </Form.Group>
-                                                        {
-                                                            filters.filterKeyword !== '' ?
-                                                                <Form.Group className="mb-3 ms-3">
-                                                                    <OverlayTrigger
-                                                                        placement="top"
-                                                                        overlay={<Tooltip>Clear</Tooltip>}
-                                                                    >
-                                                                        <Button variant="secondary" className="btn-wh-42 br-8 bg-f3772c" onClick={onHandleSearchReset} ><FontAwesomeIcon icon={faTimes} /></Button>
-                                                                    </OverlayTrigger>
-                                                                </Form.Group> : null
-                                                        }
-                                                    </div>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <Form.Group className="form-dark mb-4">
-                                                        <Form.Label>Category</Form.Label>
-                                                        {params.category ? (
-                                                            <Select
-                                                                ref={categoryRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={categories.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                value={
-                                                                    categories.map((data) => (
-                                                                        data.id == filters.filterCategory
-                                                                            ? { 'value': data.id, 'label': data.title }
-                                                                            : null
-                                                                    ))
-                                                                }
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select category"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterCategory"
-                                                                isClearable={true}
-                                                            />
-                                                        ) : (
-                                                            <Select
-                                                                ref={categoryRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={categories.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select category"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterCategory"
-                                                                isClearable={true}
-                                                            />
-                                                        )}
+                                <Offcanvas show={show} onHide={handleClose} placement={'end'} className="dark-canvas">
+                                    <Offcanvas.Header closeButton>
+                                        <Offcanvas.Title>Filter</Offcanvas.Title>
+                                    </Offcanvas.Header>
+                                    <Offcanvas.Body>
+                                        <Row>
+                                            <Col md={12}>
+                                                <div className='d-flex align-items-start'>
+                                                    <Form.Group className="search-form form-dark">
+                                                        <Form.Control onChange={onChangeSearch} type="text" value={filters.filterKeyword} placeholder="Search by Keywords" />
+                                                        <Button varient="primary" onClick={onHandleSearch} className="btn-wh-35 br-8 bg-f3772c"><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
                                                     </Form.Group>
-                                                </Col>
-                                                {/* <Col md={6}>
-                                                    <Form.Group className="form-dark mb-4">
-                                                        <Form.Label>Med/Rec</Form.Label>
-                                                        {params.medRec ? (
-                                                            <Select
-                                                                ref={medRecRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={medRec.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                value={
-                                                                    medRec.map((data) => (
-                                                                        data.id == filters.filterMedRec
-                                                                            ? { 'value': data.id, 'label': data.title }
-                                                                            : null
-                                                                    ))
-                                                                }
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select Med / Rec"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterMedRec"
-                                                                isClearable={true}
-                                                            />
-                                                        ) : (
-                                                            <Select
-                                                                ref={medRecRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={medRec.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select Med/Rec"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterMedRec"
-                                                                isClearable={true}
-                                                            />
-                                                        )}
-                                                    </Form.Group>
-                                                </Col> */}
-                                                {/* <Col md={6}>
-                                                    <Form.Group className="form-dark mb-4">
-                                                        <Form.Label>Price</Form.Label>
-                                                        <Form.Label className='float-end'>${priceRange[0] == '' ? 0 : priceRange[0]} - ${priceRange[1]}</Form.Label>
-                                                        <div className="form-control">
-
-                                                            <Range
-                                                                values={priceRange}
-                                                                step={1}
-                                                                min={0}
-                                                                max={maxPrice}
-                                                                onChange={(priceRange) => {
-                                                                    setPriceRange(priceRange);
-                                                                }}
-                                                                renderTrack={({ props, children }) => (
-                                                                    <div
-                                                                        onMouseDown={props.onMouseDown}
-                                                                        onTouchStart={props.onTouchStart}
-                                                                        style={{
-                                                                            ...props.style,
-                                                                            height: '40px',
-                                                                            display: 'flex',
-                                                                            width: '100%'
-                                                                        }}
-                                                                    >
-                                                                        <div
-                                                                            ref={props.ref}
-                                                                            style={{
-                                                                                height: '5px',
-                                                                                width: '100%',
-                                                                                borderRadius: '4px',
-                                                                                backgroundColor: '#575757',
-                                                                                alignSelf: 'center'
-                                                                            }}
-                                                                        >
-                                                                            {children}
-                                                                        </div>
-                                                                    </div>
-                                                                )}
-                                                                renderThumb={({ props, isDragged }) => (
-                                                                    <div
-                                                                        {...props}
-                                                                        style={{
-                                                                            ...props.style,
-                                                                            height: '16px',
-                                                                            width: '16px',
-                                                                            borderRadius: '25px',
-                                                                            backgroundColor: '#FFF',
-                                                                            display: 'flex',
-                                                                            justifyContent: 'center',
-                                                                            alignItems: 'center',
-                                                                            border: '3px solid #f3772c'
-                                                                        }}
-                                                                    >
-                                                                    </div>
-                                                                )}
-                                                                allowOverlap={true}
-                                                            />
-                                                        </div>
-                                                    </Form.Group>
-                                                </Col> */}
-                                                <Col md={12}>
-                                                    <Form.Group className="form-dark mb-4">
-                                                        <Form.Label>THC%</Form.Label>
-                                                        <Form.Label className='float-end'>{thcRange[0] == '' ? 0 : thcRange[0]}% - {thcRange[1]}%</Form.Label>
-                                                        <div className="form-control">
-                                                            <Range
-                                                                values={thcRange}
-                                                                step={1}
-                                                                min={0}
-                                                                max={maxThc ?? 5}
-                                                                onChange={(thcRange) => {
-                                                                    setThcRange(thcRange);
-                                                                }}
-                                                                renderTrack={({ props, children }) => (
-                                                                    <div
-                                                                        onMouseDown={props.onMouseDown}
-                                                                        onTouchStart={props.onTouchStart}
-                                                                        style={{
-                                                                            ...props.style,
-                                                                            height: '40px',
-                                                                            display: 'flex',
-                                                                            width: '100%'
-                                                                        }}
-                                                                    >
-                                                                        <div
-                                                                            ref={props.ref}
-                                                                            style={{
-                                                                                height: '5px',
-                                                                                width: '100%',
-                                                                                borderRadius: '4px',
-                                                                                backgroundColor: '#575757',
-                                                                                alignSelf: 'center'
-                                                                            }}
-                                                                        >
-                                                                            {children}
-                                                                        </div>
-                                                                    </div>
-                                                                )}
-                                                                renderThumb={({ props, isDragged }) => (
-                                                                    <div
-                                                                        {...props}
-                                                                        style={{
-                                                                            ...props.style,
-                                                                            height: '16px',
-                                                                            width: '16px',
-                                                                            borderRadius: '25px',
-                                                                            backgroundColor: '#FFF',
-                                                                            display: 'flex',
-                                                                            justifyContent: 'center',
-                                                                            alignItems: 'center',
-                                                                            border: '3px solid #f3772c'
-                                                                        }}
-                                                                    >
-                                                                    </div>
-                                                                )}
-                                                            />
-                                                        </div>
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col md={6}>
-                                                    <Form.Group className="form-dark mb-4">
-                                                        <Form.Label>Strain</Form.Label>
-                                                        {params.strain ? (
-                                                            <Select
-                                                                ref={strainRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={strain.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                value={
-                                                                    strain.map((data) => (
-                                                                        data.id == filters.filterStrain
-                                                                            ? { 'value': data.id, 'label': data.title }
-                                                                            : null
-                                                                    ))
-                                                                }
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select strain"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterStrain"
-                                                                isClearable={true}
-                                                            />
-                                                        ) : (
-                                                            <Select
-                                                                ref={strainRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={strain.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select strain"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterStrain"
-                                                                isClearable={true}
-                                                            />
-                                                        )}
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col md={6}>
-                                                    <Form.Group className="form-dark mb-4">
-                                                        <Form.Label>I/O</Form.Label>
-                                                        {params.io ? (
-                                                            <Select
-                                                                ref={ioRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={iO.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                value={
-                                                                    iO.map((data) => (
-                                                                        data.id == filters.filterIorO
-                                                                            ? { 'value': data.id, 'label': data.title }
-                                                                            : null
-                                                                    ))
-                                                                }
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select strain"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterIorO"
-                                                                isClearable={true}
-                                                            />
-                                                        ) : (
-                                                            <Select
-                                                                ref={ioRef}
-                                                                classNamePrefix="react-select"
-                                                                className="react-select-lg"
-                                                                styles={react_select_sm_Styles}
-                                                                options={iO.map(({ id, title }) => ({
-                                                                    value: id,
-                                                                    label: title,
-                                                                }))}
-                                                                onChange={(val, e) => handleFilterChange(val, e)}
-                                                                placeholder="Select I/O"
-                                                                components={{
-                                                                    DropdownIndicator,
-                                                                    IndicatorSeparator: () => null,
-                                                                }}
-                                                                name="filterIorO"
-                                                                isClearable={true}
-                                                            />
-                                                        )}
-                                                    </Form.Group>
-                                                </Col>
-                                                <Col md={12}>
-                                                    <div className="d-flex justify-content-between align-item-center">
-                                                        <Button onClick={resetFilter} className="btn-wh-120-41 btn-outline-secondary-transparent br-6 bs-none">Clear</Button>
-
-                                                        <Button variant="primary" onClick={filterSubmit} className="btn-wh-120-41 br-6  bs-none"><span className='me-2'><FontAwesomeIcon icon={faFilter} /></span>Filter</Button>
-                                                    </div>
-                                                </Col>
-                                            </Row>
-                                        </Offcanvas.Body>
-                                    </Offcanvas>
-                                </div>
-                                <div className="table-wrap CustomScrollbar CustomScrollbarY">
-                                    {/* <Table bordered hover id="list_table" className="table-head-bg-101010" variant="dark"> */}
-                                    <ResponsiveTable id="list_table" className="table table-bordered table-hover table-dark table-head-bg-101010">
-                                        <Thead>
-                                            <Tr>
-                                                <Th width="250px;">Brand Name</Th>
-                                                <Th width="250px;">Product Name</Th>
-                                                {/* <Th className="text-center" width="100px;">Med/Rec</Th>
-                                                <Th className="text-center" width="140px;">Price Per lb</Th> */}
-                                                <Th className="text-center" width="70px;">Strain</Th>
-                                                <Th className="text-center" width="90px;">THC%</Th>
-                                                <Th className="text-center" width="200px;">Flavor</Th>
-                                                <Th className="text-center" width="200px;">Dominant<br />Terpene</Th>
-                                                <Th className="text-center" width="90px;">I/O</Th>
-                                                <Th className="text-center" width="100px;">Harvested</Th>
-                                                <Th className="text-center" width="100px;">Unit Size</Th>
-                                                <Th className="text-center" width="300px;">Action</Th>
-                                            </Tr>
-                                        </Thead>
-                                        <Tbody>
-                                            {
-                                                isLoading ?
-                                                    [...Array(10)].map((value, key) => (
-                                                        <Tr key={'tr-' + key}>
-                                                            {
-                                                                [...Array(12)].map((v, k) => {
-                                                                    return (<Td key={'td-' + k}>
-                                                                        <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                                            <Skeleton />
-                                                                        </SkeletonTheme>
-                                                                    </Td>)
-                                                                })
+                                                    {
+                                                        filters.filterKeyword !== '' ?
+                                                            <Form.Group className="mb-3 ms-3">
+                                                                <OverlayTrigger
+                                                                    placement="top"
+                                                                    overlay={<Tooltip>Clear</Tooltip>}
+                                                                >
+                                                                    <Button variant="secondary" className="btn-wh-42 br-8 bg-f3772c" onClick={onHandleSearchReset} ><FontAwesomeIcon icon={faTimes} /></Button>
+                                                                </OverlayTrigger>
+                                                            </Form.Group> : null
+                                                    }
+                                                </div>
+                                            </Col>
+                                            <Col md={12}>
+                                                <Form.Group className="form-dark mb-4">
+                                                    <Form.Label>Category</Form.Label>
+                                                    {params.category ? (
+                                                        <Select
+                                                            ref={categoryRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={categories.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            value={
+                                                                categories.map((data) => (
+                                                                    data.id == filters.filterCategory
+                                                                        ? { 'value': data.id, 'label': data.title }
+                                                                        : null
+                                                                ))
                                                             }
-                                                        </Tr>
-                                                    )
-                                                    ) :
-                                                    products.length > 0 ?
-                                                        products.map((productRow, index) => (
-                                                            <Tr key={index + 'product'}>
-                                                                <Td>
-                                                                    <Link href={"/brand/" + productRow.user.brand.slug} ><a className="color-22a612"> {Helper.niceString(productRow.user.brand.brandName, 20, true)} </a></Link>
-                                                                </Td>
-                                                                <Td>
-                                                                    <Link href={"/product/" + productRow.slug}><a className="color-f3772c">{Helper.niceString(productRow.title, 15, true)}</a></Link>
-                                                                    <br />
-                                                                    {Helper.niceString(productRow.category?.title, 14, true)}
-                                                                </Td>
-                                                                {/* <Td className="text-center">{productRow.medRec.title}</Td>
-                                                                <Td className="text-center">{productRow.productPrice}</Td> */}
-                                                                <Td className="text-center">{productRow.strain?.title}</Td>
-                                                                <Td className="text-center">{productRow?.thc}%</Td>
-                                                                <Td className="text-center">{productRow.flavor}</Td>
-                                                                <Td className="text-center">{Helper.niceString(productRow.dominant, 15, true)}</Td>
-                                                                <Td className="text-center">{productRow.io?.title}</Td>
-                                                                <Td className="text-center">{productRow.niceHarvested}</Td>
-                                                                <Td className="text-center">{productRow.unit}</Td>
-                                                                <Td className="text-center">
-                                                                    {getSingle('role') !== '2' ?
-                                                                        <>
-                                                                            {
-                                                                                props.isLoggedIn ?
-                                                                                    <FavouriteBtn isFavourite={productRow.productFavourites.length} productSlug={productRow.slug} />
-                                                                                    :
-                                                                                    <Link href={'/sign-in'}>
-                                                                                        <a>
-                                                                                            <FavouriteBtn isFavourite={false} productSlug={productRow.slug} />
-                                                                                        </a>
-                                                                                    </Link>
-                                                                            }
-                                                                            {
-                                                                                props.isLoggedIn ?
-                                                                                    <Link href={`/messages/${productRow.user?.brand?.slug}`}><a className="action-btn color-f3772c"><FontAwesomeIcon icon={faCommentDots} /></a></Link>
-                                                                                    :
-                                                                                    <Link href={`/sign-in`}><a className="action-btn color-f3772c"><FontAwesomeIcon icon={faCommentDots} /></a></Link>
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select category"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterCategory"
+                                                            isClearable={true}
+                                                        />
+                                                    ) : (
+                                                        <Select
+                                                            ref={categoryRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={categories.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select category"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterCategory"
+                                                            isClearable={true}
+                                                        />
+                                                    )}
+                                                </Form.Group>
+                                            </Col>
+                                            {/* <Col md={6}>
+                                                <Form.Group className="form-dark mb-4">
+                                                    <Form.Label>Med/Rec</Form.Label>
+                                                    {params.medRec ? (
+                                                        <Select
+                                                            ref={medRecRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={medRec.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            value={
+                                                                medRec.map((data) => (
+                                                                    data.id == filters.filterMedRec
+                                                                        ? { 'value': data.id, 'label': data.title }
+                                                                        : null
+                                                                ))
+                                                            }
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select Med / Rec"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterMedRec"
+                                                            isClearable={true}
+                                                        />
+                                                    ) : (
+                                                        <Select
+                                                            ref={medRecRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={medRec.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select Med/Rec"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterMedRec"
+                                                            isClearable={true}
+                                                        />
+                                                    )}
+                                                </Form.Group>
+                                            </Col> */}
+                                            {/* <Col md={6}>
+                                                <Form.Group className="form-dark mb-4">
+                                                    <Form.Label>Price</Form.Label>
+                                                    <Form.Label className='float-end'>${priceRange[0] == '' ? 0 : priceRange[0]} - ${priceRange[1]}</Form.Label>
+                                                    <div className="form-control">
 
-                                                                            }
-                                                                        </>
-                                                                        : null}
-                                                                    <Link href={"/brand/" + productRow.user?.brand?.slug} ><a className="action-btn color-white text-decoration-none"> <i className="icon-user-view"></i></a></Link>
-                                                                </Td>
-                                                            </Tr>
-                                                        ))
-                                                        :
-                                                        <Tr>
-                                                            <Td className="text-center" colSpan={11}>No records found!</Td>
+                                                        <Range
+                                                            values={priceRange}
+                                                            step={1}
+                                                            min={0}
+                                                            max={maxPrice}
+                                                            onChange={(priceRange) => {
+                                                                setPriceRange(priceRange);
+                                                            }}
+                                                            renderTrack={({ props, children }) => (
+                                                                <div
+                                                                    onMouseDown={props.onMouseDown}
+                                                                    onTouchStart={props.onTouchStart}
+                                                                    style={{
+                                                                        ...props.style,
+                                                                        height: '40px',
+                                                                        display: 'flex',
+                                                                        width: '100%'
+                                                                    }}
+                                                                >
+                                                                    <div
+                                                                        ref={props.ref}
+                                                                        style={{
+                                                                            height: '5px',
+                                                                            width: '100%',
+                                                                            borderRadius: '4px',
+                                                                            backgroundColor: '#575757',
+                                                                            alignSelf: 'center'
+                                                                        }}
+                                                                    >
+                                                                        {children}
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                            renderThumb={({ props, isDragged }) => (
+                                                                <div
+                                                                    {...props}
+                                                                    style={{
+                                                                        ...props.style,
+                                                                        height: '16px',
+                                                                        width: '16px',
+                                                                        borderRadius: '25px',
+                                                                        backgroundColor: '#FFF',
+                                                                        display: 'flex',
+                                                                        justifyContent: 'center',
+                                                                        alignItems: 'center',
+                                                                        border: '3px solid #f3772c'
+                                                                    }}
+                                                                >
+                                                                </div>
+                                                            )}
+                                                            allowOverlap={true}
+                                                        />
+                                                    </div>
+                                                </Form.Group>
+                                            </Col> */}
+                                            <Col md={12}>
+                                                <Form.Group className="form-dark mb-4">
+                                                    <Form.Label>THC%</Form.Label>
+                                                    <Form.Label className='float-end'>{thcRange[0] == '' ? 0 : thcRange[0]}% - {thcRange[1]}%</Form.Label>
+                                                    <div className="form-control">
+                                                        <Range
+                                                            values={thcRange}
+                                                            step={1}
+                                                            min={0}
+                                                            max={maxThc ?? 5}
+                                                            onChange={(thcRange) => {
+                                                                setThcRange(thcRange);
+                                                            }}
+                                                            renderTrack={({ props, children }) => (
+                                                                <div
+                                                                    onMouseDown={props.onMouseDown}
+                                                                    onTouchStart={props.onTouchStart}
+                                                                    style={{
+                                                                        ...props.style,
+                                                                        height: '40px',
+                                                                        display: 'flex',
+                                                                        width: '100%'
+                                                                    }}
+                                                                >
+                                                                    <div
+                                                                        ref={props.ref}
+                                                                        style={{
+                                                                            height: '5px',
+                                                                            width: '100%',
+                                                                            borderRadius: '4px',
+                                                                            backgroundColor: '#575757',
+                                                                            alignSelf: 'center'
+                                                                        }}
+                                                                    >
+                                                                        {children}
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                            renderThumb={({ props, isDragged }) => (
+                                                                <div
+                                                                    {...props}
+                                                                    style={{
+                                                                        ...props.style,
+                                                                        height: '16px',
+                                                                        width: '16px',
+                                                                        borderRadius: '25px',
+                                                                        backgroundColor: '#FFF',
+                                                                        display: 'flex',
+                                                                        justifyContent: 'center',
+                                                                        alignItems: 'center',
+                                                                        border: '3px solid #f3772c'
+                                                                    }}
+                                                                >
+                                                                </div>
+                                                            )}
+                                                        />
+                                                    </div>
+                                                </Form.Group>
+                                            </Col>
+                                            <Col md={6}>
+                                                <Form.Group className="form-dark mb-4">
+                                                    <Form.Label>Strain</Form.Label>
+                                                    {params.strain ? (
+                                                        <Select
+                                                            ref={strainRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={strain.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            value={
+                                                                strain.map((data) => (
+                                                                    data.id == filters.filterStrain
+                                                                        ? { 'value': data.id, 'label': data.title }
+                                                                        : null
+                                                                ))
+                                                            }
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select strain"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterStrain"
+                                                            isClearable={true}
+                                                        />
+                                                    ) : (
+                                                        <Select
+                                                            ref={strainRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={strain.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select strain"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterStrain"
+                                                            isClearable={true}
+                                                        />
+                                                    )}
+                                                </Form.Group>
+                                            </Col>
+                                            <Col md={6}>
+                                                <Form.Group className="form-dark mb-4">
+                                                    <Form.Label>I/O</Form.Label>
+                                                    {params.io ? (
+                                                        <Select
+                                                            ref={ioRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={iO.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            value={
+                                                                iO.map((data) => (
+                                                                    data.id == filters.filterIorO
+                                                                        ? { 'value': data.id, 'label': data.title }
+                                                                        : null
+                                                                ))
+                                                            }
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select strain"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterIorO"
+                                                            isClearable={true}
+                                                        />
+                                                    ) : (
+                                                        <Select
+                                                            ref={ioRef}
+                                                            classNamePrefix="react-select"
+                                                            className="react-select-lg"
+                                                            styles={react_select_sm_Styles}
+                                                            options={iO.map(({ id, title }) => ({
+                                                                value: id,
+                                                                label: title,
+                                                            }))}
+                                                            onChange={(val, e) => handleFilterChange(val, e)}
+                                                            placeholder="Select I/O"
+                                                            components={{
+                                                                DropdownIndicator,
+                                                                IndicatorSeparator: () => null,
+                                                            }}
+                                                            name="filterIorO"
+                                                            isClearable={true}
+                                                        />
+                                                    )}
+                                                </Form.Group>
+                                            </Col>
+                                            <Col md={12}>
+                                                <div className="d-flex justify-content-between align-item-center">
+                                                    <Button onClick={resetFilter} className="btn-wh-120-41 btn-outline-secondary-transparent br-6 bs-none">Clear</Button>
+
+                                                    <Button variant="primary" onClick={filterSubmit} className="btn-wh-120-41 br-6  bs-none"><span className='me-2'><FontAwesomeIcon icon={faFilter} /></span>Filter</Button>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </Offcanvas.Body>
+                                </Offcanvas>
+                            </div>
+                            <div className="table-wrap CustomScrollbar CustomScrollbarY">
+                                {/* <Table bordered hover id="list_table" className="table-head-bg-101010" variant="dark"> */}
+                                <ResponsiveTable id="list_table" className="table table-bordered table-hover table-dark table-head-bg-101010">
+                                    <Thead>
+                                        <Tr>
+                                            <Th width="250px;">Brand Name</Th>
+                                            <Th width="250px;">Product Name</Th>
+                                            {/* <Th className="text-center" width="100px;">Med/Rec</Th>
+                                            <Th className="text-center" width="140px;">Price Per lb</Th> */}
+                                            <Th className="text-center" width="70px;">Strain</Th>
+                                            <Th className="text-center" width="90px;">THC%</Th>
+                                            <Th className="text-center" width="200px;">Flavor</Th>
+                                            <Th className="text-center" width="200px;">Dominant<br />Terpene</Th>
+                                            <Th className="text-center" width="90px;">I/O</Th>
+                                            <Th className="text-center" width="100px;">Harvested</Th>
+                                            <Th className="text-center" width="100px;">Unit Size</Th>
+                                            <Th className="text-center" width="300px;">Action</Th>
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {
+                                            isLoading ?
+                                                [...Array(10)].map((value, key) => (
+                                                    <Tr key={'tr-' + key}>
+                                                        {
+                                                            [...Array(12)].map((v, k) => {
+                                                                return (<Td key={'td-' + k}>
+                                                                    <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                                        <Skeleton />
+                                                                    </SkeletonTheme>
+                                                                </Td>)
+                                                            })
+                                                        }
+                                                    </Tr>
+                                                )
+                                                ) :
+                                                products.length > 0 ?
+                                                    products.map((productRow, index) => (
+                                                        <Tr key={index + 'product'}>
+                                                            <Td>
+                                                            {Helper.niceString(productRow.user.brand.brandName, 20, true)}
+                                                                
+                                                            </Td>
+                                                            <Td>
+                                                                <Link
+                                                                    href={"/product/" + productRow.slug}
+                                                                    className="color-f3772c"
+                                                                    legacyBehavior>{Helper.niceString(productRow.title, 15, true)}</Link>
+                                                                <br />
+                                                                {Helper.niceString(productRow.category?.title, 14, true)}
+                                                            </Td>
+                                                            {/* <Td className="text-center">{productRow.medRec.title}</Td>
+                                                            <Td className="text-center">{productRow.productPrice}</Td> */}
+                                                            <Td className="text-center">{productRow.strain?.title}</Td>
+                                                            <Td className="text-center">{productRow?.thc}%</Td>
+                                                            <Td className="text-center">{productRow.flavor}</Td>
+                                                            <Td className="text-center">{Helper.niceString(productRow.dominant, 15, true)}</Td>
+                                                            <Td className="text-center">{productRow.io?.title}</Td>
+                                                            <Td className="text-center">{productRow.niceHarvested}</Td>
+                                                            <Td className="text-center">{productRow.unit}</Td>
+                                                            <Td className="text-center">
+                                                                {getSingle('role') !== '2' ?
+                                                                    <>
+                                                                        {
+                                                                            props.isLoggedIn ?
+                                                                                <FavouriteBtn isFavourite={productRow.productFavourites.length} productSlug={productRow.slug} />
+                                                                                :
+                                                                                <Link href={'/sign-in'} legacyBehavior>
+
+                                                                                    <FavouriteBtn isFavourite={false} productSlug={productRow.slug} />
+
+                                                                                </Link>
+                                                                        }
+                                                                        {
+                                                                            props.isLoggedIn ?
+                                                                                <Link
+                                                                                    href={`/messages/${productRow.user?.brand?.slug}`}
+                                                                                    className="action-btn color-f3772c"
+                                                                                    legacyBehavior><FontAwesomeIcon icon={faCommentDots} /></Link>
+                                                                                :
+                                                                                <Link href={`/sign-in`} className="action-btn color-f3772c" legacyBehavior><FontAwesomeIcon icon={faCommentDots} /></Link>
+
+                                                                        }
+                                                                    </>
+                                                                    : null}
+                                                                {/* <Link
+                                                                    href={"/brand/" + productRow.user?.brand?.slug}
+                                                                    className="action-btn color-white text-decoration-none"
+                                                                    ></Link> */}
+                                                            </Td>
                                                         </Tr>
-                                            }
-                                        </Tbody>
-                                    </ResponsiveTable>
-                                </div>
+                                                    ))
+                                                    :
+                                                    <Tr>
+                                                        <Td className="text-center" colSpan={11}>No records found!</Td>
+                                                    </Tr>
+                                        }
+                                    </Tbody>
+                                </ResponsiveTable>
                             </div>
-                            <div className='mt-5 d-flex justify-content-center'>
-                                {totalPages > 1 ?
-                                    <ReactPaginate
-                                        previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
-                                        nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
-                                        pageClassName="page-item"
-                                        pageLinkClassName="page-link"
-                                        previousClassName="page-item prev-item"
-                                        previousLinkClassName="page-link"
-                                        nextClassName="page-item next-item"
-                                        nextLinkClassName="page-link"
-                                        breakLabel="..."
-                                        breakClassName="page-item"
-                                        breakLinkClassName="page-link"
-                                        pageCount={totalPages}
-                                        //marginPagesDisplayed={1}
-                                        pageRangeDisplayed={5}
-                                        onPageChange={handlePageChange}
-                                        containerClassName="pagination"
-                                        activeClassName="active"
-                                        forcePage={parseInt(router.query.offset ?? 0)}
-                                    /> : null}
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
-        </>
-    )
+                        </div>
+                        <div className='mt-5 d-flex justify-content-center'>
+                            {totalPages > 1 ?
+                                <ReactPaginate
+                                    previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
+                                    nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
+                                    pageClassName="page-item"
+                                    pageLinkClassName="page-link"
+                                    previousClassName="page-item prev-item"
+                                    previousLinkClassName="page-link"
+                                    nextClassName="page-item next-item"
+                                    nextLinkClassName="page-link"
+                                    breakLabel="..."
+                                    breakClassName="page-item"
+                                    breakLinkClassName="page-link"
+                                    pageCount={totalPages}
+                                    //marginPagesDisplayed={1}
+                                    pageRangeDisplayed={5}
+                                    onPageChange={handlePageChange}
+                                    containerClassName="pagination"
+                                    activeClassName="active"
+                                    forcePage={parseInt(router.query.offset ?? 0)}
+                                /> : null}
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    </>;
 }
 
 export default ProductList;

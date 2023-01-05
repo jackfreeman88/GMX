@@ -43,105 +43,108 @@ function Brands(props) {
         setParams((prevState) => ({ ...prevState, offset: event.selected }))
     };
 
-    return (
-        <>
-            <Meta title={`Brands | ${APP_NAME}`} keywords={''} description={''} />
-            <section className="bg-black p-30-0-60">
-                <Container>
-                    <Row>
-                        <Col lg={12} className="mx-auto">
-                            <Card className="card-dark border-gray p-15-20-30 br-10">
-                                {/* <Card.Header className="border-btm-gray mb-20 p-l-0 p-r-0 p-t-0 p-b-13">
-                                    <Card.Title className="fs-18 fw-600 color-white mb-0">My Favourite</Card.Title>
-                                </Card.Header> */}
+    return <>
+        <Meta title={`Brands | ${APP_NAME}`} keywords={''} description={''} />
+        <section className="bg-black p-30-0-60">
+            <Container>
+                <Row>
+                    <Col lg={12} className="mx-auto">
+                        <Card className="card-dark border-gray p-15-20-30 br-10">
+                            {/* <Card.Header className="border-btm-gray mb-20 p-l-0 p-r-0 p-t-0 p-b-13">
+                                <Card.Title className="fs-18 fw-600 color-white mb-0">My Favourite</Card.Title>
+                            </Card.Header> */}
 
-                                <Card.Body className="p-0">
-                                    <div className="table-wrap CustomScrollbar CustomScrollbarY">
-                                        <Table bordered hover className="table-head-bg-000 table-td-bg-191919" variant="dark" id="seller-favourite">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th width="275px;">State</th>
-                                                    <th width="200px;">No. of Products</th>
-                                                    <th width="250px;">Year Founded</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {
-                                                    showSkeleton ?
-                                                        [...Array(5)].map((data, index) => {
+                            <Card.Body className="p-0">
+                                <div className="table-wrap CustomScrollbar CustomScrollbarY">
+                                    <Table bordered hover className="table-head-bg-000 table-td-bg-191919" variant="dark" id="seller-favourite">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th width="275px;">State</th>
+                                                <th width="200px;">No. of Products</th>
+                                                <th width="250px;">Year Founded</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                showSkeleton ?
+                                                    [...Array(5)].map((data, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                {
+                                                                    [...Array(4)].map((data, i) => {
+                                                                        return (<td key={i}>
+                                                                            <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                                                <Skeleton />
+                                                                            </SkeletonTheme>
+                                                                        </td>)
+                                                                    })
+                                                                }
+                                                            </tr>
+                                                        )
+                                                    })
+                                                    :
+                                                    brands.length ?
+                                                        brands.map((brand) => {
                                                             return (
-                                                                <tr key={index}>
-                                                                    {
-                                                                        [...Array(4)].map((data, i) => {
-                                                                            return (<td key={i}>
-                                                                                <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                                                    <Skeleton />
-                                                                                </SkeletonTheme>
-                                                                            </td>)
-                                                                        })
-                                                                    }
-                                                                </tr>
-                                                            )
-                                                        })
-                                                        :
-                                                        brands.length ?
-                                                            brands.map((brand) => {
-                                                                return (<tr key={brand.id}>
+                                                                <tr key={brand.id}>
                                                                     <td>
 
-                                                                        <Link href={`/brand/${brand.slug}`}>
-                                                                            <a className="color-f3772c text-decoration-none d-flex align-items-center"><Figure className='figure-40 figure-circle mb-0 me-3'>
+                                                                        <Link
+                                                                            href={`/brand/${brand.slug}`}
+                                                                            className="color-f3772c text-decoration-none d-flex align-items-center"
+                                                                            legacyBehavior>
+                                                                            <Figure className='figure-40 figure-circle mb-0 me-3'>
                                                                                 <Image alt="profile" height={150} src={ASSETS_URL + brand?.user?.profilePath} className="cover" />
-                                                                            </Figure>{brand.brandName}</a></Link>
+                                                                            </Figure>{brand.brandName}</Link>
                                                                     </td>
                                                                     <td> {brand?.user?.states?.name}</td>
                                                                     <td>{brand?.product?.length}</td>
                                                                     <td>{brand.year}</td>
-                                                                </tr>)
-                                                            })
-                                                            : <tr>
-                                                                <td className="text-center" colSpan={11}>No records found!</td>
-                                                            </tr>
-                                                }
-                                            </tbody>
-                                        </Table>
-                                    </div>
-                                    <div className='mt-5 d-flex justify-content-center'>
-                                        {
-                                            totalPages > 1 ?
-                                                <ReactPaginate
-                                                    previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
-                                                    nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
-                                                    pageClassName="page-item"
-                                                    pageLinkClassName="page-link"
-                                                    previousClassName="page-item prev-item"
-                                                    previousLinkClassName="page-link"
-                                                    nextClassName="page-item next-item"
-                                                    nextLinkClassName="page-link"
-                                                    breakLabel="..."
-                                                    breakClassName="page-item"
-                                                    breakLinkClassName="page-link"
-                                                    pageCount={totalPages}
-                                                    //marginPagesDisplayed={1}
-                                                    pageRangeDisplayed={5}
-                                                    onPageChange={handlePageChange}
-                                                    containerClassName="pagination"
-                                                    activeClassName="active"
-                                                    forcePage={parseInt(params.offset)}
-                                                />
-                                                : null
-                                        }
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
+                                                                </tr>
+                                                            );
+                                                        })
+                                                        : <tr>
+                                                            <td className="text-center" colSpan={11}>No records found!</td>
+                                                        </tr>
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </div>
+                                <div className='mt-5 d-flex justify-content-center'>
+                                    {
+                                        totalPages > 1 ?
+                                            <ReactPaginate
+                                                previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
+                                                nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
+                                                pageClassName="page-item"
+                                                pageLinkClassName="page-link"
+                                                previousClassName="page-item prev-item"
+                                                previousLinkClassName="page-link"
+                                                nextClassName="page-item next-item"
+                                                nextLinkClassName="page-link"
+                                                breakLabel="..."
+                                                breakClassName="page-item"
+                                                breakLinkClassName="page-link"
+                                                pageCount={totalPages}
+                                                //marginPagesDisplayed={1}
+                                                pageRangeDisplayed={5}
+                                                onPageChange={handlePageChange}
+                                                containerClassName="pagination"
+                                                activeClassName="active"
+                                                forcePage={parseInt(params.offset)}
+                                            />
+                                            : null
+                                    }
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
 
-        </>
-    )
+    </>;
 }
 
 export default Brands

@@ -373,178 +373,186 @@ function RetailerDetails({ userImage, ...props }) {
     }
 
 
-    return (
-        <>
-            <section className="bg-black p-60-0">
-                <Container>
-                    <Row>
-                        <Col lg={12} className="mx-auto">
-                            <div className="m-l-r-30">
-                                <div className="box-dark mb-30 overflow-hidden">
-                                    <ul className="d-flex justify-start flex-wrap">
-                                        <li className="logo-box d-flex justify-content-center align-items-center ">
-                                            <Figure className="mb-0 figure-circle figure-green-2 figure-120">
-                                                {
-                                                    props.retailerData.profilePath ?
-                                                        <Figure.Image src={ASSETS_URL + props.retailerData.profilePath} className='cover circle' />
-                                                        : <Figure.Image src={ASSETS_URL + '/profile/no-profile-image.jpg'} className='cover circle' />
-                                                }
-                                            </Figure>
-                                        </li>
-                                        <li className="seller-detail-wrap">
-                                            <ul>
-                                                <li className="seller-infor">
-                                                    <div className="d-flex align-items-center justify-content-between flex-wrap">
-                                                        <div>
-                                                            <h5 className="fs-23 fw-600 color-f3772c">
-                                                                <h5 className='fs-24 fw-600 color-f3772c mb-2'> {Helper.niceString(props.retailerData.fullName, 90, true)}</h5>
-                                                            </h5>
-                                                            <ul className="inline-listing">
-                                                                <a className="fs-15 fw-600 color-22a612 text-decoration-none" onClick={() => downloadFile(props.retailerData.licensePath)}><i className="icon-pdf-download"></i><span className="text-decoration-underline">Operating Licenses</span></a>
-                                                            </ul>
-                                                        </div>
-                                                        {!props.isLoggedIn
-                                                            ?
-                                                            <Link href={`/sign-in`}>
-                                                                <a className="btn-wh-150-46 btn btn-primary br-30 position-static top-0 end-0 me-sm-3 mx-auto" style={{ transform: "none" }}><span className='fs-20 v-align-middle'><i className="icon icon-add-friend"></i></span> Follow</a>
-                                                            </Link>
-                                                            : props.isLoggedIn && props.retailerData.id !== getSingle('userId') &&
-                                                            <a className="btn-wh-150-46 btn btn-primary br-30 position-static top-0 end-0 me-sm-3 mx-auto" style={{ transform: "none" }} onClick={handleFollow}><span><i className="icon icon-add-friend"></i></span> {followStatus}</a>
-                                                        }
+    return <>
+        <section className="bg-black p-60-0">
+            <Container>
+                <Row>
+                    <Col lg={12} className="mx-auto">
+                        <div className="m-l-r-30">
+                            <div className="box-dark mb-30 overflow-hidden">
+                                <ul className="d-flex justify-start flex-wrap">
+                                    <li className="logo-box d-flex justify-content-center align-items-center ">
+                                        <Figure className="mb-0 figure-circle figure-green-2 figure-120">
+                                            {
+                                                props.retailerData.profilePath ?
+                                                    <Figure.Image src={ASSETS_URL + props.retailerData.profilePath} className='cover circle' />
+                                                    : <Figure.Image src={ASSETS_URL + '/profile/no-profile-image.jpg'} className='cover circle' />
+                                            }
+                                        </Figure>
+                                    </li>
+                                    <li className="seller-detail-wrap">
+                                        <ul>
+                                            <li className="seller-infor">
+                                                <div className="d-flex align-items-center justify-content-between flex-wrap">
+                                                    <div>
+                                                        <h5 className="fs-23 fw-600 color-f3772c">
+                                                            <h5 className='fs-24 fw-600 color-f3772c mb-2'> {Helper.niceString(props.retailerData.fullName, 90, true)}</h5>
+                                                        </h5>
+                                                        <ul className="inline-listing">
+                                                            <a className="fs-15 fw-600 color-22a612 text-decoration-none" onClick={() => downloadFile(props.retailerData.licensePath)}><i className="icon-pdf-download"></i><span className="text-decoration-underline">Operating Licenses</span></a>
+                                                        </ul>
                                                     </div>
-                                                    {!props.isLoggedIn ?
-                                                        <Link href={`/sign-in`}>
-                                                            <a className="btn-wh-150-46 btn btn-secondary br-30"><span className='fs-20 v-align-middle'><FontAwesomeIcon icon={faCommentDots} /></span> Message</a>
+                                                    {!props.isLoggedIn
+                                                        ?
+                                                        <Link
+                                                            href={`/sign-in`}
+                                                            className="btn-wh-150-46 btn btn-primary br-30 position-static top-0 end-0 me-sm-3 mx-auto"
+                                                            style={{ transform: "none" }}
+                                                            legacyBehavior>
+                                                            <span className='fs-20 v-align-middle'><i className="icon icon-add-friend"></i></span>Follow
                                                         </Link>
-                                                        : props.isLoggedIn && getSingle('role') !== '3' ?
-                                                            <Link href={`/messages/${props.retailerData.slug}`}>
-                                                                <a className="btn-wh-150-46 btn btn-secondary br-30"><span className='fs-20 v-align-middle'><FontAwesomeIcon icon={faCommentDots} /></span> Message</a>
-                                                            </Link>
-                                                            : null}
-                                                </li>
-                                                <li>
-                                                    <ul className="listing-33p">
-                                                        <li>
-                                                            <span className="color-777777 fs-16 fw-600 text-center d-block">State</span>
-                                                            <p className="fs-18 fw-600 color-white mb-0 text-center">{props.retailerData.state}</p>
-                                                        </li>
-                                                        <li>
-                                                            <span className="color-777777 fs-16 fw-600 text-center d-block">Phone Number</span>
-                                                            <p className="fs-18 fw-600 color-white mb-0 text-center">{props.retailerData.phoneNumber}</p>
-                                                        </li>
-                                                        <li>
-                                                            <span className="color-777777 fs-16 fw-600 text-center d-block">Zipcode</span>
-                                                            <p className="fs-18 fw-600 color-white mb-0 text-center">{props.retailerData.zipCode}</p>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <ul className="listing-50p rating-listing">
-                                        <li className="p-3">
-                                            {
-                                                followersCount > 0 ? <Link href={'/followers/' + props.retailerData.slug}>
-                                                    <a>
-                                                        <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Followers</span>
-                                                        <p className="fs-16 fw-500 color-white mb-0 text-center">{followersCount}</p>
-                                                    </a>
-                                                </Link>
-                                                    :
-                                                    <div>
-                                                        <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Followers</span>
-                                                        <p className="fs-16 fw-500 color-white mb-0 text-center">{followersCount}</p>
-                                                    </div>
-                                            }
-                                        </li>
-                                        <li className="p-3">
-                                            {
-                                                props.retailerData.followingsCount > 0 ?
-                                                    <Link href={'/following/' + props.retailerData.slug}>
-                                                        <a>
-                                                            <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Following</span>
-                                                            <p className="fs-16 fw-500 color-white mb-0 text-center">{props.retailerData.followingsCount}</p>
-                                                        </a>
+                                                        : props.isLoggedIn && props.retailerData.id !== getSingle('userId') &&
+                                                        <a className="btn-wh-150-46 btn btn-primary br-30 position-static top-0 end-0 me-sm-3 mx-auto" style={{ transform: "none" }} onClick={handleFollow}><span><i className="icon icon-add-friend"></i></span> {followStatus}</a>
+                                                    }
+                                                </div>
+                                                {!props.isLoggedIn ?
+                                                    <Link
+                                                        href={`/sign-in`}
+                                                        className="btn-wh-150-46 btn btn-secondary br-30"
+                                                        legacyBehavior>
+                                                        <span className='fs-20 v-align-middle'><FontAwesomeIcon icon={faCommentDots} /></span>Message
                                                     </Link>
-                                                    :
-                                                    <div>
-                                                        <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Following</span>
-                                                        <p className="fs-16 fw-500 color-white mb-0 text-center">{props.retailerData.followingsCount}</p>
-                                                    </div>
-                                            }
-                                        </li>
-                                    </ul>
-                                </div>
+                                                    : props.isLoggedIn && getSingle('role') !== '3' ?
+                                                        <Link
+                                                            href={`/messages/${props.retailerData.slug}`}
+                                                            className="btn-wh-150-46 btn btn-secondary br-30"
+                                                            legacyBehavior>
+                                                            <span className='fs-20 v-align-middle'><FontAwesomeIcon icon={faCommentDots} /></span>Message
+                                                        </Link>
+                                                        : null}
+                                            </li>
+                                            <li>
+                                                <ul className="listing-33p">
+                                                    <li>
+                                                        <span className="color-777777 fs-16 fw-600 text-center d-block">State</span>
+                                                        <p className="fs-18 fw-600 color-white mb-0 text-center">{props.retailerData.state}</p>
+                                                    </li>
+                                                    <li>
+                                                        <span className="color-777777 fs-16 fw-600 text-center d-block">Phone Number</span>
+                                                        <p className="fs-18 fw-600 color-white mb-0 text-center">{props.retailerData.phoneNumber}</p>
+                                                    </li>
+                                                    <li>
+                                                        <span className="color-777777 fs-16 fw-600 text-center d-block">Zipcode</span>
+                                                        <p className="fs-18 fw-600 color-white mb-0 text-center">{props.retailerData.zipCode}</p>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul className="listing-50p rating-listing">
+                                    <li className="p-3">
+                                        {
+                                            followersCount > 0 ? <Link href={'/followers/' + props.retailerData.slug} legacyBehavior>
+
+                                                <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Followers</span>
+                                                <p className="fs-16 fw-500 color-white mb-0 text-center">{followersCount}</p>
+
+                                            </Link>
+                                                :
+                                                <div>
+                                                    <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Followers</span>
+                                                    <p className="fs-16 fw-500 color-white mb-0 text-center">{followersCount}</p>
+                                                </div>
+                                        }
+                                    </li>
+                                    <li className="p-3">
+                                        {
+                                            props.retailerData.followingsCount > 0 ?
+                                                <Link href={'/following/' + props.retailerData.slug} legacyBehavior>
+
+                                                    <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Following</span>
+                                                    <p className="fs-16 fw-500 color-white mb-0 text-center">{props.retailerData.followingsCount}</p>
+
+                                                </Link>
+                                                :
+                                                <div>
+                                                    <span className="fs-16 fw-500 color-777777 d-block mb-6 text-center">Following</span>
+                                                    <p className="fs-16 fw-500 color-white mb-0 text-center">{props.retailerData.followingsCount}</p>
+                                                </div>
+                                        }
+                                    </li>
+                                </ul>
                             </div>
-                            <Card className="card-dark card-post card-axis-point border-gray-1">
-                                <Card.Header>
-                                    <div className="d-flex align-items-center">
-                                        <h3 className="text-white fs-18 fw-500 mb-0 py-1">Activity</h3>
-                                    </div>
-                                </Card.Header>
-                                <Card.Body>
-                                    <Row>
-                                        <Col lg={11} className="mx-auto">
-                                            {getSingle('userId') === props.retailerData.id ? (
-                                                <ActivityPost
-                                                    activityComment={activityComment}
-                                                    attachments={attachments}
-                                                    attachmentsHandler={attachmentsHandler}
-                                                    deleteHandler={deleteHandler}
-                                                    postContentHandler={postContentHandler}
-                                                    submitPost={submitPost}
-                                                    userImage={userImage}
-                                                    isEnable={isEnable}
-                                                    isMediaEnable={isMediaEnable}
-                                                    selectedMediaFile={selectedMediaFile}
-                                                />
-                                            ) : null}
-                                        </Col>
-                                    </Row>
-                                    <hr></hr>
-                                    <ActivityList
-                                        activities={activities}
-                                        totalActivities={totalActivities}
-                                        fetchMoreActivity={fetchMoreActivity}
-                                        handleShow={handleShow}
-                                        handleShowCommentModal={handleShowCommentModal}
-                                        likesClickHandler={likesClickHandler}
-                                        repostsClickhandler={repostsClickhandler}
-                                    />
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
-            </section >
-            <LightboxModal
-                sliderIndex={activeIndex}
-                images={individualPostAttachments}
-                show={show}
-                handleClose={handleClose}
-            />
-            <CommentModal
-                showCommentModal={showCommentModal}
-                handleCloseCommentModal={handleCloseCommentModal}
-                postId={selectedPostId}
-                userImage={userImage}
-            />
-            <RepostModal
-                show={showRepostModal}
-                hide={repostsModalClose}
-                reposts={reposts}
-                repostsCount={repostsCount}
-                fetchMoreReposts={fetchMoreReposts}
-            />
-            <LikeModal
-                show={showLikeModal}
-                hide={likesModalClose}
-                likes={likes}
-                likesCount={likesCount}
-                fetchMoreLikes={fetchMoreLikes}
-            />
-        </>
-    )
+                        </div>
+                        <Card className="card-dark card-post card-axis-point border-gray-1">
+                            <Card.Header>
+                                <div className="d-flex align-items-center">
+                                    <h3 className="text-white fs-18 fw-500 mb-0 py-1">Activity</h3>
+                                </div>
+                            </Card.Header>
+                            <Card.Body>
+                                <Row>
+                                    <Col lg={11} className="mx-auto">
+                                        {getSingle('userId') === props.retailerData.id ? (
+                                            <ActivityPost
+                                                activityComment={activityComment}
+                                                attachments={attachments}
+                                                attachmentsHandler={attachmentsHandler}
+                                                deleteHandler={deleteHandler}
+                                                postContentHandler={postContentHandler}
+                                                submitPost={submitPost}
+                                                userImage={userImage}
+                                                isEnable={isEnable}
+                                                isMediaEnable={isMediaEnable}
+                                                selectedMediaFile={selectedMediaFile}
+                                            />
+                                        ) : null}
+                                    </Col>
+                                </Row>
+                                <hr></hr>
+                                <ActivityList
+                                    activities={activities}
+                                    totalActivities={totalActivities}
+                                    fetchMoreActivity={fetchMoreActivity}
+                                    handleShow={handleShow}
+                                    handleShowCommentModal={handleShowCommentModal}
+                                    likesClickHandler={likesClickHandler}
+                                    repostsClickhandler={repostsClickhandler}
+                                />
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </section >
+        <LightboxModal
+            sliderIndex={activeIndex}
+            images={individualPostAttachments}
+            show={show}
+            handleClose={handleClose}
+        />
+        <CommentModal
+            showCommentModal={showCommentModal}
+            handleCloseCommentModal={handleCloseCommentModal}
+            postId={selectedPostId}
+            userImage={userImage}
+        />
+        <RepostModal
+            show={showRepostModal}
+            hide={repostsModalClose}
+            reposts={reposts}
+            repostsCount={repostsCount}
+            fetchMoreReposts={fetchMoreReposts}
+        />
+        <LikeModal
+            show={showLikeModal}
+            hide={likesModalClose}
+            likes={likes}
+            likesCount={likesCount}
+            fetchMoreLikes={fetchMoreLikes}
+        />
+    </>;
 }
 
 export default RetailerDetails;

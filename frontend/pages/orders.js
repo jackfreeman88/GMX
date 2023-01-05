@@ -96,120 +96,120 @@ function MyOrdersSeller(props) {
             noti.notify(response.data.message, "danger");
         }
     }
-    return (
-        <>
-            <Meta title={`My Orders | ${APP_NAME}`} keywords='My Orders' description='My Orders' />
-            <section className="bg-black p-30-0-60">
-                <Container>
-                    <Row>
-                        <Col lg={12} className="mx-auto">
-                            <Card className="card-dark border-gray p-15-20-20 br-10 card">
-                                <Card.Header className="border-btm-gray mb-20 px-0">
-                                    <Card.Title className="fs-18 fw-600 color-dcdcdc">My Orders</Card.Title>
-                                </Card.Header>
+    return <>
+        <Meta title={`My Orders | ${APP_NAME}`} keywords='My Orders' description='My Orders' />
+        <section className="bg-black p-30-0-60">
+            <Container>
+                <Row>
+                    <Col lg={12} className="mx-auto">
+                        <Card className="card-dark border-gray p-15-20-20 br-10 card">
+                            <Card.Header className="border-btm-gray mb-20 px-0">
+                                <Card.Title className="fs-18 fw-600 color-dcdcdc">My Orders</Card.Title>
+                            </Card.Header>
 
-                                <Card.Body className="p-0">
-                                    <div className="d-flex justify-content-between flex-wrap mb-20">
-                                        <Form className="d-flex justify-content-flex-start align-items-center filter-form flex-md-nowrap flex-wrap filter-form order-filter">
-                                            <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-sm-2 flex-fill">
-                                                <Form.Label className="my-2">Category:</Form.Label>
-                                                <Select
-                                                    classNamePrefix="react-select"
-                                                    className="react-select-lg maxw-200"
-                                                    styles={react_select_xs_Styles}
-                                                    options={categories.map(({ id, name }) => ({
-                                                        value: id,
-                                                        label: name,
-                                                    }))}
-                                                    value={categories.filter((item) => item.id == params.category)}
-                                                    onChange={(val, e) => handleFilterChange(val, e)}
-                                                    placeholder="Category"
-                                                    components={{
-                                                        DropdownIndicator,
-                                                        IndicatorSeparator: () => null,
-                                                    }}
-                                                    name="category"
-                                                    isClearable={true}
-                                                />
-                                            </Form.Group>
-                                            <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-2 flex-fill">
-                                                <Form.Label className="my-2">Sort By:</Form.Label>
-                                                <Select
-                                                    classNamePrefix="react-select"
-                                                    className="react-select-lg maxw-150"
-                                                    styles={react_select_xs_Styles}
-                                                    options={sortBy.map(({ value, name }) => ({
-                                                        value: value,
-                                                        label: name,
-                                                    }))}
-                                                    value={sortBy.filter((item) => item.value == params.sortBy)}
-                                                    onChange={(val, e) => handleFilterChange(val, e)}
-                                                    placeholder="Sort By"
-                                                    components={{
-                                                        DropdownIndicator,
-                                                        IndicatorSeparator: () => null,
-                                                    }}
-                                                    name="sortBy"
-                                                    isClearable={true}
-                                                />
-                                            </Form.Group>
-                                        </Form>
-                                        <Form className="mb-7 d-flex search-form-main">
-                                            <Form.Group className="search-form form-dark maxw-150 ">
-                                                <Form.Control type="search" placeholder="Search by Keywords" name="keyword" onChange={onChangeSearch} value={keyword} />
-                                                <Button variant="primary" className="btn-wh-35 br-8 bg-f3772c" onClick={() => setParams((prevState) => ({ ...prevState, ['keyword']: keyword }))}><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                                            </Form.Group>
+                            <Card.Body className="p-0">
+                                <div className="d-flex justify-content-between flex-wrap mb-20">
+                                    <Form className="d-flex justify-content-flex-start align-items-center filter-form flex-md-nowrap flex-wrap filter-form order-filter">
+                                        <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-sm-2 flex-fill">
+                                            <Form.Label className="my-2">Category:</Form.Label>
+                                            <Select
+                                                classNamePrefix="react-select"
+                                                className="react-select-lg maxw-200"
+                                                styles={react_select_xs_Styles}
+                                                options={categories.map(({ id, name }) => ({
+                                                    value: id,
+                                                    label: name,
+                                                }))}
+                                                value={categories.filter((item) => item.id == params.category)}
+                                                onChange={(val, e) => handleFilterChange(val, e)}
+                                                placeholder="Category"
+                                                components={{
+                                                    DropdownIndicator,
+                                                    IndicatorSeparator: () => null,
+                                                }}
+                                                name="category"
+                                                isClearable={true}
+                                            />
+                                        </Form.Group>
+                                        <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-2 flex-fill">
+                                            <Form.Label className="my-2">Sort By:</Form.Label>
+                                            <Select
+                                                classNamePrefix="react-select"
+                                                className="react-select-lg maxw-150"
+                                                styles={react_select_xs_Styles}
+                                                options={sortBy.map(({ value, name }) => ({
+                                                    value: value,
+                                                    label: name,
+                                                }))}
+                                                value={sortBy.filter((item) => item.value == params.sortBy)}
+                                                onChange={(val, e) => handleFilterChange(val, e)}
+                                                placeholder="Sort By"
+                                                components={{
+                                                    DropdownIndicator,
+                                                    IndicatorSeparator: () => null,
+                                                }}
+                                                name="sortBy"
+                                                isClearable={true}
+                                            />
+                                        </Form.Group>
+                                    </Form>
+                                    <Form className="mb-7 d-flex search-form-main">
+                                        <Form.Group className="search-form form-dark maxw-150 ">
+                                            <Form.Control type="search" placeholder="Search by Keywords" name="keyword" onChange={onChangeSearch} value={keyword} />
+                                            <Button variant="primary" className="btn-wh-35 br-8 bg-f3772c" onClick={() => setParams((prevState) => ({ ...prevState, ['keyword']: keyword }))}><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
+                                        </Form.Group>
+                                        {
+                                            params.category !== '' || params.sortBy !== '' || params.keyword !== '' ?
+                                                <Form.Group className="form-inline form-dark form-group-h-33 mr-10">
+                                                    <OverlayTrigger
+                                                        placement="top"
+                                                        overlay={<Tooltip>Clear All</Tooltip>}
+                                                    >
+                                                        <Button variant="secondary" className="btn-wh-35 br-8 bg-f3772c ms-3" onClick={() => { setParams({ category: '', sortBy: '', keyword: '', offset: 0, }); setKeyword(''); }}><FontAwesomeIcon icon={faTimes} /></Button>
+                                                    </OverlayTrigger>
+                                                </Form.Group>
+                                                : null
+                                        }
+                                    </Form>
+                                </div>
+                                <div className="table-wrap CustomScrollbar CustomScrollbarY">
+                                    {/* <Table bordered hover variant="dark" id="seller-my-order"> */}
+                                    <ResponsiveTable className="table table-bordered table-hover table-dark" id="seller-my-order">
+                                        <Thead>
+                                            <Tr>
+                                                <Th className="text-center" width="85px;">Order ID</Th>
+                                                <Th className="text-start" width="145px;">Product & Category</Th>
+                                                <Th className="text-center" width="130px;">Customer Name</Th>
+                                                <Th className="text-center" width="40px;">Qty</Th>
+                                                {/* <Th className="text-center" width="100px;">Price per lb</Th> */}
+                                                <Th className="text-center" width="70px;">Total</Th>
+                                                <Th className="text-center" width="70px;">Status</Th>
+                                                <Th className="text-center" width="150px;">Action</Th>
+                                            </Tr>
+                                        </Thead>
+                                        <Tbody>
                                             {
-                                                params.category !== '' || params.sortBy !== '' || params.keyword !== '' ?
-                                                    <Form.Group className="form-inline form-dark form-group-h-33 mr-10">
-                                                        <OverlayTrigger
-                                                            placement="top"
-                                                            overlay={<Tooltip>Clear All</Tooltip>}
-                                                        >
-                                                            <Button variant="secondary" className="btn-wh-35 br-8 bg-f3772c ms-3" onClick={() => { setParams({ category: '', sortBy: '', keyword: '', offset: 0, }); setKeyword(''); }}><FontAwesomeIcon icon={faTimes} /></Button>
-                                                        </OverlayTrigger>
-                                                    </Form.Group>
-                                                    : null
-                                            }
-                                        </Form>
-                                    </div>
-                                    <div className="table-wrap CustomScrollbar CustomScrollbarY">
-                                        {/* <Table bordered hover variant="dark" id="seller-my-order"> */}
-                                        <ResponsiveTable className="table table-bordered table-hover table-dark" id="seller-my-order">
-                                            <Thead>
-                                                <Tr>
-                                                    <Th className="text-center" width="85px;">Order ID</Th>
-                                                    <Th className="text-start" width="145px;">Product & Category</Th>
-                                                    <Th className="text-center" width="130px;">Customer Name</Th>
-                                                    <Th className="text-center" width="40px;">Qty</Th>
-                                                    {/* <Th className="text-center" width="100px;">Price per lb</Th> */}
-                                                    <Th className="text-center" width="70px;">Total</Th>
-                                                    <Th className="text-center" width="70px;">Status</Th>
-                                                    <Th className="text-center" width="150px;">Action</Th>
-                                                </Tr>
-                                            </Thead>
-                                            <Tbody>
-                                                {
-                                                    showSkeleton ?
-                                                        [...Array(5)].map((index) => {
+                                                showSkeleton ?
+                                                    [...Array(5)].map((index) => {
+                                                        return (
+                                                            <Tr key={index}>
+                                                                {
+                                                                    [...Array(7)].map((i) => {
+                                                                        return (<Td key={i}>
+                                                                            <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
+                                                                                <Skeleton />
+                                                                            </SkeletonTheme>
+                                                                        </Td>)
+                                                                    })
+                                                                }
+                                                            </Tr>
+                                                        )
+                                                    })
+                                                    :
+                                                    orders.length ?
+                                                        orders.map((order) => {
                                                             return (
-                                                                <Tr key={index}>
-                                                                    {
-                                                                        [...Array(7)].map((i) => {
-                                                                            return (<Td key={i}>
-                                                                                <SkeletonTheme baseColor={SkeletonOptions.baseColor} highlightColor={SkeletonOptions.highlightColor}>
-                                                                                    <Skeleton />
-                                                                                </SkeletonTheme>
-                                                                            </Td>)
-                                                                        })
-                                                                    }
-                                                                </Tr>
-                                                            )
-                                                        })
-                                                        :
-                                                        orders.length ?
-                                                            orders.map((order) => {
-                                                                return (<Tr>
+                                                                <Tr>
                                                                     <Td className="text-center">
                                                                         <p className="fs-14 color-dcdcdc fw-500">#{order.orderId ?? ''}</p>
                                                                         <p className="fs-14 color-dcdcdc fw-400 o-08">{moment(order.createdAt).format("DD MMM 'YY")}</p>
@@ -220,10 +220,16 @@ function MyOrdersSeller(props) {
                                                                     </Td>
                                                                     <Td className="text-center">
                                                                         <p className="fs-14 color-dcdcdc fw-500">
-                                                                            <Link href={"/customer/" + order.retailer.slug}><a className="color-f3772c">{order.retailer.fullName ? Helper.niceString(order.retailer.fullName, 20, true) : ''}</a></Link></p>
-                                                                        <Link href={`/messages/${order.retailer.slug}`}>
-                                                                            <a className="btn-rounded w-30 h-30 btn-outline-secondary-transparent d-block table-chat-btn mx-auto">
-                                                                                <span className="icon"><FontAwesomeIcon icon={faCommentDots} /></span></a>
+                                                                            <Link
+                                                                                href={"/customer/" + order.retailer.slug}
+                                                                                className="color-f3772c"
+                                                                                legacyBehavior>{order.retailer.fullName ? Helper.niceString(order.retailer.fullName, 20, true) : ''}</Link></p>
+                                                                        <Link
+                                                                            href={`/messages/${order.retailer.slug}`}
+                                                                            className="btn-rounded w-30 h-30 btn-outline-secondary-transparent d-block table-chat-btn mx-auto"
+                                                                            legacyBehavior>
+
+                                                                            <span className="icon"><FontAwesomeIcon icon={faCommentDots} /></span>
                                                                         </Link>
                                                                     </Td>
                                                                     <Td className="text-center">{order.quantity ?? ''}</Td>
@@ -275,48 +281,48 @@ function MyOrdersSeller(props) {
                                                                             }
                                                                         </p>
                                                                     </Td>
-                                                                </Tr>)
-                                                            })
-                                                            : <Tr>
-                                                                <Td className="text-center" colSpan={9}>No records found!</Td>
-                                                            </Tr>
-                                                }
-                                            </Tbody>
-                                        </ResponsiveTable>
-                                    </div>
-                                    <div className='mt-5 d-flex justify-content-center'>
-                                        {
-                                            totalPages > 1 ?
-                                                <ReactPaginate
-                                                    previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
-                                                    nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
-                                                    pageClassName="page-item"
-                                                    pageLinkClassName="page-link"
-                                                    previousClassName="page-item prev-item"
-                                                    previousLinkClassName="page-link"
-                                                    nextClassName="page-item next-item"
-                                                    nextLinkClassName="page-link"
-                                                    breakLabel="..."
-                                                    breakClassName="page-item"
-                                                    breakLinkClassName="page-link"
-                                                    pageCount={totalPages}
-                                                    pageRangeDisplayed={5}
-                                                    onPageChange={handlePageChange}
-                                                    containerClassName="pagination"
-                                                    activeClassName="active"
-                                                    forcePage={parseInt(params.offset)}
-                                                />
-                                                : null
-                                        }
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
-        </>
-    )
+                                                                </Tr>
+                                                            );
+                                                        })
+                                                        : <Tr>
+                                                            <Td className="text-center" colSpan={9}>No records found!</Td>
+                                                        </Tr>
+                                            }
+                                        </Tbody>
+                                    </ResponsiveTable>
+                                </div>
+                                <div className='mt-5 d-flex justify-content-center'>
+                                    {
+                                        totalPages > 1 ?
+                                            <ReactPaginate
+                                                previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
+                                                nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
+                                                pageClassName="page-item"
+                                                pageLinkClassName="page-link"
+                                                previousClassName="page-item prev-item"
+                                                previousLinkClassName="page-link"
+                                                nextClassName="page-item next-item"
+                                                nextLinkClassName="page-link"
+                                                breakLabel="..."
+                                                breakClassName="page-item"
+                                                breakLinkClassName="page-link"
+                                                pageCount={totalPages}
+                                                pageRangeDisplayed={5}
+                                                onPageChange={handlePageChange}
+                                                containerClassName="pagination"
+                                                activeClassName="active"
+                                                forcePage={parseInt(params.offset)}
+                                            />
+                                            : null
+                                    }
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    </>;
 }
 
 export default MyOrdersSeller

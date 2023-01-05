@@ -140,170 +140,171 @@ function MyProducts(props) {
     const handleCategoryFilter = (catId) => {
         setParams((prevState) => ({ ...prevState, category: catId }))
     }
-    return (
-        <>
-            <CategoriesContext.Provider value={{ categories, medrecData, strainsData, ioData }}>
-                <Meta title={`My Products | ${APP_NAME}`} keywords={'My Products'} description={'My Products'} />
-                <section className="bg-black p-30-0-60">
-                    <Container>
-                        <Row>
-                            <Col lg={12} className="mx-auto">
-                                <Card className="card-dark border-gray p-8-21-30 br-10">
-                                    <Card.Header className="d-flex justify-content-between align-items-center border-btm-gray mb-20 p-l-0 p-r-0 p-t-0 p-b-6">
-                                        <Card.Title className="fs-18 fw-600 color-dcdcdc mb-0">My Product</Card.Title>
-                                        <Link href='/product/add'><a className="btn btn-primary btn-wh-130-38 br-6"><span className='me-2'><FontAwesomeIcon icon={faCirclePlus} /></span>Add Product</a></Link>
-                                    </Card.Header>
+    return <>
+        <CategoriesContext.Provider value={{ categories, medrecData, strainsData, ioData }}>
+            <Meta title={`My Products | ${APP_NAME}`} keywords={'My Products'} description={'My Products'} />
+            <section className="bg-black p-30-0-60">
+                <Container>
+                    <Row>
+                        <Col lg={12} className="mx-auto">
+                            <Card className="card-dark border-gray p-8-21-30 br-10">
+                                <Card.Header className="d-flex justify-content-between align-items-center border-btm-gray mb-20 p-l-0 p-r-0 p-t-0 p-b-6">
+                                    <Card.Title className="fs-18 fw-600 color-dcdcdc mb-0">My Product</Card.Title>
+                                    <Link
+                                        href='/product/add'
+                                        className="btn btn-primary btn-wh-130-38 br-6"
+                                        legacyBehavior><span className='me-2'><FontAwesomeIcon icon={faCirclePlus} /></span>Add Product</Link>
+                                </Card.Header>
 
-                                    <Card.Body className="p-0">
-                                        <div className="d-flex justify-content-between flex-wrap mb-20">
-                                            <Form className="d-flex justify-content-flex-start align-items-center filter-form flex-md-nowrap flex-wrap filter-form order-filter">
-                                                <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-sm-2 flex-fill">
-                                                    <Form.Label className="my-2">Category:</Form.Label>
-                                                    <Select
-                                                        classNamePrefix="react-select"
-                                                        className="react-select-lg maxw-200"
-                                                        styles={react_select_xs_Styles}
-                                                        options={categories.map(({ id, name }) => ({
-                                                            value: id,
-                                                            label: name,
-                                                        }))}
-                                                        value={categories.filter((item) => item.id == params.category)}
-                                                        onChange={(val, e) => handleFilterChange(val, e)}
-                                                        placeholder="Category"
-                                                        components={{
-                                                            DropdownIndicator,
-                                                            IndicatorSeparator: () => null,
-                                                        }}
-                                                        name="category"
-                                                        isClearable={true}
-                                                    />
-                                                </Form.Group>
-                                                <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-2 flex-fill">
-                                                    <Form.Label className="my-2">Sort By:</Form.Label>
-                                                    <Select
-                                                        classNamePrefix="react-select"
-                                                        className="react-select-lg maxw-150"
-                                                        styles={react_select_xs_Styles}
-                                                        options={sortBy.map(({ value, name }) => ({
-                                                            value: value,
-                                                            label: name,
-                                                        }))}
-                                                        value={sortBy.filter((item) => item.value == params.sortBy)}
-                                                        onChange={(val, e) => handleFilterChange(val, e)}
-                                                        placeholder="Sort By"
-                                                        components={{
-                                                            DropdownIndicator,
-                                                            IndicatorSeparator: () => null,
-                                                        }}
-                                                        name="sortBy"
-                                                        isClearable={true}
-                                                    />
-                                                </Form.Group>
-                                            </Form>
-                                            <Form className="mb-7 d-flex search-form-main">
-                                                <Form.Group className="search-form form-dark maxw-150 ">
-                                                    <Form.Control type="search" placeholder="Search by Keywords" name="keyword" onChange={onChangeSearch} value={keyword} />
-                                                    <Button variant="primary" className="btn-wh-35 br-8 bg-f3772c" onClick={() => setParams((prevState) => ({ ...prevState, ['keyword']: keyword }))}><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
-                                                </Form.Group>
-                                                {
-                                                    params.category !== '' || params.sortBy !== '' || params.keyword !== '' ?
-                                                        <Form.Group className="form-inline form-dark form-group-h-33 mr-10">
-                                                            <OverlayTrigger
-                                                                placement="top"
-                                                                overlay={<Tooltip>Clear All</Tooltip>}
-                                                            >
-                                                                <Button variant="secondary" className="btn-wh-35 br-8 bg-f3772c ms-3" onClick={() => { setParams({ category: '', sortBy: '', keyword: '', offset: 0, }); setKeyword(''); }}><FontAwesomeIcon icon={faTimes} /></Button>
-                                                            </OverlayTrigger>
-                                                        </Form.Group>
-                                                        : null
-                                                }
-                                            </Form>
-                                        </div>
-                                        <div className="table-wrap CustomScrollbar CustomScrollbarY">
-                                            {/* <Table bordered hover variant="dark" id="seller-product" className='form-dark'> */}
-                                            <ResponsiveTable className="table table-bordered table-hover table-dark form-dark" id="seller-product">
-                                                <Thead>
-                                                    <Tr>
-                                                        <Th width="200px">Product Name</Th>
-                                                        <Th width="100px">Category</Th>
-                                                        <Th width="130px">Med/Rec</Th>
-                                                        {/* <Th width="100px">Price Per lb</Th> */}
-                                                        <Th width="70px">Strain</Th>
-                                                        <Th width="70px">THC%</Th>
-                                                        <Th width="150px">Flavor</Th>
-                                                        <Th width="150px">Dominant Terpene</Th>
-                                                        <Th width="100px">I/O</Th>
-                                                        <Th width="100px">Harvested</Th>
-                                                        <Th width="100px">Unit Size</Th>
-                                                        <Th width="180px">Action</Th>
-                                                    </Tr>
-                                                </Thead>
-                                                <Tbody>
-                                                    {
-                                                        showSkeleton ?
-                                                            [...Array(5)].map((arrayData, index) => {
-                                                                return (
-                                                                    <Tr key={index + 'loader'}>
-                                                                        {
-                                                                            [...Array(11)].map((data, sIndex) => {
-                                                                                return (<Td key={sIndex + "skeleton"}>
-                                                                                    <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-                                                                                        <Skeleton />
-                                                                                    </SkeletonTheme>
-                                                                                </Td>)
-                                                                            })
-                                                                        }
-                                                                    </Tr>
-                                                                )
-                                                            })
-                                                            :
-                                                            products.length ?
-                                                                products.map((product, i) => {
-                                                                    return (<ProductRow key={i} product={product} handleStatusChange={handleStatusChange} categories={categories} handleCategoryFilter={handleCategoryFilter} isLastRow={i === products.length - 1 && products.length > 1} />)
-                                                                })
-                                                                : <Tr>
-                                                                    <Td className="text-center" colSpan={10}>No records found!</Td>
-                                                                </Tr>
-                                                    }
-                                                </Tbody>
-                                            </ResponsiveTable>
-                                        </div>
-                                        <div className='mt-5 d-flex justify-content-center'>
+                                <Card.Body className="p-0">
+                                    <div className="d-flex justify-content-between flex-wrap mb-20">
+                                        <Form className="d-flex justify-content-flex-start align-items-center filter-form flex-md-nowrap flex-wrap filter-form order-filter">
+                                            <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-sm-2 flex-fill">
+                                                <Form.Label className="my-2">Category:</Form.Label>
+                                                <Select
+                                                    classNamePrefix="react-select"
+                                                    className="react-select-lg maxw-200"
+                                                    styles={react_select_xs_Styles}
+                                                    options={categories.map(({ id, name }) => ({
+                                                        value: id,
+                                                        label: name,
+                                                    }))}
+                                                    value={categories.filter((item) => item.id == params.category)}
+                                                    onChange={(val, e) => handleFilterChange(val, e)}
+                                                    placeholder="Category"
+                                                    components={{
+                                                        DropdownIndicator,
+                                                        IndicatorSeparator: () => null,
+                                                    }}
+                                                    name="category"
+                                                    isClearable={true}
+                                                />
+                                            </Form.Group>
+                                            <Form.Group className="form-inline form-dark form-group-h-33 me-md-3 me-0 mb-2 flex-fill">
+                                                <Form.Label className="my-2">Sort By:</Form.Label>
+                                                <Select
+                                                    classNamePrefix="react-select"
+                                                    className="react-select-lg maxw-150"
+                                                    styles={react_select_xs_Styles}
+                                                    options={sortBy.map(({ value, name }) => ({
+                                                        value: value,
+                                                        label: name,
+                                                    }))}
+                                                    value={sortBy.filter((item) => item.value == params.sortBy)}
+                                                    onChange={(val, e) => handleFilterChange(val, e)}
+                                                    placeholder="Sort By"
+                                                    components={{
+                                                        DropdownIndicator,
+                                                        IndicatorSeparator: () => null,
+                                                    }}
+                                                    name="sortBy"
+                                                    isClearable={true}
+                                                />
+                                            </Form.Group>
+                                        </Form>
+                                        <Form className="mb-7 d-flex search-form-main">
+                                            <Form.Group className="search-form form-dark maxw-150 ">
+                                                <Form.Control type="search" placeholder="Search by Keywords" name="keyword" onChange={onChangeSearch} value={keyword} />
+                                                <Button variant="primary" className="btn-wh-35 br-8 bg-f3772c" onClick={() => setParams((prevState) => ({ ...prevState, ['keyword']: keyword }))}><FontAwesomeIcon icon={faMagnifyingGlass} /></Button>
+                                            </Form.Group>
                                             {
-                                                totalPages > 1 ?
-                                                    <ReactPaginate
-                                                        previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
-                                                        nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
-                                                        pageClassName="page-item"
-                                                        pageLinkClassName="page-link"
-                                                        previousClassName="page-item prev-item"
-                                                        previousLinkClassName="page-link"
-                                                        nextClassName="page-item next-item"
-                                                        nextLinkClassName="page-link"
-                                                        breakLabel="..."
-                                                        breakClassName="page-item"
-                                                        breakLinkClassName="page-link"
-                                                        pageCount={totalPages}
-                                                        //marginPagesDisplayed={1}
-                                                        pageRangeDisplayed={5}
-                                                        onPageChange={handlePageChange}
-                                                        containerClassName="pagination"
-                                                        activeClassName="active"
-                                                        forcePage={parseInt(params.offset)}
-                                                    />
+                                                params.category !== '' || params.sortBy !== '' || params.keyword !== '' ?
+                                                    <Form.Group className="form-inline form-dark form-group-h-33 mr-10">
+                                                        <OverlayTrigger
+                                                            placement="top"
+                                                            overlay={<Tooltip>Clear All</Tooltip>}
+                                                        >
+                                                            <Button variant="secondary" className="btn-wh-35 br-8 bg-f3772c ms-3" onClick={() => { setParams({ category: '', sortBy: '', keyword: '', offset: 0, }); setKeyword(''); }}><FontAwesomeIcon icon={faTimes} /></Button>
+                                                        </OverlayTrigger>
+                                                    </Form.Group>
                                                     : null
                                             }
-                                        </div>
+                                        </Form>
+                                    </div>
+                                    <div className="table-wrap CustomScrollbar CustomScrollbarY">
+                                        {/* <Table bordered hover variant="dark" id="seller-product" className='form-dark'> */}
+                                        <ResponsiveTable className="table table-bordered table-hover table-dark form-dark" id="seller-product">
+                                            <Thead>
+                                                <Tr>
+                                                    <Th width="200px">Product Name</Th>
+                                                    <Th width="100px">Category</Th>
+                                                    <Th width="130px">Med/Rec</Th>
+                                                    {/* <Th width="100px">Price Per lb</Th> */}
+                                                    <Th width="70px">Strain</Th>
+                                                    <Th width="70px">THC%</Th>
+                                                    <Th width="150px">Flavor</Th>
+                                                    <Th width="150px">Dominant Terpene</Th>
+                                                    <Th width="100px">I/O</Th>
+                                                    <Th width="100px">Harvested</Th>
+                                                    <Th width="100px">Unit Size</Th>
+                                                    <Th width="180px">Action</Th>
+                                                </Tr>
+                                            </Thead>
+                                            <Tbody>
+                                                {
+                                                    showSkeleton ?
+                                                        [...Array(5)].map((arrayData, index) => {
+                                                            return (
+                                                                <Tr key={index + 'loader'}>
+                                                                    {
+                                                                        [...Array(11)].map((data, sIndex) => {
+                                                                            return (<Td key={sIndex + "skeleton"}>
+                                                                                <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
+                                                                                    <Skeleton />
+                                                                                </SkeletonTheme>
+                                                                            </Td>)
+                                                                        })
+                                                                    }
+                                                                </Tr>
+                                                            )
+                                                        })
+                                                        :
+                                                        products.length ?
+                                                            products.map((product, i) => {
+                                                                return (<ProductRow key={i} product={product} handleStatusChange={handleStatusChange} categories={categories} handleCategoryFilter={handleCategoryFilter} isLastRow={i === products.length - 1 && products.length > 1} />)
+                                                            })
+                                                            : <Tr>
+                                                                <Td className="text-center" colSpan={10}>No records found!</Td>
+                                                            </Tr>
+                                                }
+                                            </Tbody>
+                                        </ResponsiveTable>
+                                    </div>
+                                    <div className='mt-5 d-flex justify-content-center'>
+                                        {
+                                            totalPages > 1 ?
+                                                <ReactPaginate
+                                                    previousLabel={<i className="fas fa-long-arrow-alt-left"></i>}
+                                                    nextLabel={<i className="fas fa-long-arrow-alt-right"></i>}
+                                                    pageClassName="page-item"
+                                                    pageLinkClassName="page-link"
+                                                    previousClassName="page-item prev-item"
+                                                    previousLinkClassName="page-link"
+                                                    nextClassName="page-item next-item"
+                                                    nextLinkClassName="page-link"
+                                                    breakLabel="..."
+                                                    breakClassName="page-item"
+                                                    breakLinkClassName="page-link"
+                                                    pageCount={totalPages}
+                                                    //marginPagesDisplayed={1}
+                                                    pageRangeDisplayed={5}
+                                                    onPageChange={handlePageChange}
+                                                    containerClassName="pagination"
+                                                    activeClassName="active"
+                                                    forcePage={parseInt(params.offset)}
+                                                />
+                                                : null
+                                        }
+                                    </div>
 
-                                    </Card.Body>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-                </section>
-            </CategoriesContext.Provider>
-        </>
-    )
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
+            </section>
+        </CategoriesContext.Provider>
+    </>;
 }
 
 export default MyProducts

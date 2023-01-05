@@ -98,106 +98,106 @@ function SignIn() {
     }
     let checkValidation = submitted ? validator.validate(state) : validation
 
-    return ( 
-        <>
-        <Meta title={`Sign in | ${APP_NAME}`} keywords='Sign in' description='Sign in' />
-            <section className="bg-black">
-                <Container>
-                    <Row>
-                        <Col lg={5} md={8} sm={10} className="mx-auto">
-                            <Card className="card-post border-gray bs-none">
-                                <Card.Body className="p-md-5 py-md-4 p-3">
-                                    <Card.Title className="text-center fs-26 fw-700 color-dcdcdc mt-3 mb-4">Sign In</Card.Title>
-                                    <Form className="form-dark">
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Email</Form.Label>
-                                            <Form.Control
-                                                type="email"
-                                                placeholder="Enter Email"
-                                                name="username"
-                                                onChange={handleChange}
-                                                value={state.username}
-                                            />
-                                            <div
-                                                className={
-                                                    checkValidation.username.isInvalid
-                                                        ? 'animated fadeIn'
-                                                        : ''
-                                                }
-                                            >
-                                                <div className="error">
-                                                    {checkValidation.username.message}
-                                                </div>
+    return <>
+    <Meta title={`Sign in | ${APP_NAME}`} keywords='Sign in' description='Sign in' />
+        <section className="bg-black">
+            <Container>
+                <Row>
+                    <Col lg={5} md={8} sm={10} className="mx-auto">
+                        <Card className="card-post border-gray bs-none">
+                            <Card.Body className="p-md-5 py-md-4 p-3">
+                                <Card.Title className="text-center fs-26 fw-700 color-dcdcdc mt-3 mb-4">Sign In</Card.Title>
+                                <Form className="form-dark">
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Email</Form.Label>
+                                        <Form.Control
+                                            type="email"
+                                            placeholder="Enter Email"
+                                            name="username"
+                                            onChange={handleChange}
+                                            value={state.username}
+                                        />
+                                        <div
+                                            className={
+                                                checkValidation.username.isInvalid
+                                                    ? 'animated fadeIn'
+                                                    : ''
+                                            }
+                                        >
+                                            <div className="error">
+                                                {checkValidation.username.message}
                                             </div>
-                                        </Form.Group>
-                                        <Form.Group className="mb-3">
-                                            <Form.Label>Password</Form.Label>
-                                            <div className="form-icon form-icon-right">
-                                                <Form.Control
-                                                    type={type}
-                                                    placeholder="Enter Password"
-                                                    name="password"
-                                                    onChange={handleChange}
-                                                    value={state.password}
-                                                />
-                                                <span className="icon" onClick={showHide}>
-                                                    {type === "password" ? (
-                                                        <FontAwesomeIcon icon={faEye} />
-                                                    ) : (
-                                                        <FontAwesomeIcon icon={faEyeSlash} />
-                                                    )}
-                                                </span>
-                                            </div>
-                                            <div
-                                                className={
-                                                    checkValidation.password.isInvalid
-                                                        ? 'animated fadeIn'
-                                                        : ''
-                                                }
-                                            >
-                                                <div className="error">
-                                                    {checkValidation.password.message}
-                                                </div>
-                                            </div>
-                                        </Form.Group>
-                                        <div className="d-flex justify-content-between mb-3 form-btmbox">
-                                            <Form.Group className="mb-3">
-                                                <Form.Check type="checkbox" label="Remember Me" id="rememberme" className="fw-500 color-white" onChange={() => setRemember(!remember)}/>
-                                            </Form.Group>
-                                            <Form.Group className="mb-3">
-                                                <Link href="/forgot-password">
-                                                    <a className="color-22a612 fw-500 text-decoration-underline">Forgot Password?</a>
-                                                </Link>
-                                            </Form.Group>
                                         </div>
-                                        <Form.Group className="mb-4 text-center">
-                                            <Button
-                                                variant="primary"
-                                                className="btn-wh-180-56 btn-rounded btn-right-icons fw-500"
-                                                onClick={!showLoading ? handleSubmit : null}
-                                                disabled={showLoading}
-                                            >
-                                                {showLoading ? <Spinner animation="border" /> : "Sign In "}
-                                                <span className="color-177b0b"><FontAwesomeIcon icon={faAngleRight} /></span>
-                                            </Button>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Password</Form.Label>
+                                        <div className="form-icon form-icon-right">
+                                            <Form.Control
+                                                type={type}
+                                                placeholder="Enter Password"
+                                                name="password"
+                                                onChange={handleChange}
+                                                value={state.password}
+                                            />
+                                            <span className="icon" onClick={showHide}>
+                                                {type === "password" ? (
+                                                    <FontAwesomeIcon icon={faEye} />
+                                                ) : (
+                                                    <FontAwesomeIcon icon={faEyeSlash} />
+                                                )}
+                                            </span>
+                                        </div>
+                                        <div
+                                            className={
+                                                checkValidation.password.isInvalid
+                                                    ? 'animated fadeIn'
+                                                    : ''
+                                            }
+                                        >
+                                            <div className="error">
+                                                {checkValidation.password.message}
+                                            </div>
+                                        </div>
+                                    </Form.Group>
+                                    <div className="d-flex justify-content-between mb-3 form-btmbox">
+                                        <Form.Group className="mb-3">
+                                            <Form.Check type="checkbox" label="Remember Me" id="rememberme" className="fw-500 color-white" onChange={() => setRemember(!remember)}/>
                                         </Form.Group>
-                                        <Form.Group className="mb-3 text-center">
-                                            <p className="color-dcdcdc">
-                                                Don’t have an account yet?{" "}
-                                                <Link href="/sign-up">
-                                                    <a className="color-22a612 fw-500">Sign Up</a>
-                                                </Link>
-                                            </p>
+                                        <Form.Group className="mb-3">
+                                            <Link
+                                                href="/forgot-password"
+                                                className="color-22a612 fw-500 text-decoration-underline">
+                                                Forgot Password?
+                                            </Link>
                                         </Form.Group>
-                                    </Form>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Container>
-            </section>
-        </>
-    );
+                                    </div>
+                                    <Form.Group className="mb-4 text-center">
+                                        <Button
+                                            variant="primary"
+                                            className="btn-wh-180-56 btn-rounded btn-right-icons fw-500"
+                                            onClick={!showLoading ? handleSubmit : null}
+                                            disabled={showLoading}
+                                        >
+                                            {showLoading ? <Spinner animation="border" /> : "Sign In "}
+                                            <span className="color-177b0b"><FontAwesomeIcon icon={faAngleRight} /></span>
+                                        </Button>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3 text-center">
+                                        <p className="color-dcdcdc">
+                                            Don’t have an account yet?{" "}
+                                            <Link href="/sign-up" className="color-22a612 fw-500">
+                                                Sign Up
+                                            </Link>
+                                        </p>
+                                    </Form.Group>
+                                </Form>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+        </section>
+    </>;
 }
 
 export default SignIn;
