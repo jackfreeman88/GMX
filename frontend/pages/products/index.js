@@ -638,10 +638,8 @@ function ProductList(props) {
                                                     products.map((productRow, index) => (
                                                         <Tr key={index + 'product'}>
                                                             <Td>
-                                                                <Link
-                                                                    href={"/brand/" + productRow.user.brand.slug}
-                                                                    className="color-22a612"
-                                                                    legacyBehavior> {Helper.niceString(productRow.user.brand.brandName, 20, true)} </Link>
+                                                            {Helper.niceString(productRow.user.brand.brandName, 20, true)}
+                                                                
                                                             </Td>
                                                             <Td>
                                                                 <Link
@@ -685,10 +683,10 @@ function ProductList(props) {
                                                                         }
                                                                     </>
                                                                     : null}
-                                                                <Link
+                                                                {/* <Link
                                                                     href={"/brand/" + productRow.user?.brand?.slug}
                                                                     className="action-btn color-white text-decoration-none"
-                                                                    legacyBehavior> <i className="icon-user-view"></i></Link>
+                                                                    ></Link> */}
                                                             </Td>
                                                         </Tr>
                                                     ))
