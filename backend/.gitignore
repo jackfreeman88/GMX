@@ -36,6 +36,5 @@ lerna-debug.log*
 *.zip
 
 #Project Files
-.env
 /uploads
-src/main.ts
+# src/main.ts
